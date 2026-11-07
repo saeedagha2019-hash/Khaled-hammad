@@ -641,3 +641,40 @@ body.wc-mode .works-listview, body.wc-mode .site-footer, body.wc-mode .review-no
 .wc-end p { font: 400 clamp(1.4rem, 3vw, 2rem)/1.3 var(--f-display); color: var(--ivory); margin: 0 0 16px; text-shadow: 0 2px 20px rgba(0,0,0,.6); }
 .wc-end .btn-primary { background: var(--bronze); color: var(--charcoal); }
 [data-mode="reel"] .wc-top { display: none; }
+
+/* ---- music-motion study ---- */
+.mm { position: fixed; inset: 72px 0 0 0; z-index: 10; background: var(--charcoal); color: var(--white); overflow: hidden; }
+.has-staging .mm { top: 102px; }
+.mm canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; outline: none; cursor: grab; }
+@media (hover: hover) and (pointer: fine) { .mm canvas { cursor: none; } }
+.mm .wc-cursor { z-index: 4; }
+.mm-intro { position: absolute; top: 22px; inset-inline-start: var(--gutter); z-index: 3; max-width: 330px; pointer-events: none; }
+.mm-intro h1 { font-size: clamp(1.6rem, 3vw, 2.4rem); margin: 0 0 6px; }
+.mm-intro p:last-child { font-size: .85rem; color: var(--on-dark-2); margin: 0; }
+.mm-legend { position: absolute; top: 22px; inset-inline-end: var(--gutter); z-index: 4; max-width: 340px; background: rgba(17,23,25,.86); border: 1px solid var(--line-dark); border-radius: 18px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.mm-legend summary { cursor: pointer; padding: 10px 18px; font-size: .9rem; color: var(--bronze); list-style: none; }
+.mm-legend summary::-webkit-details-marker { display: none; }
+.mm-legend ol { margin: 0; padding: 0 18px 16px; list-style: none; display: grid; gap: 10px; max-height: 60vh; overflow: auto; }
+.mm-legend li { display: grid; gap: 2px; font-size: .82rem; color: var(--on-dark-2); line-height: 1.6; }
+.mm-legend b { color: var(--ivory); font-weight: 600; font-size: .9rem; }
+.mm-now { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); z-index: 3; display: flex; align-items: center; gap: 14px; padding: 8px 8px 8px 18px; background: rgba(17,23,25,.86); border: 1px solid var(--line-dark); border-radius: 999px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); max-width: calc(100% - 24px); }
+:root[dir="rtl"] .mm-now { padding: 8px 18px 8px 8px; }
+.mm-meter { display: inline-flex; align-items: center; gap: 3px; height: 22px; flex: none; }
+.mm-meter i { width: 3px; border-radius: 2px; background: var(--bronze); height: calc(4px + 18px * var(--lv, .1) * (1 + var(--pulse, 0) * .6)); transition: height .08s linear; }
+.mm-meter i:nth-child(2) { height: calc(4px + 18px * var(--lv, .1) * .7); } .mm-meter i:nth-child(3) { height: calc(4px + 18px * var(--lv, .1) * (1.15 + var(--pulse, 0))); }
+.mm-meter i:nth-child(4) { height: calc(4px + 18px * var(--lv, .1) * .8); } .mm-meter i:nth-child(5) { height: calc(4px + 18px * var(--lv, .1) * .55); }
+.mm-now-t { min-width: 0; }
+.mm-title { margin: 0; font: 400 1.05rem/1.3 var(--f-display); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mm-mood { margin: 0; font-size: .75rem; color: var(--bronze); white-space: nowrap; }
+.mm-listen { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; border: 0; border-radius: 999px; background: var(--ivory); color: var(--charcoal); cursor: pointer; font-size: .88rem; white-space: nowrap; }
+.mm-listen svg { width: 20px; height: 20px; }
+.mm-listen[aria-pressed="true"] { background: var(--bronze); }
+.mm-cut { position: absolute; inset: 0; z-index: 5; background: #000; opacity: 0; pointer-events: none; }
+.mm-fallback { display: none; position: absolute; inset: 40% 0 auto; text-align: center; padding: 0 24px; }
+.mm.no-gl .mm-fallback { display: block; }
+.mm.no-gl canvas, .mm.no-gl .mm-now { display: none; }
+@media (max-width: 700px) {
+  .mm-intro { max-width: 60%; top: 14px; } .mm-intro p:last-child { display: none; }
+  .mm-legend { top: 14px; max-width: calc(100% - 32px); } .mm-legend[open] { inset-inline-start: 16px; }
+  .mm-now { bottom: 14px; gap: 10px; } .mm-listen span { display: none; } .mm-listen { padding: 8px 12px; }
+}
