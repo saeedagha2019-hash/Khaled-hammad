@@ -585,6 +585,7 @@ def build_works(lang):
  <div class="wc-top"><h1 class="wc-title">{e(t['works_title'])}</h1><p class="wc-hint wc-hint-reel">{e(t['wc_hint_reel'])}</p><p class="wc-hint wc-hint-canvas">{e(t['wc_hint'])}</p></div>
  <div class="wc-filter"><button type="button" class="wc-filter-btn" data-wc-filter-btn aria-expanded="false" aria-haspopup="true">{e(t['wc_filter'])}<span class="wcf-cur" data-wc-filter-cur>{e(t['cat']['all'])}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   <ul class="wc-filter-menu" data-wc-filter-menu hidden aria-label="{e(t['format'])}">{wchips}</ul></div>
+ <div class="wc-end" data-wc-end><p>{e(t['work_cta'])}</p><a class="btn btn-primary" href="{lu(lang, 'contact/scoring')}">{e(t['cta_commission'])}</a></div>
  <div class="wc-bar">{vt}</div>
  <p class="sr" aria-live="polite" data-wc-live></p>
  <script type="application/json" data-wc-data>{json.dumps(data, ensure_ascii=False).replace('</', '<\\/')}</script>
