@@ -636,3 +636,8 @@ body.wc-mode .works-listview, body.wc-mode .site-footer, body.wc-mode .review-no
 [data-mode="reel"] .wc-top { top: 30px; }
 @media (max-width: 1000px) { [data-mode="reel"] .wc-top { display: none; } }
 @media (max-width: 700px) { .wc-filter { top: 16px; } .wc-bar { bottom: 14px; } .wc-filter-btn { min-height: 44px; font-size: 1rem; } }
+.wc-end { position: absolute; z-index: 3; left: 50%; bottom: 96px; transform: translate(-50%, 20px); text-align: center; opacity: 0; pointer-events: none; transition: opacity .5s var(--ease), transform .5s var(--ease); width: min(560px, calc(100% - 32px)); }
+.wc-end.is-on { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.wc-end p { font: 400 clamp(1.4rem, 3vw, 2rem)/1.3 var(--f-display); color: var(--ivory); margin: 0 0 16px; text-shadow: 0 2px 20px rgba(0,0,0,.6); }
+.wc-end .btn-primary { background: var(--bronze); color: var(--charcoal); }
+[data-mode="reel"] .wc-top { display: none; }
