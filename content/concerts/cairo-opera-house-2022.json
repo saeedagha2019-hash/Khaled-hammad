@@ -1,0 +1,60 @@
+{
+  "slug": "cairo-opera-house-2022",
+  "published": true,
+  "status": "past",
+  "date": "2022-11-23",
+  "time": "",
+  "name": {
+    "en": "Khaled Hammad in Concert — Music for Film and Television",
+    "ar": "خالد حماد في حفل — موسيقى السينما والتلفزيون",
+    "ru": "Халед Хаммад: концерт музыки для кино и телевидения"
+  },
+  "venue": {
+    "en": "Cairo Opera House — Main Hall",
+    "ar": "دار الأوبرا المصرية — المسرح الكبير",
+    "ru": "Каирский оперный театр — Главный зал"
+  },
+  "city": {
+    "en": "Cairo, Egypt",
+    "ar": "القاهرة، مصر",
+    "ru": "Каир, Египет"
+  },
+  "partners": {
+    "en": "Cairo Opera Symphony Orchestra, conducted by Maestro Nayer Nagui",
+    "ar": "أوركسترا أوبرا القاهرة السيمفوني بقيادة المايسترو ناير ناجي",
+    "ru": "Симфонический оркестр Каирской оперы, дирижёр — маэстро Найер Наги"
+  },
+  "summary": {
+    "en": "His first concert on the Main Stage of the Cairo Opera House, performed to a full house. The programme drew on his best-known film and television scores, from The Yacoubian Building to Awan El Ward and Hidden Worlds.",
+    "ar": "أولى حفلاته على المسرح الكبير بدار الأوبرا المصرية، بحضور كامل العدد. ضم البرنامج مختارات من أشهر موسيقاه للسينما والتلفزيون، من «عمارة يعقوبيان» إلى «أوان الورد» و«عوالم خفية».",
+    "ru": "Первый концерт композитора на Главной сцене Каирского оперного театра — с аншлагом. В программе прозвучала музыка к самым известным фильмам и сериалам: от «Дома Якубяна» до «Поры роз» и «Скрытых миров»."
+  },
+  "ticket_url": "",
+  "accessibility": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "photos": [
+    "/assets/img/about-wide.webp",
+    "/assets/img/gallery-01-concerts.webp",
+    "/assets/img/gallery-07-concerts.webp",
+    "/assets/img/hero-portrait-2.webp"
+  ],
+  "video": [
+    {
+      "youtube": "rbrzEF-c3j4",
+      "title": {
+        "en": "Kelma Akhira — ON (TV segment)",
+        "ar": "«كلمة أخيرة» — ON",
+        "ru": "«Кельма ахира» — ON (телесюжет)"
+      }
+    }
+  ],
+  "photo_rights": "used-on-previous-site-confirm-licence",
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

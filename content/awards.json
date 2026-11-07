@@ -1,0 +1,390 @@
+{
+  "groups": [
+    {
+      "key": "scoring",
+      "label": {
+        "en": "Music",
+        "ar": "الموسيقى",
+        "ru": "Музыка"
+      },
+      "image": "/assets/img/awards-1.webp",
+      "image_alt": "Khaled Hammad holding his Best Score award"
+    },
+    {
+      "key": "directing",
+      "label": {
+        "en": "Directing — The Mulberry Tree",
+        "ar": "الإخراج — «شجرة التوت»",
+        "ru": "Режиссура — «Тутовое дерево»"
+      },
+      "image": null,
+      "image_alt": ""
+    },
+    {
+      "key": "tributes",
+      "label": {
+        "en": "Tributes and concert",
+        "ar": "تكريمات وحفل",
+        "ru": "Чествования и концерт"
+      },
+      "image": "/assets/img/awards-3.webp",
+      "image_alt": "Khaled Hammad receiving an award"
+    },
+    {
+      "key": "juries",
+      "label": {
+        "en": "Juries and festivals",
+        "ar": "التحكيم والمهرجانات",
+        "ru": "Жюри и фестивали"
+      },
+      "image": "/assets/img/awards-4.webp",
+      "image_alt": "Khaled Hammad on the red carpet at a film festival"
+    }
+  ],
+  "items": [
+    {
+      "id": "award-2001-a-cultural-film",
+      "group": "scoring",
+      "year": 2001,
+      "name": {
+        "en": "Best Original Score — A Cultural Film",
+        "ar": "أفضل موسيقى تصويرية — «فيلم ثقافي»",
+        "ru": "Лучшая оригинальная музыка — «Культурный фильм»"
+      },
+      "awarding_body": {
+        "en": "Egyptian Film Association",
+        "ar": "جمعية الفيلم",
+        "ru": "Египетская ассоциация кино"
+      },
+      "work": "a-cultural-film",
+      "evidence_url": "",
+      "verified": false,
+      "show_on_home": true
+    },
+    {
+      "id": "award-2002-state-encouragement-award-in-the-arts",
+      "group": "scoring",
+      "year": 2002,
+      "name": {
+        "en": "State Encouragement Award in the Arts",
+        "ar": "جائزة الدولة التشجيعية في الفنون",
+        "ru": "Государственная поощрительная премия в области искусств"
+      },
+      "awarding_body": null,
+      "work": null,
+      "evidence_url": "",
+      "verified": false,
+      "show_on_home": true
+    },
+    {
+      "id": "award-2002-love-and-blood",
+      "group": "scoring",
+      "year": 2002,
+      "name": {
+        "en": "Best Original Score — Love and Blood",
+        "ar": "أفضل موسيقى تصويرية — «العشق والدم»",
+        "ru": "Лучшая оригинальная музыка — «Любовь и кровь»"
+      },
+      "awarding_body": {
+        "en": "Alexandria International Film Festival",
+        "ar": "مهرجان الإسكندرية السينمائي الدولي",
+        "ru": "Александрийский международный кинофестиваль"
+      },
+      "work": "love-and-blood",
+      "evidence_url": "",
+      "verified": false,
+      "show_on_home": true
+    },
+    {
+      "id": "award-2007-the-yacoubian-building",
+      "group": "scoring",
+      "year": 2007,
+      "name": {
+        "en": "Best Original Score — The Yacoubian Building",
+        "ar": "أفضل موسيقى تصويرية — «عمارة يعقوبيان»",
+        "ru": "Лучшая оригинальная музыка — «Дом Якубяна»"
+      },
+      "awarding_body": {
+        "en": "Egyptian Film Association",
+        "ar": "جمعية الفيلم",
+        "ru": "Египетская ассоциация кино"
+      },
+      "work": "the-yacoubian-building",
+      "evidence_url": "",
+      "verified": false,
+      "show_on_home": true
+    },
+    {
+      "id": "award-2023-gaafar-el-omda",
+      "group": "scoring",
+      "year": 2023,
+      "name": {
+        "en": "Best Original Score — Gaafar El Omda",
+        "ar": "أفضل موسيقى تصويرية — «جعفر العمدة»",
+        "ru": "Лучшая оригинальная музыка — «Гаафар эль-Омда»"
+      },
+      "awarding_body": {
+        "en": "Energy Drama Cup and Hamsa Festival",
+        "ar": "كأس إنرجي للدراما ومهرجان همسة",
+        "ru": "Кубок Energy Drama и фестиваль «Хамса»"
+      },
+      "work": "gaafar-el-omda",
+      "evidence_url": "",
+      "verified": false,
+      "show_on_home": true
+    },
+    {
+      "id": "award-2024-the-ruby-house",
+      "group": "scoring",
+      "year": 2024,
+      "name": {
+        "en": "Best Original Score — The Ruby House",
+        "ar": "أفضل موسيقى تصويرية — «بيت الروبي»",
+        "ru": "Лучшая оригинальная музыка — «Дом Руби»"
+      },
+      "awarding_body": {
+        "en": "Egyptian Film Association Festival",
+        "ar": "مهرجان جمعية الفيلم",
+        "ru": "Фестиваль Египетской ассоциации кино"
+      },
+      "work": "the-ruby-house",
+      "evidence_url": "",
+      "verified": false,
+      "show_on_home": true
+    },
+    {
+      "id": "award-2025-the-white-dress",
+      "group": "scoring",
+      "year": 2025,
+      "name": {
+        "en": "Best Original Score — The White Dress",
+        "ar": "أفضل موسيقى تصويرية — «الفستان الأبيض»",
+        "ru": "Лучшая оригинальная музыка — «Белое платье»"
+      },
+      "awarding_body": {
+        "en": "Egyptian Catholic Center Cinema Festival",
+        "ar": "مهرجان المركز الكاثوليكي للسينما",
+        "ru": "Кинофестиваль Египетского католического центра"
+      },
+      "work": "the-white-dress",
+      "evidence_url": "",
+      "verified": false,
+      "show_on_home": true
+    },
+    {
+      "id": "award-2001-mulberry-tree-silver-award",
+      "group": "directing",
+      "year": 2001,
+      "name": {
+        "en": "Silver Award",
+        "ar": "الجائزة الفضية",
+        "ru": "Серебряная премия"
+      },
+      "awarding_body": {
+        "en": "Cairo International Children’s Film Festival",
+        "ar": "مهرجان القاهرة لسينما الطفل",
+        "ru": "Каирский международный фестиваль детского кино"
+      },
+      "work": null,
+      "evidence_url": "",
+      "verified": false,
+      "show_on_home": false
+    },
+    {
+      "id": "award-2001-mulberry-tree-gold-award-for-arab",
+      "group": "directing",
+      "year": 2001,
+      "name": {
+        "en": "Gold Award for Arab feature and short films",
+        "ar": "الجائزة الذهبية للأفلام العربية",
+        "ru": "Золотая премия в категории арабских полнометражных и короткометражных фильмов"
+      },
+      "awarding_body": {
+        "en": "Cairo International Children’s Film Festival",
+        "ar": "مهرجان القاهرة لسينما الطفل",
+        "ru": "Каирский международный фестиваль детского кино"
+      },
+      "work": null,
+      "evidence_url": "",
+      "verified": false,
+      "show_on_home": false
+    },
+    {
+      "id": "award-2001-mulberry-tree-jury-prize",
+      "group": "directing",
+      "year": 2001,
+      "name": {
+        "en": "Jury Prize",
+        "ar": "جائزة لجنة التحكيم",
+        "ru": "Приз жюри"
+      },
+      "awarding_body": {
+        "en": "Egyptian National Film Festival",
+        "ar": "المهرجان القومي للسينما",
+        "ru": "Национальный кинофестиваль Египта"
+      },
+      "work": null,
+      "evidence_url": "",
+      "verified": false,
+      "show_on_home": false
+    },
+    {
+      "id": "award-2019-career-tribute-academy-of-arts",
+      "group": "tributes",
+      "year": 2019,
+      "name": {
+        "en": "Career tribute, Academy of Arts",
+        "ar": "تكريم لمسيرته من أكاديمية الفنون",
+        "ru": "Чествование за творческий путь, Академия искусств"
+      },
+      "awarding_body": null,
+      "work": null,
+      "evidence_url": "",
+      "verified": false,
+      "show_on_home": false
+    },
+    {
+      "id": "award-2022-career-tribute-alexandria-short-film-fes",
+      "group": "tributes",
+      "year": 2022,
+      "name": {
+        "en": "Career tribute, Alexandria Short Film Festival",
+        "ar": "تكريم لمسيرته مهرجان الإسكندرية للفيلم القصير",
+        "ru": "Чествование за творческий путь, Александрийский фестиваль короткометражного кино"
+      },
+      "awarding_body": {
+        "en": "8th edition",
+        "ar": "الدورة الثامنة",
+        "ru": "8-й фестиваль"
+      },
+      "work": null,
+      "evidence_url": "",
+      "verified": false,
+      "show_on_home": false
+    },
+    {
+      "id": "award-2022-first-concert-cairo-opera-house-main-hal",
+      "group": "tributes",
+      "year": 2022,
+      "name": {
+        "en": "First concert, Cairo Opera House Main Hall, with the Cairo Opera Symphony Orchestra",
+        "ar": "أولى حفلاته بالقاعة الرئيسية بدار الأوبرا مع أوركسترا أوبرا القاهرة السيمفوني",
+        "ru": "Первый концерт в Главном зале Каирского оперного театра с Симфоническим оркестром Каирской оперы"
+      },
+      "awarding_body": {
+        "en": "23 November",
+        "ar": "23 نوفمبر",
+        "ru": "23 ноября"
+      },
+      "work": null,
+      "evidence_url": "",
+      "verified": false,
+      "show_on_home": false
+    },
+    {
+      "id": "award-2019-co-founder-ontario-international-film-fe",
+      "group": "juries",
+      "year": 2019,
+      "name": {
+        "en": "Co-founder, Ontario International Film Festival (ONIFF), Canada",
+        "ar": "أحد مؤسسي مهرجان ONIFF السينمائي بكندا",
+        "ru": "Сооснователь Международного кинофестиваля Онтарио (ONIFF), Канада"
+      },
+      "awarding_body": null,
+      "work": null,
+      "evidence_url": "",
+      "verified": false,
+      "show_on_home": false
+    },
+    {
+      "id": "award-2018-feature-film-competition-jury-egyptian-n",
+      "group": "juries",
+      "year": 2018,
+      "name": {
+        "en": "Feature Film Competition jury, Egyptian National Film Festival",
+        "ar": "لجنة تحكيم الأفلام الروائية الطويلة بالمهرجان القومي للسينما",
+        "ru": "Жюри конкурса полнометражных фильмов, Национальный кинофестиваль Египта"
+      },
+      "awarding_body": null,
+      "work": null,
+      "evidence_url": "",
+      "verified": false,
+      "show_on_home": false
+    },
+    {
+      "id": "award-2021-selection-committee-state-encouragement",
+      "group": "juries",
+      "year": 2021,
+      "name": {
+        "en": "Selection committee, State Encouragement Award in Music",
+        "ar": "لجنة اختيار جائزة الدولة التشجيعية في الموسيقى",
+        "ru": "Отборочная комиссия Государственной поощрительной премии в области музыки"
+      },
+      "awarding_body": null,
+      "work": null,
+      "evidence_url": "",
+      "verified": false,
+      "show_on_home": false
+    },
+    {
+      "id": "award-2023-music-arrangement-competition-jury-arab",
+      "group": "juries",
+      "year": 2023,
+      "name": {
+        "en": "Music Arrangement Competition jury, Arab Music Festival",
+        "ar": "لجنة تحكيم مسابقة التوزيع الموسيقي بمهرجان الموسيقى العربية",
+        "ru": "Жюри конкурса аранжировки, Фестиваль арабской музыки"
+      },
+      "awarding_body": null,
+      "work": null,
+      "evidence_url": "",
+      "verified": false,
+      "show_on_home": false
+    },
+    {
+      "id": "award-2023-international-competition-jury-cairo-int",
+      "group": "juries",
+      "year": 2023,
+      "name": {
+        "en": "International Competition jury, Cairo International Short Film Festival",
+        "ar": "لجنة تحكيم المسابقة الدولية بمهرجان القاهرة للفيلم القصير",
+        "ru": "Жюри международного конкурса, Каирский международный фестиваль короткометражного кино"
+      },
+      "awarding_body": null,
+      "work": null,
+      "evidence_url": "",
+      "verified": false,
+      "show_on_home": false
+    },
+    {
+      "id": "award-2024-jury-member-burdeya-minute-film-festival",
+      "group": "juries",
+      "year": 2024,
+      "name": {
+        "en": "Jury member, Burdeya Minute Film Festival",
+        "ar": "لجنة تحكيم مهرجان بردية لسينما الومضة",
+        "ru": "Член жюри, фестиваль минутного кино «Бурдея»"
+      },
+      "awarding_body": null,
+      "work": null,
+      "evidence_url": "",
+      "verified": false,
+      "show_on_home": false
+    },
+    {
+      "id": "award-2024-selection-committee-egypts-academy-award",
+      "group": "juries",
+      "year": 2024,
+      "name": {
+        "en": "Selection committee, Egypt’s Academy Awards submission",
+        "ar": "لجنة ترشيح الفيلم المصري لمسابقة الأوسكار",
+        "ru": "Комиссия по выдвижению египетского фильма на премию «Оскар»"
+      },
+      "awarding_body": null,
+      "work": null,
+      "evidence_url": "",
+      "verified": false,
+      "show_on_home": false
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "slug": "hidden-worlds",
+  "published": true,
+  "category": "tv",
+  "year": 2018,
+  "title": {
+    "en": "Hidden Worlds",
+    "ar": "عوالم خفية",
+    "ru": "Скрытые миры"
+  },
+  "original_title": "عوالم خفية",
+  "role": "original-score",
+  "cast": {
+    "en": "Adel Emam, Rania Farid Shawky",
+    "ar": "عادل إمام ورانيا فريد شوقي",
+    "ru": "Адель Имам, Рания Фарид Шауки"
+  },
+  "director": {
+    "en": "Rami Imam",
+    "ar": "رامي إمام",
+    "ru": "Рами Имам"
+  },
+  "credit_note": null,
+  "synopsis": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "score_story": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "poster": "/assets/img/poster-hidden-worlds.webp",
+  "poster_rights": "used-on-previous-site-confirm-licence",
+  "gallery": [],
+  "audio": null,
+  "video": null,
+  "awards": [],
+  "credit_sources": [
+    {
+      "label": {
+        "en": "Professional Portfolio (2025) — to be reconciled with IMDb / elCinema",
+        "ar": "ملف الأعمال المهني (٢٠٢٥) — قيد المراجعة مع IMDb و elCinema",
+        "ru": "Профессиональное портфолио (2025) — требует сверки с IMDb / elCinema"
+      },
+      "url": ""
+    }
+  ],
+  "featured": true,
+  "featured_order": 5,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

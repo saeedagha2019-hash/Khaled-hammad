@@ -1,0 +1,57 @@
+{
+  "slug": "call-me-thank-you",
+  "published": true,
+  "category": "film",
+  "year": 2010,
+  "title": {
+    "en": "Call Me Thank You",
+    "ar": "كلمني شكرا",
+    "ru": "Зовите меня Спасибо"
+  },
+  "original_title": "كلمني شكرا",
+  "role": "original-score",
+  "cast": {
+    "en": "Amr Abdel Gelil, Ghada Abdel Razek",
+    "ar": "عمرو عبد الجليل وغادة عبد الرازق",
+    "ru": "Амр Абдель Гелиль, Гада Абдель Разек"
+  },
+  "director": {
+    "en": "Khaled Youssef",
+    "ar": "خالد يوسف",
+    "ru": "Халед Юсеф"
+  },
+  "credit_note": null,
+  "synopsis": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "score_story": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "poster": null,
+  "poster_rights": "not-supplied",
+  "gallery": [],
+  "audio": null,
+  "video": null,
+  "awards": [],
+  "credit_sources": [
+    {
+      "label": {
+        "en": "Professional Portfolio (2025) — to be reconciled with IMDb / elCinema",
+        "ar": "ملف الأعمال المهني (٢٠٢٥) — قيد المراجعة مع IMDb و elCinema",
+        "ru": "Профессиональное портфолио (2025) — требует сверки с IMDb / elCinema"
+      },
+      "url": ""
+    }
+  ],
+  "featured": false,
+  "featured_order": null,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

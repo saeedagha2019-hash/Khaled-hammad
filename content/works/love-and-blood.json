@@ -1,0 +1,59 @@
+{
+  "slug": "love-and-blood",
+  "published": true,
+  "category": "film",
+  "year": 2002,
+  "title": {
+    "en": "Love and Blood",
+    "ar": "العشق والدم",
+    "ru": "Любовь и кровь"
+  },
+  "original_title": "العشق والدم",
+  "role": "original-score",
+  "cast": {
+    "en": "Sherihan, Farouk El-Fishawy",
+    "ar": "شريهان وفاروق الفيشاوي",
+    "ru": "Шерихан, Фарук аль-Фишави"
+  },
+  "director": {
+    "en": "Ashraf Fahmy",
+    "ar": "أشرف فهمي",
+    "ru": "Ашраф Фахми"
+  },
+  "credit_note": null,
+  "synopsis": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "score_story": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "poster": null,
+  "poster_rights": "not-supplied",
+  "gallery": [],
+  "audio": null,
+  "video": null,
+  "awards": [
+    "award-2002-love-and-blood"
+  ],
+  "credit_sources": [
+    {
+      "label": {
+        "en": "Professional Portfolio (2025) — to be reconciled with IMDb / elCinema",
+        "ar": "ملف الأعمال المهني (٢٠٢٥) — قيد المراجعة مع IMDb و elCinema",
+        "ru": "Профессиональное портфолио (2025) — требует сверки с IMDb / elCinema"
+      },
+      "url": ""
+    }
+  ],
+  "featured": false,
+  "featured_order": null,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

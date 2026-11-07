@@ -1,0 +1,57 @@
+{
+  "slug": "point-of-weakness",
+  "published": true,
+  "category": "tv",
+  "year": 2013,
+  "title": {
+    "en": "Point of Weakness",
+    "ar": "نقطة ضعف",
+    "ru": "Слабое место"
+  },
+  "original_title": "نقطة ضعف",
+  "role": "original-score",
+  "cast": {
+    "en": "Gamal Soliman, Rania Farid Shawky",
+    "ar": "جمال سليمان ورانيا فريد شوقي",
+    "ru": "Гамаль Солиман, Рания Фарид Шауки"
+  },
+  "director": {
+    "en": "Ahmed Shafik",
+    "ar": "أحمد شفيق",
+    "ru": "Ахмед Шафик"
+  },
+  "credit_note": null,
+  "synopsis": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "score_story": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "poster": null,
+  "poster_rights": "not-supplied",
+  "gallery": [],
+  "audio": null,
+  "video": null,
+  "awards": [],
+  "credit_sources": [
+    {
+      "label": {
+        "en": "Professional Portfolio (2025) — to be reconciled with IMDb / elCinema",
+        "ar": "ملف الأعمال المهني (٢٠٢٥) — قيد المراجعة مع IMDb و elCinema",
+        "ru": "Профессиональное портфолио (2025) — требует сверки с IMDb / elCinema"
+      },
+      "url": ""
+    }
+  ],
+  "featured": false,
+  "featured_order": null,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

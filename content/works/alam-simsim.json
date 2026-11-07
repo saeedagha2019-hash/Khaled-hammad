@@ -1,0 +1,53 @@
+{
+  "slug": "alam-simsim",
+  "published": true,
+  "category": "children",
+  "year": 2000,
+  "title": {
+    "en": "Alam Simsim",
+    "ar": "عالم سمسم",
+    "ru": "Алам Симсим"
+  },
+  "original_title": "عالم سمسم",
+  "role": "title-theme-music-songs",
+  "cast": null,
+  "director": null,
+  "credit_note": {
+    "en": "Title theme, music and songs; music production supervisor",
+    "ar": "المقدمة والموسيقى والأغاني؛ مشرف الإنتاج الموسيقي",
+    "ru": "Заставка, музыка и песни; руководитель музыкального производства"
+  },
+  "synopsis": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "score_story": {
+    "en": "Khaled Hammad supervised music production for the Egyptian edition of the programme after attending a workshop in New York in 1998.",
+    "ar": "عمل خالد حماد مشرفًا على الإنتاج الموسيقي للنسخة المصرية من البرنامج بعد تلقيه ورشة عمل في مدينة نيويورك عام ١٩٩٨.",
+    "ru": "Халед Хаммад руководил музыкальным производством египетской версии программы после мастер-класса в Нью-Йорке в 1998 году."
+  },
+  "poster": "/assets/img/poster-alam-simsim.webp",
+  "poster_rights": "used-on-previous-site-confirm-licence",
+  "gallery": [],
+  "audio": null,
+  "video": null,
+  "awards": [],
+  "credit_sources": [
+    {
+      "label": {
+        "en": "Professional Portfolio (2025) — to be reconciled with IMDb / elCinema",
+        "ar": "ملف الأعمال المهني (٢٠٢٥) — قيد المراجعة مع IMDb و elCinema",
+        "ru": "Профессиональное портфолио (2025) — требует сверки с IMDb / elCinema"
+      },
+      "url": ""
+    }
+  ],
+  "featured": false,
+  "featured_order": null,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

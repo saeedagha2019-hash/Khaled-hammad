@@ -1,0 +1,63 @@
+{
+  "site_url": "https://khaledhammad.com",
+  "base_path": "",
+  "domain_note": "Canonical domain still to be confirmed by management: khaledhammad.com (strategy) vs khaledhmmad.net (portfolio). Update site_url before launch.",
+  "show_media_pending_licence": true,
+  "form_endpoint": "",
+  "contacts": {
+    "general": "info@khaledhammad.com",
+    "scoring": "info@khaledhammad.com",
+    "concerts": "info@khaledhammad.com",
+    "licensing": "info@khaledhammad.com",
+    "press": "info@khaledhammad.com"
+  },
+  "social": [
+    {
+      "name": "Instagram",
+      "url": "https://www.instagram.com/khaled_hammad"
+    },
+    {
+      "name": "Facebook",
+      "url": "https://www.facebook.com/egyfilm.Khaled.Hammad"
+    },
+    {
+      "name": "YouTube",
+      "url": "https://youtube.com/@khaledhammad"
+    },
+    {
+      "name": "Spotify",
+      "url": "https://open.spotify.com/artist/5aYiB3Z9ikuCHIFZHXfPVI"
+    },
+    {
+      "name": "IMDb",
+      "url": "https://www.imdb.com/name/nm1223984/"
+    },
+    {
+      "name": "SoundCloud",
+      "url": "https://soundcloud.com/khaled_hammad"
+    },
+    {
+      "name": "Apple Music",
+      "url": "https://music.apple.com/ae/artist/khaled-hammad/1452824769"
+    },
+    {
+      "name": "Anghami",
+      "url": "https://play.anghami.com/artist/2068858"
+    },
+    {
+      "name": "Deezer",
+      "url": "https://www.deezer.com/us/artist/59604492"
+    },
+    {
+      "name": "Amazon Music",
+      "url": "https://www.amazon.com/music/player/artists/B07NRQXWBM/khaled-hammad"
+    }
+  ],
+  "analytics_id": "",
+  "languages": [
+    "en",
+    "ar",
+    "ru"
+  ],
+  "default_language": "en"
+}

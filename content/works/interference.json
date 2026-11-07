@@ -1,0 +1,53 @@
+{
+  "slug": "interference",
+  "published": true,
+  "category": "film",
+  "year": 2024,
+  "title": {
+    "en": "Interference",
+    "ar": "تشويش",
+    "ru": "Помехи"
+  },
+  "original_title": "تشويش",
+  "role": "original-score",
+  "cast": null,
+  "director": {
+    "en": "Ahmed El Bably",
+    "ar": "أحمد البابلي",
+    "ru": "Ахмед аль-Бабли"
+  },
+  "credit_note": null,
+  "synopsis": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "score_story": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "poster": null,
+  "poster_rights": "not-supplied",
+  "gallery": [],
+  "audio": null,
+  "video": null,
+  "awards": [],
+  "credit_sources": [
+    {
+      "label": {
+        "en": "Professional Portfolio (2025) — to be reconciled with IMDb / elCinema",
+        "ar": "ملف الأعمال المهني (٢٠٢٥) — قيد المراجعة مع IMDb و elCinema",
+        "ru": "Профессиональное портфолио (2025) — требует сверки с IMDb / elCinema"
+      },
+      "url": ""
+    }
+  ],
+  "featured": false,
+  "featured_order": null,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

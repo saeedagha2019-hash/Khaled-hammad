@@ -1,0 +1,57 @@
+{
+  "slug": "tehheb-teshouf-maasah",
+  "published": true,
+  "category": "theatre",
+  "year": null,
+  "title": {
+    "en": "Tehheb Teshouf Ma’sah",
+    "ar": "تحب تشوف مأساة",
+    "ru": "Хочешь увидеть трагедию?"
+  },
+  "original_title": "تحب تشوف مأساة",
+  "role": "stage-music",
+  "cast": null,
+  "director": {
+    "en": "Khaled Galal",
+    "ar": "خالد جلال",
+    "ru": "Халед Галяль"
+  },
+  "credit_note": {
+    "en": "Written by Lenin El-Ramly · National Theatre of Egypt",
+    "ar": "تأليف لينين الرملي · المسرح القومي",
+    "ru": "Автор пьесы — Ленин ар-Рамли · Национальный театр Египта"
+  },
+  "synopsis": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "score_story": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "poster": null,
+  "poster_rights": "not-supplied",
+  "gallery": [],
+  "audio": null,
+  "video": null,
+  "awards": [],
+  "credit_sources": [
+    {
+      "label": {
+        "en": "Professional Portfolio (2025) — year to confirm",
+        "ar": "ملف الأعمال المهني (٢٠٢٥) — السنة قيد التأكيد",
+        "ru": "Профессиональное портфолио (2025) — год уточняется"
+      },
+      "url": ""
+    }
+  ],
+  "featured": false,
+  "featured_order": null,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

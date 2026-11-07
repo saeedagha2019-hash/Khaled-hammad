@@ -1,0 +1,59 @@
+{
+  "slug": "the-white-dress",
+  "published": true,
+  "category": "film",
+  "year": 2024,
+  "title": {
+    "en": "The White Dress",
+    "ar": "الفستان الأبيض",
+    "ru": "Белое платье"
+  },
+  "original_title": "الفستان الأبيض",
+  "role": "original-score",
+  "cast": {
+    "en": "Yasmine Raeis",
+    "ar": "ياسمين رئيس",
+    "ru": "Ясмин Раис"
+  },
+  "director": {
+    "en": "Jaylan Auf",
+    "ar": "جيلان عوف",
+    "ru": "Джейлан Ауф"
+  },
+  "credit_note": null,
+  "synopsis": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "score_story": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "poster": null,
+  "poster_rights": "not-supplied",
+  "gallery": [],
+  "audio": null,
+  "video": null,
+  "awards": [
+    "award-2025-the-white-dress"
+  ],
+  "credit_sources": [
+    {
+      "label": {
+        "en": "Professional Portfolio (2025) — to be reconciled with IMDb / elCinema",
+        "ar": "ملف الأعمال المهني (٢٠٢٥) — قيد المراجعة مع IMDb و elCinema",
+        "ru": "Профессиональное портфолио (2025) — требует сверки с IMDb / elCinema"
+      },
+      "url": ""
+    }
+  ],
+  "featured": false,
+  "featured_order": null,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}
