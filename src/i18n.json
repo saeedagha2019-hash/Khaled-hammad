@@ -334,7 +334,14 @@
     "Other"
    ],
    "subject": "Subject"
-  }
+  },
+  "wc_canvas": "Canvas",
+  "wc_list": "List",
+  "wc_view_label": "View",
+  "wc_hint": "Drag or scroll to explore · Click a work to open it",
+  "wc_open": "Open",
+  "wc_a11y": "Interactive canvas of all works. Use the arrow keys to move and Enter to open the work nearest the centre, or switch to the list view.",
+  "wc_views": "Display"
  },
  "ar": {
   "lang_name": "العربية",
@@ -671,7 +678,14 @@
     "أخرى"
    ],
    "subject": "الموضوع"
-  }
+  },
+  "wc_canvas": "عرض حر",
+  "wc_list": "قائمة",
+  "wc_view_label": "العرض",
+  "wc_hint": "اسحب أو مرّر للاستكشاف · اضغط على أي عمل لفتحه",
+  "wc_open": "افتح",
+  "wc_a11y": "مساحة تفاعلية لكل الأعمال. استخدم الأسهم للتنقل وزر Enter لفتح العمل الأقرب إلى المنتصف، أو انتقل إلى عرض القائمة.",
+  "wc_views": "طريقة العرض"
  },
  "ru": {
   "lang_name": "Русский",
@@ -1008,6 +1022,13 @@
     "Другое"
    ],
    "subject": "Тема"
-  }
+  },
+  "wc_canvas": "Холст",
+  "wc_list": "Список",
+  "wc_view_label": "Вид",
+  "wc_hint": "Перетаскивайте или прокручивайте · нажмите на работу, чтобы открыть",
+  "wc_open": "Открыть",
+  "wc_a11y": "Интерактивный холст со всеми работами. Стрелки — перемещение, Enter — открыть работу в центре; или переключитесь на список.",
+  "wc_views": "Вид"
  }
 }
