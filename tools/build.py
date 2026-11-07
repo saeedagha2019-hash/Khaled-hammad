@@ -574,16 +574,18 @@ def build_works(lang):
                  f'<span class="wr-main"><span class="wr-title">{e(tr(w["title"], lang))}</span><span class="wr-credit">{e(credit_line(w, lang))}</span></span>'
                  f'<span class="wr-cat">{e(t["cat"][w["category"]])}</span></a></li>')
     data = [{'t': tr(w['title'], lang), 'c': w['category'], 'cl': t['cat'][w['category']], 'y': w['year'], 'h': lu(lang, 'works/' + w['slug']),
-             'i': u(w['poster']) if media_ok(w.get('poster'), w.get('poster_rights')) else None, 'cr': tr(w['director'], lang) if w.get('director') else ''} for w in WORKS]
-    wchips = ''.join(f'<button type="button" class="wc-chip" data-wc-cat="{c}" aria-pressed="{"true" if c == "all" else "false"}">{e(t["cat"][c])}<sup>{len(WORKS) if c == "all" else counts[c]}</sup></button>' for c in cats if c == 'all' or counts[c])
+             'i': u(w['poster']) if media_ok(w.get('poster'), w.get('poster_rights')) else None, 'cr': tr(w['director'], lang) if w.get('director') else '', 'f': w.get('featured_order') if w.get('featured') else None} for w in WORKS]
+    wchips = ''.join(f'<li><button type="button" class="wc-chip" data-wc-cat="{c}" data-label="{e(t["cat"][c])}" aria-pressed="{"true" if c == "all" else "false"}"><span>{e(t["cat"][c])}</span><sup>{len(WORKS) if c == "all" else counts[c]}</sup></button></li>' for c in cats if c == 'all' or counts[c])
     vt = (f'<div class="view-toggle" role="group" aria-label="{e(t["wc_views"])}"><span class="vt-l">{e(t["wc_view_label"])}</span>'
-          f'<button type="button" data-view="canvas" aria-pressed="false">{e(t["wc_canvas"])}</button><button type="button" data-view="list" aria-pressed="true">{e(t["wc_list"])}</button></div>')
+          f'<button type="button" data-view="reel" aria-pressed="false">{e(t["wc_reel"])}</button><button type="button" data-view="canvas" aria-pressed="false">{e(t["wc_canvas"])}</button><button type="button" data-view="list" aria-pressed="true">{e(t["wc_list"])}</button></div>')
     canvas_sec = f'''<section class="works-canvas" data-wc hidden aria-label="{e(t['works_title'])} — {e(t['wc_canvas'])}">
  <canvas data-wc-canvas tabindex="0" role="img" aria-label="{e(t['wc_a11y'])}"></canvas>
  <div class="wc-cursor" data-wc-cursor aria-hidden="true"><span>{e(t['wc_open'])}</span></div>
  <div class="wc-label" data-wc-label aria-hidden="true"><span class="wcl-cat"></span><span class="wcl-title"></span><span class="wcl-meta"></span></div>
- <div class="wc-top"><h1 class="wc-title">{e(t['works_title'])}</h1><p class="wc-hint">{e(t['wc_hint'])}</p></div>
- <div class="wc-bar"><div class="wc-chips" role="group" aria-label="{e(t['format'])}">{wchips}</div>{vt}</div>
+ <div class="wc-top"><h1 class="wc-title">{e(t['works_title'])}</h1><p class="wc-hint wc-hint-reel">{e(t['wc_hint_reel'])}</p><p class="wc-hint wc-hint-canvas">{e(t['wc_hint'])}</p></div>
+ <div class="wc-filter"><button type="button" class="wc-filter-btn" data-wc-filter-btn aria-expanded="false" aria-haspopup="true">{e(t['wc_filter'])}<span class="wcf-cur" data-wc-filter-cur>{e(t['cat']['all'])}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <ul class="wc-filter-menu" data-wc-filter-menu hidden aria-label="{e(t['format'])}">{wchips}</ul></div>
+ <div class="wc-bar">{vt}</div>
  <p class="sr" aria-live="polite" data-wc-live></p>
  <script type="application/json" data-wc-data>{json.dumps(data, ensure_ascii=False).replace('</', '<\\/')}</script>
 </section>'''
