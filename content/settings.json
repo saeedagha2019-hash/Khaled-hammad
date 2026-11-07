@@ -53,11 +53,30 @@
       "url": "https://www.amazon.com/music/player/artists/B07NRQXWBM/khaled-hammad"
     }
   ],
-  "analytics_id": "",
   "languages": [
     "en",
     "ar",
     "ru"
   ],
-  "default_language": "en"
+  "default_language": "en",
+  "language_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  },
+  "language_status_note": "Production publishes only approved languages; drafts appear on /staging/. Set ru to \"approved\" after native editorial review.",
+  "form_endpoints": {
+    "scoring": "",
+    "concerts": "",
+    "licensing": "",
+    "press": "",
+    "general": ""
+  },
+  "analytics": {
+    "provider": "",
+    "id": "",
+    "note": "provider: \"plausible\" (cookieless) or \"ga4\". Leave id empty to disable. GA4 loads only after consent."
+  },
+  "google_site_verification": "",
+  "redirects": []
 }

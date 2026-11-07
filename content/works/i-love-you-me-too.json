@@ -53,5 +53,9 @@
     "en": "approved",
     "ar": "approved",
     "ru": "draft-needs-native-review"
+  },
+  "slugs": {
+    "ar": "بحبك-وأنا-كمان",
+    "ru": "ya-lyublyu-tebya-i-ya-tozhe"
   }
 }

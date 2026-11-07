@@ -22,7 +22,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: sudo apt-get update && sudo apt-get install -y ffmpeg && pip install pillow
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg && pip install pillow python-docx
       - name: Build
         # Default: project page at https://<owner>.github.io/<repo>/.
         # With a custom domain, set repository variable SITE_URL (e.g. https://khaledhammad.com);

@@ -55,5 +55,9 @@
     "en": "approved",
     "ar": "approved",
     "ru": "draft-needs-native-review"
+  },
+  "slugs": {
+    "ar": "جعفر-العمدة",
+    "ru": "gaafar-el-omda"
   }
 }

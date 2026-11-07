@@ -251,7 +251,90 @@
    "November",
    "December"
   ],
-  "enquiry_type": "What is your enquiry about?"
+  "enquiry_type": "What is your enquiry about?",
+  "staging_note": "Preview of unpublished drafts. Not indexed by search engines.",
+  "consent_text": "We would like to use analytics cookies to understand how the site is used. They are only set if you agree.",
+  "consent_yes": "Accept analytics",
+  "consent_no": "Decline",
+  "cookie_settings": "Cookie settings",
+  "news": "News",
+  "latest_news": "Latest news",
+  "in_press": "In the press",
+  "read_more": "Read more",
+  "sources_label": "Sources",
+  "news_related": "Related works",
+  "all_news": "All news",
+  "kit_downloads": "Downloads",
+  "kit_doc": "Biographies & selected credits (Word)",
+  "kit_zip": "All approved portraits (ZIP)",
+  "gallery_intro": "Concerts, studio sessions, festivals and tributes.",
+  "gcat": {
+   "all": "All",
+   "portraits": "Portraits",
+   "studio": "Studio",
+   "concerts": "Concerts",
+   "tributes": "Tributes",
+   "events": "Festivals & events",
+   "behind": "Behind the scenes"
+  },
+  "contact_index_intro": "Each enquiry has its own form, so it reaches the right person with the details they need.",
+  "open_form": "Open form",
+  "other_paths": "Other enquiries",
+  "rider_note": "The technical rider is shared only with verified promoters and venues — request it with the concert form.",
+  "ff": {
+   "project_title": "Project title",
+   "project_format": "Format",
+   "project_format_opts": [
+    "Feature film",
+    "Television series",
+    "Documentary",
+    "Theatre",
+    "Advertising",
+    "Other"
+   ],
+   "stage": "Production stage",
+   "stage_opts": [
+    "Development",
+    "Pre-production",
+    "Shooting",
+    "Post-production"
+   ],
+   "director_prod": "Director / producer",
+   "venue": "Venue",
+   "location": "City and country",
+   "event_format": "Concert format",
+   "event_format_opts": [
+    "Orchestral concert",
+    "Chamber / ensemble",
+    "Festival appearance",
+    "Private or corporate event",
+    "Other"
+   ],
+   "capacity": "Expected capacity",
+   "rider": "Please send the technical rider (shared after we verify the request).",
+   "track": "Music you want to license",
+   "track_hint": "Title of the work or cue, and the production it comes from",
+   "usage": "Intended use",
+   "usage_opts": [
+    "Film or series",
+    "Advertising",
+    "Broadcast or online",
+    "Live event",
+    "Other"
+   ],
+   "territory": "Territory",
+   "term": "Licence term",
+   "outlet": "Media outlet",
+   "deadline": "Deadline",
+   "request": "Request",
+   "request_opts": [
+    "Interview",
+    "Press kit / photographs",
+    "Accreditation",
+    "Other"
+   ],
+   "subject": "Subject"
+  }
  },
  "ar": {
   "lang_name": "العربية",
@@ -505,7 +588,90 @@
    "نوفمبر",
    "ديسمبر"
   ],
-  "enquiry_type": "ما موضوع استفسارك؟"
+  "enquiry_type": "ما موضوع استفسارك؟",
+  "staging_note": "معاينة لمسودات غير منشورة. لا تظهر في محركات البحث.",
+  "consent_text": "نود استخدام ملفات تعريف ارتباط تحليلية لفهم طريقة استخدام الموقع. لا تُستخدم إلا بموافقتك.",
+  "consent_yes": "أوافق على التحليلات",
+  "consent_no": "رفض",
+  "cookie_settings": "إعدادات ملفات تعريف الارتباط",
+  "news": "الأخبار",
+  "latest_news": "آخر الأخبار",
+  "in_press": "في الصحافة",
+  "read_more": "اقرأ المزيد",
+  "sources_label": "المصادر",
+  "news_related": "أعمال ذات صلة",
+  "all_news": "كل الأخبار",
+  "kit_downloads": "ملفات للتنزيل",
+  "kit_doc": "السيرة الذاتية وأعمال مختارة (Word)",
+  "kit_zip": "كل الصور المعتمدة (ZIP)",
+  "gallery_intro": "الحفلات وجلسات الاستوديو والمهرجانات والتكريمات.",
+  "gcat": {
+   "all": "الكل",
+   "portraits": "بورتريه",
+   "studio": "استوديو",
+   "concerts": "حفلات",
+   "tributes": "تكريمات",
+   "events": "مهرجانات وفعاليات",
+   "behind": "من الكواليس"
+  },
+  "contact_index_intro": "لكل نوع استفسار نموذج خاص به، ليصل إلى الشخص المختص بالتفاصيل التي يحتاجها.",
+  "open_form": "افتح النموذج",
+  "other_paths": "استفسارات أخرى",
+  "rider_note": "تُرسل المتطلبات الفنية للحفل إلى المنظمين والمسارح بعد التحقق فقط — اطلبها عبر نموذج الحفلات.",
+  "ff": {
+   "project_title": "اسم المشروع",
+   "project_format": "نوع العمل",
+   "project_format_opts": [
+    "فيلم روائي",
+    "مسلسل تلفزيوني",
+    "فيلم وثائقي",
+    "مسرح",
+    "إعلان",
+    "أخرى"
+   ],
+   "stage": "مرحلة الإنتاج",
+   "stage_opts": [
+    "التطوير",
+    "ما قبل الإنتاج",
+    "التصوير",
+    "ما بعد الإنتاج"
+   ],
+   "director_prod": "المخرج / المنتج",
+   "venue": "المكان",
+   "location": "المدينة والدولة",
+   "event_format": "شكل الحفل",
+   "event_format_opts": [
+    "حفل أوركسترالي",
+    "فرقة موسيقى حجرة",
+    "مشاركة في مهرجان",
+    "فعالية خاصة أو لشركة",
+    "أخرى"
+   ],
+   "capacity": "السعة المتوقعة",
+   "rider": "أرجو إرسال المتطلبات الفنية للحفل (تُرسل بعد التحقق من الطلب).",
+   "track": "الموسيقى المطلوب ترخيصها",
+   "track_hint": "اسم المقطوعة أو اللحن والعمل الذي ينتمي إليه",
+   "usage": "نوع الاستخدام",
+   "usage_opts": [
+    "فيلم أو مسلسل",
+    "إعلان",
+    "بث تلفزيوني أو إلكتروني",
+    "فعالية حية",
+    "أخرى"
+   ],
+   "territory": "نطاق الاستخدام الجغرافي",
+   "term": "مدة الترخيص",
+   "outlet": "الوسيلة الإعلامية",
+   "deadline": "الموعد النهائي",
+   "request": "الطلب",
+   "request_opts": [
+    "مقابلة",
+    "ملف صحفي / صور",
+    "اعتماد صحفي",
+    "أخرى"
+   ],
+   "subject": "الموضوع"
+  }
  },
  "ru": {
   "lang_name": "Русский",
@@ -759,6 +925,89 @@
    "ноября",
    "декабря"
   ],
-  "enquiry_type": "Тема запроса"
+  "enquiry_type": "Тема запроса",
+  "staging_note": "Предпросмотр неопубликованных черновиков. Не индексируется поисковиками.",
+  "consent_text": "Мы хотели бы использовать аналитические cookie, чтобы понимать, как используется сайт. Они устанавливаются только с вашего согласия.",
+  "consent_yes": "Разрешить аналитику",
+  "consent_no": "Отклонить",
+  "cookie_settings": "Настройки cookie",
+  "news": "Новости",
+  "latest_news": "Последние новости",
+  "in_press": "В прессе",
+  "read_more": "Читать далее",
+  "sources_label": "Источники",
+  "news_related": "Связанные работы",
+  "all_news": "Все новости",
+  "kit_downloads": "Файлы для скачивания",
+  "kit_doc": "Биографии и избранные работы (Word)",
+  "kit_zip": "Все утверждённые портреты (ZIP)",
+  "gallery_intro": "Концерты, работа в студии, фестивали и чествования.",
+  "gcat": {
+   "all": "Все",
+   "portraits": "Портреты",
+   "studio": "Студия",
+   "concerts": "Концерты",
+   "tributes": "Чествования",
+   "events": "Фестивали и события",
+   "behind": "За кадром"
+  },
+  "contact_index_intro": "У каждого типа запроса своя форма — так он попадёт к нужному человеку со всеми необходимыми деталями.",
+  "open_form": "Открыть форму",
+  "other_paths": "Другие запросы",
+  "rider_note": "Технический райдер предоставляется только проверенным промоутерам и площадкам — запросите его через форму концертов.",
+  "ff": {
+   "project_title": "Название проекта",
+   "project_format": "Формат",
+   "project_format_opts": [
+    "Полнометражный фильм",
+    "Телесериал",
+    "Документальный фильм",
+    "Театр",
+    "Реклама",
+    "Другое"
+   ],
+   "stage": "Стадия производства",
+   "stage_opts": [
+    "Разработка",
+    "Подготовка",
+    "Съёмки",
+    "Постпродакшн"
+   ],
+   "director_prod": "Режиссёр / продюсер",
+   "venue": "Площадка",
+   "location": "Город и страна",
+   "event_format": "Формат концерта",
+   "event_format_opts": [
+    "Симфонический концерт",
+    "Камерный ансамбль",
+    "Участие в фестивале",
+    "Частное или корпоративное мероприятие",
+    "Другое"
+   ],
+   "capacity": "Ожидаемая вместимость",
+   "rider": "Пришлите, пожалуйста, технический райдер (после проверки запроса).",
+   "track": "Музыка для лицензирования",
+   "track_hint": "Название произведения или темы и проект, к которому она относится",
+   "usage": "Цель использования",
+   "usage_opts": [
+    "Фильм или сериал",
+    "Реклама",
+    "Эфир или онлайн",
+    "Живое мероприятие",
+    "Другое"
+   ],
+   "territory": "Территория",
+   "term": "Срок лицензии",
+   "outlet": "Издание",
+   "deadline": "Срок",
+   "request": "Запрос",
+   "request_opts": [
+    "Интервью",
+    "Пресс-кит / фотографии",
+    "Аккредитация",
+    "Другое"
+   ],
+   "subject": "Тема"
+  }
  }
 }

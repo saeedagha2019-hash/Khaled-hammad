@@ -137,25 +137,17 @@
     });
   });
 
-  /* enquiry form */
+  /* enquiry forms — one per enquiry type */
   var form = $('[data-enquiry]');
   if (form) {
-    var started = Date.now(), hint = $('[data-cat-hint]', form), proj = $('[data-proj]', form), budget = $('[data-budget]', form);
-    var type = new URLSearchParams(location.search).get('type');
-    function syncCat() {
-      var c = $('input[name="category"]:checked', form); hint.textContent = c.dataset.hint;
-      proj.hidden = c.value === 'press';
-      budget.hidden = !(c.value === 'scoring' || c.value === 'concerts' || c.value === 'licensing');
-    }
-    if (type) { var r = $('input[name="category"][value="' + type + '"]', form); if (r) r.checked = true; }
-    $$('input[name="category"]', form).forEach(function (r) { r.addEventListener('change', syncCat); });
-    syncCat();
+    var started = Date.now();
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
       var E = T.err, errs = [], d = new FormData(form);
       function check(name, ok, msg) {
-        var el = form.elements[name], out = $('[data-err="' + name + '"]', form);
-        el.setAttribute('aria-invalid', ok ? 'false' : 'true'); out.textContent = ok ? '' : msg; if (!ok) errs.push(el);
+        var el = form.elements[name], o = $('[data-err="' + name + '"]', form);
+        if (!el || !o) return;
+        el.setAttribute('aria-invalid', ok ? 'false' : 'true'); o.textContent = ok ? '' : msg; if (!ok) errs.push(el);
       }
       check('name', (d.get('name') || '').trim().length > 1, E.name);
       check('email', /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test((d.get('email') || '').trim()), E.email);
@@ -164,23 +156,63 @@
       var sum = $('[data-summary]', form), ok = $('[data-ok]', form);
       if (errs.length) { sum.textContent = E.summary; sum.hidden = false; errs[0].focus(); return; }
       sum.hidden = true;
-      if (d.get('website') || Date.now() - started < 2500) { ok.textContent = T.sent; ok.hidden = false; return; } // spam trap
-      var catEl = $('input[name="category"]:checked', form), catLabel = catEl.nextElementSibling.textContent, to = (KH.contacts || {})[catEl.value] || KH.contacts.general;
-      var lines = [catLabel, '', 'Name: ' + d.get('name'), 'Organisation: ' + (d.get('organisation') || '—'), 'Email: ' + d.get('email')];
-      if (!proj.hidden) lines.push('Project dates: ' + (d.get('dates') || '—'));
-      if (!budget.hidden) lines.push('Budget band: ' + form.elements.budget.options[form.elements.budget.selectedIndex].text);
+      function done(msg) { ok.textContent = msg; ok.hidden = false; ok.focus(); }
+      if (d.get('website') || Date.now() - started < 2500) { done(T.sent); return; } // spam trap
+      var label = form.dataset.label, to = form.dataset.to, endpoint = form.dataset.endpoint || KH.endpoint, lines = [label, ''], payload = {};
+      $$('input, select, textarea', form).forEach(function (el) {
+        if (!el.name || el.name === 'website' || el.name === 'consent') return;
+        var v = el.type === 'checkbox' ? (el.checked ? '✓' : '') : el.value.trim();
+        if (!v) return;
+        var lab = form.querySelector('label[for="' + el.id + '"]');
+        var name = lab ? lab.textContent.replace(/\*.*$/, '').replace(/\s*\(.*\)\s*$/, '').trim() : el.name;
+        payload[el.name] = v;
+        if (el.name !== 'brief') lines.push(name + ': ' + v);
+      });
       lines.push('', d.get('brief'), '', 'Language: ' + KH.lang);
-      if (KH.endpoint) {
-        var payload = {}; d.forEach(function (v, k) { if (k !== 'website') payload[k] = v; }); payload.category_label = catLabel; payload.language = KH.lang; payload._subject = '[' + catLabel + '] ' + d.get('name');
-        fetch(KH.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) })
-          .then(function (r) { if (!r.ok) throw r; ok.textContent = T.sent; ok.hidden = false; form.reset(); syncCat(); ok.focus && ok.setAttribute('tabindex', '-1'); ok.focus(); })
-          .catch(function () { mailto(); });
-      } else mailto();
-      function mailto() {
-        location.href = 'mailto:' + to + '?subject=' + encodeURIComponent('[' + catLabel + '] ' + d.get('name')) + '&body=' + encodeURIComponent(lines.join('\n'));
-        ok.textContent = T.sent_mailto.replace('{e}', to); ok.hidden = false;
-      }
+      payload.enquiry_type = form.dataset.kind; payload.language = KH.lang; payload._subject = '[' + label + '] ' + d.get('name');
+      function mailto() { location.href = 'mailto:' + to + '?subject=' + encodeURIComponent(payload._subject) + '&body=' + encodeURIComponent(lines.join('\n')); done(T.sent_mailto.replace('{e}', to)); }
+      if (!endpoint) { mailto(); return; }
+      var btn = $('button[type="submit"]', form); btn.disabled = true;
+      fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) })
+        .then(function (r) { if (!r.ok) throw r; form.reset(); done(T.sent); })
+        .catch(mailto)
+        .then(function () { btn.disabled = false; });
     });
+  }
+
+  /* about-page gallery filter */
+  var gf = $('[data-gallery-filter]');
+  if (gf) {
+    var gl = $$('[data-gallery] > li');
+    $$('[data-gcat]', gf).forEach(function (c) {
+      c.addEventListener('click', function () {
+        var k = c.dataset.gcat;
+        $$('[data-gcat]', gf).forEach(function (o) { o.setAttribute('aria-pressed', o === c ? 'true' : 'false'); });
+        gl.forEach(function (li) { li.hidden = !(k === 'all' || li.dataset.gcat === k); });
+      });
+    });
+  }
+
+  /* analytics — loaded only after explicit consent; nothing runs when no provider is configured */
+  var A = KH.analytics || {}, cb = $('[data-consent]');
+  function store(v) { try { localStorage.setItem('kh-consent', v); } catch (e) {} }
+  function stored() { try { return localStorage.getItem('kh-consent'); } catch (e) { return null; } }
+  function loadAnalytics() {
+    if (!A.id || window.__khA) return; window.__khA = 1;
+    var s = doc.createElement('script'); s.async = true;
+    if (A.provider === 'plausible') { s.src = 'https://plausible.io/js/script.js'; s.setAttribute('data-domain', A.id); }
+    else {
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(A.id); window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); }; window.gtag('js', new Date()); window.gtag('config', A.id, { anonymize_ip: true });
+    }
+    doc.head.appendChild(s);
+  }
+  if (A.id && cb) {
+    var c0 = stored();
+    if (c0 === 'yes') loadAnalytics(); else if (c0 !== 'no') cb.hidden = false;
+    $('[data-consent-yes]', cb).addEventListener('click', function () { store('yes'); cb.hidden = true; loadAnalytics(); });
+    $('[data-consent-no]', cb).addEventListener('click', function () { store('no'); cb.hidden = true; });
+    $$('[data-consent-open]').forEach(function (b) { b.addEventListener('click', function () { cb.hidden = false; $('[data-consent-yes]', cb).focus(); }); });
   }
 
   /* site search */
