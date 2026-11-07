@@ -216,7 +216,7 @@ def footer(lang, path, alt_langs=None):
 </footer>'''
 
 
-def page(lang, path, title, body, desc=None, jsonld=None, overlay=False, og_image=None, review=False, preload=None, body_class='', alt_langs=None):
+def page(lang, path, title, body, desc=None, jsonld=None, overlay=False, og_image=None, review=False, preload=None, body_class='', alt_langs=None, scripts=()):
     alt_langs = [l for l in (alt_langs or LANGS) if l in LANGS]
     t = I18N[lang]
     full_title = f'{title} | {t["site_name"]}' if title else f'{t["site_name"]} — {t["descriptor"]}'
@@ -261,7 +261,7 @@ def page(lang, path, title, body, desc=None, jsonld=None, overlay=False, og_imag
 {footer(lang, path, alt_langs)}
 {consent_banner(lang)}
 <script>window.KH={{lang:"{lang}",base:"{BASE}",t:{json.dumps({k: t[k] for k in ('play', 'pause', 'results_one', 'results_many', 'copied', 'copy_text', 'search_none', 'err', 'sent', 'sent_mailto', 'cat', 'press_type', 'menu', 'close')}, ensure_ascii=False)},endpoint:{json.dumps(SET.get('form_endpoint', ''))},endpoints:{json.dumps(SET.get('form_endpoints', {}))},contacts:{json.dumps(SET['contacts'])},analytics:{json.dumps({} if STAGING else SET.get('analytics', {}))}}};</script>
-<script src="{u('/assets/js/site.js')}?v={VERSION}" defer></script>
+<script src="{u('/assets/js/site.js')}?v={VERSION}" defer></script>{''.join(f'<script src="{u(sc)}?v={VERSION}" defer></script>' for sc in scripts)}
 </body>
 </html>'''
 
@@ -573,8 +573,22 @@ def build_works(lang):
                  f'<a href="{lu(lang, "works/" + w["slug"])}">{thumb}<span class="wr-year">{e(w["year"] or "—")}</span>'
                  f'<span class="wr-main"><span class="wr-title">{e(tr(w["title"], lang))}</span><span class="wr-credit">{e(credit_line(w, lang))}</span></span>'
                  f'<span class="wr-cat">{e(t["cat"][w["category"]])}</span></a></li>')
-    body = f'''{page_head(lang, t['nav']['works'], t['works_title'], t['works_intro'])}
-<section class="sec sec-ivory" aria-label="{e(t['works_title'])}"><div class="wrap">
+    data = [{'t': tr(w['title'], lang), 'c': w['category'], 'cl': t['cat'][w['category']], 'y': w['year'], 'h': lu(lang, 'works/' + w['slug']),
+             'i': u(w['poster']) if media_ok(w.get('poster'), w.get('poster_rights')) else None, 'cr': tr(w['director'], lang) if w.get('director') else ''} for w in WORKS]
+    wchips = ''.join(f'<button type="button" class="wc-chip" data-wc-cat="{c}" aria-pressed="{"true" if c == "all" else "false"}">{e(t["cat"][c])}<sup>{len(WORKS) if c == "all" else counts[c]}</sup></button>' for c in cats if c == 'all' or counts[c])
+    vt = (f'<div class="view-toggle" role="group" aria-label="{e(t["wc_views"])}"><span class="vt-l">{e(t["wc_view_label"])}</span>'
+          f'<button type="button" data-view="canvas" aria-pressed="false">{e(t["wc_canvas"])}</button><button type="button" data-view="list" aria-pressed="true">{e(t["wc_list"])}</button></div>')
+    canvas_sec = f'''<section class="works-canvas" data-wc hidden aria-label="{e(t['works_title'])} — {e(t['wc_canvas'])}">
+ <canvas data-wc-canvas tabindex="0" role="img" aria-label="{e(t['wc_a11y'])}"></canvas>
+ <div class="wc-cursor" data-wc-cursor aria-hidden="true"><span>{e(t['wc_open'])}</span></div>
+ <div class="wc-label" data-wc-label aria-hidden="true"><span class="wcl-cat"></span><span class="wcl-title"></span><span class="wcl-meta"></span></div>
+ <div class="wc-top"><h1 class="wc-title">{e(t['works_title'])}</h1><p class="wc-hint">{e(t['wc_hint'])}</p></div>
+ <div class="wc-bar"><div class="wc-chips" role="group" aria-label="{e(t['format'])}">{wchips}</div>{vt}</div>
+ <p class="sr" aria-live="polite" data-wc-live></p>
+ <script type="application/json" data-wc-data>{json.dumps(data, ensure_ascii=False).replace('</', '<\\/')}</script>
+</section>'''
+    body = f'''{canvas_sec}<div class="works-listview">{page_head(lang, t['nav']['works'], t['works_title'], t['works_intro'])}
+<section class="sec sec-ivory" aria-label="{e(t['works_title'])}"><div class="wrap">{vt}
  <div class="filters" data-filters>
   <div class="chips" role="group" aria-label="{e(t['format'])}">{chips}</div>
   <div class="filter-row">
@@ -587,11 +601,11 @@ def build_works(lang):
  <ol class="work-list" data-list>{rows}</ol>
  <p class="empty-note" data-empty hidden>{e(t['no_results'])}</p>
 </div></section>
-{contact_cta(lang)}'''
+{contact_cta(lang)}</div>'''
     ld = [crumb_ld(lang, [(t['nav']['home'], lu(lang)), (t['works_title'], lu(lang, 'works'))]),
           {'@context': 'https://schema.org', '@type': 'ItemList', 'numberOfItems': len(WORKS),
            'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'url': SITE_URL + lu(lang, 'works/' + w['slug'])} for i, w in enumerate(WORKS)]}]
-    write(out(lang, 'works'), page(lang, 'works', t['works_title'], body, desc=t['works_intro'], jsonld=ld, review=draft_lang(lang)))
+    write(out(lang, 'works'), page(lang, 'works', t['works_title'], body, desc=t['works_intro'], jsonld=ld, review=draft_lang(lang), scripts=('/assets/js/works-canvas.js',), body_class='is-works'))
     for w in WORKS:
         build_work(lang, w)
 
