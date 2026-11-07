@@ -61,5 +61,9 @@
     "en": "approved",
     "ar": "approved",
     "ru": "draft-needs-native-review"
+  },
+  "slugs": {
+    "ar": "ضحك-ولعب-وجد-وحب",
+    "ru": "smekh-igra-sereznost-i-lyubov"
   }
 }

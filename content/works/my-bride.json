@@ -53,5 +53,9 @@
     "en": "approved",
     "ar": "approved",
     "ru": "draft-needs-native-review"
+  },
+  "slugs": {
+    "ar": "عروستي",
+    "ru": "moya-nevesta"
   }
 }

@@ -53,5 +53,9 @@
     "en": "approved",
     "ar": "approved",
     "ru": "draft-needs-native-review"
+  },
+  "slugs": {
+    "ar": "عنتر-ابن-ابن-ابن-شداد",
+    "ru": "antar-syn-syna-syna-shaddada"
   }
 }

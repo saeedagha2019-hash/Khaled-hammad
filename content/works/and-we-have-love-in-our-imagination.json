@@ -53,5 +53,9 @@
     "en": "approved",
     "ar": "approved",
     "ru": "draft-needs-native-review"
+  },
+  "slugs": {
+    "ar": "ولنا-في-الخيال-حب",
+    "ru": "a-u-nas-lyubov-v-voobrazhenii"
   }
 }

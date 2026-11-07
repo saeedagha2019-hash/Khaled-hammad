@@ -53,5 +53,9 @@
     "en": "approved",
     "ar": "approved",
     "ru": "draft-needs-native-review"
+  },
+  "slugs": {
+    "ar": "تحب-تشوف-مأساة",
+    "ru": "khochesh-uvidet-tragediyu"
   }
 }

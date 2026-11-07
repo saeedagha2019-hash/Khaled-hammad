@@ -53,5 +53,9 @@
     "en": "approved",
     "ar": "approved",
     "ru": "draft-needs-native-review"
+  },
+  "slugs": {
+    "ar": "شورت-وفانلة-وكاب",
+    "ru": "shorty-futbolka-i-kepka"
   }
 }

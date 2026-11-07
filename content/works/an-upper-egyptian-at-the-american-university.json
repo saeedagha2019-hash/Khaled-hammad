@@ -61,5 +61,9 @@
     "en": "approved",
     "ar": "approved",
     "ru": "draft-needs-native-review"
+  },
+  "slugs": {
+    "ar": "صعيدي-في-الجامعة-الأمريكية",
+    "ru": "saidi-v-amerikanskom-universitete"
   }
 }

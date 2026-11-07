@@ -61,5 +61,9 @@
     "en": "approved",
     "ar": "approved",
     "ru": "draft-needs-native-review"
+  },
+  "slugs": {
+    "ar": "همام-في-أمستردام",
+    "ru": "khammam-v-amsterdame"
   }
 }

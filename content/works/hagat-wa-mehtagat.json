@@ -57,5 +57,9 @@
     "en": "approved",
     "ar": "approved",
     "ru": "draft-needs-native-review"
+  },
+  "slugs": {
+    "ar": "فوازير-حاجات-ومحتاجات",
+    "ru": "favazir-khagat-va-mekhtagat"
   }
 }

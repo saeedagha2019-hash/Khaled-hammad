@@ -55,5 +55,9 @@
     "en": "approved",
     "ar": "approved",
     "ru": "draft-needs-native-review"
+  },
+  "slugs": {
+    "ar": "عمارة-يعقوبيان",
+    "ru": "dom-yakubyana"
   }
 }

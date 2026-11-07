@@ -1,0 +1,56 @@
+{
+  "slug": "el-gouna-film-festival-jury-2026",
+  "date": "2026-10-13",
+  "image": "/assets/img/gallery-05-events.webp",
+  "title": {
+    "en": "Khaled Hammad joins the Feature Narrative jury of the 9th El Gouna Film Festival",
+    "ar": "خالد حماد عضوًا في لجنة تحكيم الأفلام الروائية الطويلة بالدورة التاسعة لمهرجان الجونة السينمائي",
+    "ru": "Халед Хаммад вошёл в жюри конкурса игровых фильмов 9-го кинофестиваля в Эль-Гуне"
+  },
+  "summary": {
+    "en": "The festival named the composer to its Feature Narrative Competition jury, chaired by British director Joanna Hogg.",
+    "ar": "اختار المهرجان المؤلف الموسيقي عضوًا في لجنة تحكيم مسابقة الأفلام الروائية الطويلة برئاسة المخرجة البريطانية جوانا هوج.",
+    "ru": "Фестиваль включил композитора в жюри конкурса полнометражных игровых фильмов под председательством британского режиссёра Джоанны Хогг."
+  },
+  "body": {
+    "en": [
+      "El Gouna Film Festival announced the juries of its ninth edition, held from 15 to 23 October 2026. Composer Khaled Hammad was named a member of the Feature Narrative Competition jury, chaired by British director Joanna Hogg.",
+      "The appointment adds to his work on festival juries and national selection committees, including the Egyptian National Film Festival, the Cairo International Short Film Festival and the committee selecting Egypt’s Academy Awards submission."
+    ],
+    "ar": [
+      "أعلن مهرجان الجونة السينمائي تشكيل لجان تحكيم دورته التاسعة، التي تُقام من ١٥ إلى ٢٣ أكتوبر ٢٠٢٦، ومن بينها اختيار المؤلف الموسيقي خالد حماد عضوًا في لجنة تحكيم مسابقة الأفلام الروائية الطويلة برئاسة المخرجة البريطانية جوانا هوج.",
+      "وتُضاف هذه العضوية إلى مشاركاته في لجان تحكيم المهرجانات ولجان الاختيار الوطنية، ومنها المهرجان القومي للسينما ومهرجان القاهرة الدولي للفيلم القصير ولجنة ترشيح الفيلم المصري لجوائز الأوسكار."
+    ],
+    "ru": [
+      "Кинофестиваль в Эль-Гуне объявил состав жюри девятого фестиваля, который проходит с 15 по 23 октября 2026 года. Композитор Халед Хаммад вошёл в жюри конкурса полнометражных игровых фильмов под председательством британского режиссёра Джоанны Хогг.",
+      "Это назначение продолжает его работу в жюри фестивалей и национальных отборочных комиссиях — в том числе Национального кинофестиваля Египта, Каирского международного фестиваля короткометражного кино и комиссии по выдвижению египетского фильма на «Оскар»."
+    ]
+  },
+  "sources": [
+    {
+      "label": {
+        "en": "Akhbar El Yom Gate",
+        "ar": "بوابة أخبار اليوم",
+        "ru": "Портал «Ахбар аль-Яум»"
+      },
+      "url": "https://share.google/d5uzxobVzUt5OXZee"
+    }
+  ],
+  "related_works": [],
+  "published": true,
+  "category": "news",
+  "image_alt": {
+    "en": "Khaled Hammad",
+    "ar": "خالد حماد",
+    "ru": "Халед Хаммад"
+  },
+  "slugs": {
+    "ar": "خالد-حماد-عضوا-في-لجنة-تحكيم",
+    "ru": "khaled-khammad-voshel-v-zhyuri-konkursa"
+  },
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

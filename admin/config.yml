@@ -45,6 +45,7 @@ collections:
       - { label: Television, field: category, pattern: tv }
     fields:
       - { label: Slug (URL), name: slug, widget: string, pattern: ['^[a-z0-9-]+$', 'lowercase letters, numbers and dashes'] }
+      - { label: Localised slugs, name: slugs, widget: object, required: false, fields: [ { label: Arabic, name: ar, widget: string, required: false }, { label: Russian, name: ru, widget: string, required: false } ] }
       - { label: Published, name: published, widget: boolean, default: true }
       - { label: Category, name: category, widget: select, options: [film, tv, theatre, children, songs] }
       - { label: Year, name: year, widget: number, value_type: int, required: false }
@@ -138,6 +139,41 @@ collections:
       - { label: Related concert (slug), name: related_concert, widget: string, required: false }
       - { label: Translation status, name: translation_status, widget: object, fields: *tstatus }
 
+  - name: news
+    label: News (own articles)
+    label_singular: News article
+    folder: content/news
+    extension: json
+    format: json
+    create: true
+    slug: "{{fields.slug}}"
+    identifier_field: slug
+    summary: "{{date}} — {{title.en}}"
+    fields:
+      - { label: Slug (URL), name: slug, widget: string }
+      - { label: Localised slugs, name: slugs, widget: object, required: false, fields: [ { label: Arabic, name: ar, widget: string, required: false }, { label: Russian, name: ru, widget: string, required: false } ] }
+      - { label: Published, name: published, widget: boolean, default: true }
+      - { label: Date, name: date, widget: datetime, format: YYYY-MM-DD, date_format: YYYY-MM-DD, time_format: false }
+      - { label: Title, name: title, widget: object, fields: *lang }
+      - { label: Summary, name: summary, widget: object, fields: *langtext }
+      - label: Body (paragraphs)
+        name: body
+        widget: object
+        fields:
+          - { label: English, name: en, widget: list, field: { label: Paragraph, name: p, widget: text } }
+          - { label: العربية, name: ar, widget: list, required: false, field: { label: Paragraph, name: p, widget: text } }
+          - { label: Русский, name: ru, widget: list, required: false, field: { label: Paragraph, name: p, widget: text } }
+      - { label: Image, name: image, widget: image }
+      - { label: Image alt, name: image_alt, widget: object, fields: *lang }
+      - label: Sources
+        name: sources
+        widget: list
+        fields:
+          - { label: Label, name: label, widget: object, fields: *lang }
+          - { label: URL, name: url, widget: string }
+      - { label: Related works (slugs), name: related_works, widget: list, required: false }
+      - { label: Translation status, name: translation_status, widget: object, fields: *tstatus }
+
   - name: site
     label: Site data
     editor: { preview: false }
@@ -207,9 +243,13 @@ collections:
           - { label: Base path, name: base_path, widget: string, required: false }
           - { label: Domain note, name: domain_note, widget: text, required: false }
           - { label: Show media still pending licence, name: show_media_pending_licence, widget: boolean, hint: "Turn OFF before launch unless every asset is licensed — unlicensed posters then fall back to typographic placeholders." }
-          - { label: Form endpoint (e.g. Formspree), name: form_endpoint, widget: string, required: false }
+          - { label: Language status, name: language_status, widget: object, hint: "Only approved languages are published; drafts appear on /staging/.", fields: *tstatus }
+          - { label: Form endpoint — default (e.g. Formspree), name: form_endpoint, widget: string, required: false }
+          - { label: Form endpoints per enquiry type, name: form_endpoints, widget: object, fields: [ { label: Scoring, name: scoring, widget: string, required: false }, { label: Concerts, name: concerts, widget: string, required: false }, { label: Licensing, name: licensing, widget: string, required: false }, { label: Press, name: press, widget: string, required: false }, { label: General, name: general, widget: string, required: false } ] }
           - { label: Contacts, name: contacts, widget: object, fields: [ { label: General, name: general, widget: string }, { label: Scoring, name: scoring, widget: string }, { label: Concerts, name: concerts, widget: string }, { label: Licensing, name: licensing, widget: string }, { label: Press, name: press, widget: string } ] }
           - { label: Social links, name: social, widget: list, fields: [ { label: Name, name: name, widget: string }, { label: URL, name: url, widget: string } ] }
-          - { label: Analytics ID (consent required), name: analytics_id, widget: string, required: false }
+          - { label: Analytics (loaded only after consent), name: analytics, widget: object, fields: [ { label: Provider, name: provider, widget: select, options: ["", plausible, ga4], required: false }, { label: ID / domain, name: id, widget: string, required: false } ] }
+          - { label: Google Search Console verification code, name: google_site_verification, widget: string, required: false }
+          - { label: Redirects, name: redirects, widget: list, required: false, fields: [ { label: From (old path), name: from, widget: string }, { label: To (new path or URL), name: to, widget: string } ] }
           - { label: Languages, name: languages, widget: list }
           - { label: Default language, name: default_language, widget: string }

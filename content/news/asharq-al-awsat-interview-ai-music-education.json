@@ -1,0 +1,56 @@
+{
+  "slug": "asharq-al-awsat-interview-ai-music-education",
+  "date": "2026-10-30",
+  "image": "/assets/img/gallery-13-studio.webp",
+  "title": {
+    "en": "In Asharq Al-Awsat: Khaled Hammad on AI, music education and the sound of film",
+    "ar": "في «الشرق الأوسط»: خالد حماد عن الذكاء الاصطناعي ودراسة الموسيقى وصوت الفيلم",
+    "ru": "В Asharq Al-Awsat: Халед Хаммад об ИИ, музыкальном образовании и звуке кино"
+  },
+  "summary": {
+    "en": "In a conversation with Ahmed Adly in Cairo, the composer warns that the turn to AI for its low cost threatens the study of music.",
+    "ar": "في حوار مع أحمد عدلي بالقاهرة، يحذّر المؤلف الموسيقي من أن الاتجاه إلى الذكاء الاصطناعي لانخفاض تكلفته يهدد دراسة الموسيقى.",
+    "ru": "В беседе с Ахмедом Адли в Каире композитор предупреждает: обращение к ИИ ради экономии угрожает музыкальному образованию."
+  },
+  "body": {
+    "en": [
+      "Speaking to Asharq Al-Awsat, Khaled Hammad voiced his concern about the growing turn to artificial intelligence in music production because of its low cost, and the threat this poses to the study of music.",
+      "He also talked about how film sound has evolved, how he chooses his projects, and his membership of the El Gouna Film Festival jury."
+    ],
+    "ar": [
+      "في حواره مع صحيفة «الشرق الأوسط»، عبّر خالد حماد عن تخوفه من تزايد الاتجاه إلى الذكاء الاصطناعي في إنتاج الموسيقى لانخفاض تكلفته، وما يمثله ذلك من خطر على دراسة الموسيقى.",
+      "كما تحدث عن تطور صوت الفيلم، وعن طريقة اختياره لأعماله، وعضويته في لجنة تحكيم مهرجان الجونة السينمائي."
+    ],
+    "ru": [
+      "В интервью газете Asharq Al-Awsat Халед Хаммад выразил тревогу из-за растущего обращения к искусственному интеллекту в музыкальном производстве ради экономии и угрозы, которую это несёт музыкальному образованию.",
+      "Он также рассказал об эволюции звука в кино, о том, как выбирает проекты, и о работе в жюри кинофестиваля в Эль-Гуне."
+    ]
+  },
+  "sources": [
+    {
+      "label": {
+        "en": "Asharq Al-Awsat — interview by Ahmed Adly",
+        "ar": "الشرق الأوسط — حوار أحمد عدلي",
+        "ru": "Asharq Al-Awsat — интервью Ахмеда Адли"
+      },
+      "url": "https://aawsat.com/node/5335716"
+    }
+  ],
+  "related_works": [],
+  "published": true,
+  "category": "news",
+  "image_alt": {
+    "en": "Khaled Hammad",
+    "ar": "خالد حماد",
+    "ru": "Халед Хаммад"
+  },
+  "slugs": {
+    "ar": "في-الشرق-الأوسط-خالد-حماد-عن",
+    "ru": "v-asharq-al-awsat-khaled-khammad"
+  },
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

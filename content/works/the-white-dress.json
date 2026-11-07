@@ -55,5 +55,9 @@
     "en": "approved",
     "ar": "approved",
     "ru": "draft-needs-native-review"
+  },
+  "slugs": {
+    "ar": "الفستان-الأبيض",
+    "ru": "beloe-plate"
   }
 }
