@@ -216,7 +216,7 @@ def footer(lang, path, alt_langs=None):
 </footer>'''
 
 
-def page(lang, path, title, body, desc=None, jsonld=None, overlay=False, og_image=None, review=False, preload=None, body_class='', alt_langs=None, scripts=()):
+def page(lang, path, title, body, desc=None, jsonld=None, overlay=False, og_image=None, review=False, preload=None, body_class='', alt_langs=None, scripts=(), noindex=False):
     alt_langs = [l for l in (alt_langs or LANGS) if l in LANGS]
     t = I18N[lang]
     full_title = f'{title} | {t["site_name"]}' if title else f'{t["site_name"]} — {t["descriptor"]}'
@@ -232,7 +232,7 @@ def page(lang, path, title, body, desc=None, jsonld=None, overlay=False, og_imag
     note = f'<p class="review-note" role="note">{e(t["translation_review"])}</p>' if review and t['translation_review'] else ''
     pre = f'<link rel="preload" as="image" href="{e(u(preload))}" fetchpriority="high">' if preload else ''
     og_alts = ''.join(f'<meta property="og:locale:alternate" content="{I18N[l]["locale"]}">' for l in alt_langs if l != lang)
-    robots = '<meta name="robots" content="noindex, nofollow">' if STAGING else ''
+    robots = '<meta name="robots" content="noindex, nofollow">' if (STAGING or noindex) else ''
     verify = f'<meta name="google-site-verification" content="{e(SET["google_site_verification"])}">' if SET.get('google_site_verification') and not STAGING else ''
     staging_bar = f'<p class="staging-bar" role="note">STAGING — {e(t["staging_note"])}</p>' if STAGING else ''
     return f'''<!doctype html>
@@ -1050,6 +1050,54 @@ def build_search(lang):
     write(out(lang, 'search'), page(lang, 'search', t['search_title'], body))
 
 
+MM_MOODS = {  # presentational tempo/depth per work for the music-motion study
+    'love-passion-and-seriousness': (0.8, 0.9, 'رومانسي · نبض متوسط'),
+    'an-upper-egyptian-at-the-american-university': (1.5, 0.7, 'كوميدي · نبض سريع وخفيف'),
+    'hammam-in-amsterdam': (1.25, 0.8, 'مغامرة · نبض حيوي'),
+    'awan-el-ward': (0.5, 1.25, 'درامي · نبض بطيء وعميق'),
+}
+
+
+def build_lab(lang):
+    """Music-motion study (Arabic): four works whose motion behaves like a film score. Not linked, noindex."""
+    if lang != 'ar':
+        return
+    t = I18N[lang]
+    data = []
+    for slug, (tempo, depth, mood) in MM_MOODS.items():
+        w = WBY.get(slug)
+        if not w or not w.get('audio'):
+            continue
+        data.append({'t': tr(w['title'], lang), 'y': w['year'], 'cl': t['cat'][w['category']], 'cr': tr(w['director'], lang) if w.get('director') else '',
+                     'img': u(w['poster']), 'track': u(w['audio']['src']), 'href': lu(lang, 'works/' + slug), 'tempo': tempo, 'depth': depth, 'moodLabel': mood})
+    legend = [('النَّفَس', 'لكل عمل إيقاعه الخاص: الموجة على البطاقة تشتد وتهدأ مثل جملة موسيقية، أبطأ وأعمق في الدراما، وأسرع وأخف في الكوميديا.'),
+              ('الدخول والذروة والخروج', 'العمل يدخل خافتًا من الأسفل، ويكتمل لونه وضوؤه عند منتصف الشاشة، ثم يخفت وهو ينطوي ويبتعد في الأعلى.'),
+              ('الأوركسترا والصدى', 'التمرير السريع يُدخل «الأوركسترا كاملة»: يزداد انحناء العدسة وانفصال الألوان. وعند التوقف لا يتجمد المشهد، بل يرنّ ويهدأ ببطء.'),
+              ('القفلة', 'بعد كل حركة يستقر العرض بهدوء على أقرب عمل، كما تستقر الجملة الموسيقية على قرارها.'),
+              ('الاستماع', 'باختيارك فقط: زر «استمع أثناء التصفح» يشغّل مقطع العمل الذي في المنتصف، فتتبع الحركة ارتفاع الصوت ونبضه، وتنتقل الموسيقى بتلاشٍ هادئ عند الانتقال لعمل آخر.'),
+              ('الصمت', 'إذا توقفت ولم تشغّل الموسيقى، تهدأ الحركة تدريجيًا حتى تكاد تسكن.')]
+    leg = ''.join(f'<li><b>{e(a)}</b><span>{e(b)}</span></li>' for a, b in legend)
+    bars = ''.join('<i></i>' for _ in range(5))
+    body = f'''<section class="mm" data-mm aria-label="الحركة كموسيقى تصويرية">
+ <canvas tabindex="0" role="img" aria-label="أربعة أعمال تتحرك كموسيقى تصويرية. استخدم الأسهم للتنقل وEnter للفتح."></canvas>
+ <div class="wc-cursor mm-cursor" data-mm-cursor aria-hidden="true"><span>{e(t['wc_open'])}</span></div>
+ <div class="mm-intro"><p class="eyebrow">تجربة</p><h1>الحركة كموسيقى تصويرية</h1><p>أربعة أعمال فقط، لكل منها إيقاعه. مرّر ببطء ثم بسرعة، ثم توقف — وجرّب الاستماع.</p></div>
+ <details class="mm-legend"><summary>ماذا ترى؟</summary><ol>{leg}</ol></details>
+ <div class="mm-now" aria-live="polite">
+  <span class="mm-meter" data-mm-meter aria-hidden="true">{bars}</span>
+  <div class="mm-now-t"><p class="mm-title" data-mm-title></p><p class="mm-mood" data-mm-mood></p></div>
+  <button type="button" class="mm-listen" data-mm-listen aria-pressed="false" data-on="إيقاف الاستماع" data-off="استمع أثناء التصفح">
+   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z" fill="currentColor"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+   <span data-mm-listen-label>استمع أثناء التصفح</span></button>
+ </div>
+ <p class="mm-fallback">هذه التجربة تحتاج متصفحًا يدعم WebGL. <a href="{lu(lang, 'works')}?view=list">اعرض قائمة الأعمال</a></p>
+ <div class="mm-cut" data-mm-cut aria-hidden="true"></div>
+ <script type="application/json" data-mm-data>{json.dumps(data, ensure_ascii=False).replace('</', '<\\/')}</script>
+</section>'''
+    write(out(lang, 'lab/music-motion'), page(lang, 'lab/music-motion', 'الحركة كموسيقى تصويرية', body, desc='تجربة: حركة عرض الأعمال كموسيقى تصويرية.',
+                                             alt_langs=['ar'], scripts=('/assets/js/music-motion.js',), noindex=True, body_class='is-works is-lab'))
+
+
 def build_utility(lang):
     t = I18N[lang]
     analytics_on = bool(SET.get('analytics', {}).get('id')) and not STAGING
@@ -1167,7 +1215,7 @@ def main():
     for lang in LANGS:
         set_scope(lang)
         build_home(lang); build_about(lang); build_works(lang); build_listen(lang); build_concerts(lang)
-        build_press(lang); build_contact(lang); build_search(lang); build_utility(lang)
+        build_press(lang); build_contact(lang); build_search(lang); build_utility(lang); build_lab(lang)
     build_root()
     static = ['', 'about', 'works', 'listen-watch', 'concerts', 'news-press', 'news-press/press-kit', 'contact', 'privacy', 'accessibility'] + ['contact/' + k for k in FORM_KINDS]
     entries = [(p, LANGS) for p in static]
