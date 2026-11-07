@@ -35,15 +35,15 @@
   function attr(p, b) { var l = gl.getAttribLocation(p, 'aP'); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.enableVertexAttribArray(l); gl.vertexAttribPointer(l, 2, gl.FLOAT, false, 0, 0); }
   var quad = buf([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1]), mA = grid(28, 28), mesh = buf(mA), mN = mA.length / 2, cA = grid(28, 2), cmesh = buf(cA), cN = cA.length / 2;
 
-  var planeProg = prog(
-    'attribute vec2 aP;uniform vec4 uRect;uniform vec2 uRes;uniform float uCamZ;uniform vec2 uBend;uniform float uTime;uniform float uPhase;uniform float uAmp;uniform float uFold;uniform float uHOff;' +
+  var VS =     'attribute vec2 aP;uniform vec4 uRect;uniform vec2 uRes;uniform float uCamZ;uniform vec2 uBend;uniform float uTime;uniform float uPhase;uniform float uAmp;uniform float uFold;uniform float uHOff;' +
     'varying vec2 vUv;varying float vDepth;varying float vRipple;' +
     'void main(){vUv=aP;vec3 p=vec3(uRect.x+aP.x*uRect.z-uRes.x*.5,uRes.y*.5-(uRect.y+aP.y*uRect.w),0.);' +
     'float n=sin((p.x-p.y*.1)*.03-uTime*1.1+cos(p.z*.04)*10.)*50.;float n2=sin((p.x+p.y*.1)*.01-uTime*.4)*.5;' +
     'float r=sin((p.x-p.y)*.02-uPhase)*12.*uAmp;p.z+=r;' +                         /* the phrase: amplitude and tempo per work */
     'float b=smoothstep(uBend.x,uBend.y,p.y);p.z-=1200.*uFold*b+n*b;' +
     'p.y-=(1.5-n2)*smoothstep(uBend.x*1.1,uBend.y*.7,p.y)*uHOff;' +
-    'float w=(uCamZ-p.z)/uCamZ;vDepth=uCamZ-p.z;vRipple=r;gl_Position=vec4(p.x/(uRes.x*.5),p.y/(uRes.y*.5),0.,w);}',
+    'float w=(uCamZ-p.z)/uCamZ;vDepth=uCamZ-p.z;vRipple=r;gl_Position=vec4(p.x/(uRes.x*.5),p.y/(uRes.y*.5),0.,w);}';
+  var planeProg = prog(VS,
     'precision highp float;uniform sampler2D uTex;uniform float uInner;uniform float uOpacity;uniform float uCamZ;uniform float uLight;uniform float uPresence;varying vec2 vUv;varying float vDepth;varying float vRipple;' +
     'void main(){vec4 c=texture2D(uTex,(vUv-.5)/uInner+.5);' +
     'float g=dot(c.rgb,vec3(.299,.587,.114));vec3 quiet=mix(vec3(g),c.rgb,.35)*.42;' +   /* entering / leaving: muted */
@@ -51,6 +51,13 @@
     'c.rgb+=smoothstep(0.,10.,vRipple*.3)*uLight;' +
     'float fog=smoothstep(uCamZ+150.,uCamZ+1150.,vDepth);c.rgb=mix(c.rgb,vec3(.067,.09,.098),fog);' +
     'c.a*=(1.-smoothstep(uCamZ+900.,uCamZ+1250.,vDepth))*uOpacity;gl_FragColor=c;}');
+  // light spill: the poster lights the dark room around it like a screen — soft elliptical falloff, no edges
+  var glowProg = prog(VS,
+    'precision highp float;uniform sampler2D uTex;uniform float uGlow;uniform float uCamZ;varying vec2 vUv;varying float vDepth;' +
+    'void main(){vec2 q=(vUv-.5)*2.;float m=1.-smoothstep(.1,1.,length(q*vec2(1.,.94)));m*=m;' +
+    'vec3 c=texture2D(uTex,vUv).rgb;float fog=smoothstep(uCamZ+150.,uCamZ+1150.,vDepth);' +
+    'gl_FragColor=vec4(c*m*uGlow*(1.-fog),1.);}');
+  var GU = U(glowProg, ['uRect', 'uRes', 'uCamZ', 'uBend', 'uTime', 'uPhase', 'uAmp', 'uFold', 'uHOff', 'uTex', 'uGlow']);
   var PU = U(planeProg, ['uRect', 'uRes', 'uCamZ', 'uBend', 'uTime', 'uPhase', 'uAmp', 'uFold', 'uHOff', 'uTex', 'uInner', 'uOpacity', 'uLight', 'uPresence']);
 
   var lensProg = prog(
@@ -73,33 +80,37 @@
 
   /* ---------- artwork (site palette & fonts) ---------- */
   function mk(w, h) { var c = doc.createElement('canvas'); c.width = w; c.height = h; return c; }
-  var IW = 1230, IH = 645, CW = 1640, CH = 148;
-  function imageCard(im) {
-    var c = mk(IW, IH), x = c.getContext('2d');
-    x.fillStyle = '#111719'; x.fillRect(0, 0, IW, IH);
-    if (!im) return c;
-    var bs = Math.max(IW / im.width, IH / im.height), bw = im.width * bs, bh = im.height * bs;
-    if ('filter' in x) { x.filter = 'blur(30px) saturate(.85) brightness(.7)'; x.drawImage(im, (IW - bw) / 2 - 50, (IH - bh) / 2 - 50, bw + 100, bh + 100); x.filter = 'none'; }
-    else { var t = mk(48, 26), tx = t.getContext('2d'), q = Math.max(48 / im.width, 26 / im.height); tx.drawImage(im, (48 - im.width * q) / 2, (26 - im.height * q) / 2, im.width * q, im.height * q); var t2 = mk(240, 130); t2.getContext('2d').drawImage(t, 0, 0, 240, 130); x.drawImage(t2, 0, 0, IW, IH); }
-    var ph = IH * .84, pw = ph * im.width / im.height;
-    x.shadowColor = 'rgba(0,0,0,.6)'; x.shadowBlur = 44; x.shadowOffsetY = 16; x.drawImage(im, (IW - pw) / 2, (IH - ph) / 2, pw, ph);
+  var PW = 600, PH = 900, CW = 1200, CH = 210;
+  function posterTex(im) {                       // the poster itself, untouched, as the moving surface
+    var c = mk(PW, PH), x = c.getContext('2d');
+    if (!im) { var g = x.createLinearGradient(0, 0, 0, PH); g.addColorStop(0, '#1B3836'); g.addColorStop(1, '#111719'); x.fillStyle = g; x.fillRect(0, 0, PW, PH); return c; }
+    var s0 = Math.max(PW / im.width, PH / im.height); x.drawImage(im, (PW - im.width * s0) / 2, (PH - im.height * s0) / 2, im.width * s0, im.height * s0);
+    return c;
+  }
+  function glowTex(im) {                         // the poster's own colours, diffused, for the light it casts
+    var small = mk(10, 14), sx = small.getContext('2d');
+    if (im) sx.drawImage(im, 0, 0, 10, 14); else { sx.fillStyle = '#1B3836'; sx.fillRect(0, 0, 10, 14); }
+    var mid = mk(40, 56), mx = mid.getContext('2d'); mx.imageSmoothingEnabled = true; mx.drawImage(small, 0, 0, 40, 56);
+    var c = mk(160, 224), x = c.getContext('2d'); x.imageSmoothingEnabled = true;
+    if ('filter' in x) x.filter = 'blur(10px) saturate(1.5)';
+    x.drawImage(mid, -10, -10, 180, 244);
     return c;
   }
   function caption(w) {
-    var c = mk(CW, CH), x = c.getContext('2d'); x.direction = rtl ? 'rtl' : 'ltr'; x.textAlign = rtl ? 'right' : 'left'; x.textBaseline = 'top';
-    var sx = rtl ? CW : 0;
-    x.fillStyle = '#F2EDE3'; x.font = '700 56px Amiri'; x.fillText(w.t, sx, -6);
-    x.fillStyle = '#C9CFCB'; x.font = '400 40px "IBM Plex Sans Arabic"'; x.fillText([w.cl, w.y, w.cr].filter(Boolean).join(' · '), sx, 70);
-    x.fillStyle = 'rgba(179,154,112,.9)'; x.fillRect(0, CH - 3, CW, 3);                      // the leitmotif line, in bronze
-    var ax = rtl ? 6 : CW - 6, ay = CH - 26, d = rtl ? 1 : -1;
-    x.strokeStyle = '#B39A70'; x.lineWidth = 3.5; x.lineCap = 'round'; x.beginPath(); x.moveTo(ax + d * 28, ay - 28); x.lineTo(ax, ay); x.lineTo(ax + d * 20, ay); x.moveTo(ax, ay); x.lineTo(ax, ay - 20); x.stroke();
+    var c = mk(CW, CH), x = c.getContext('2d'); x.direction = rtl ? 'rtl' : 'ltr'; x.textAlign = 'center'; x.textBaseline = 'top';
+    x.fillStyle = '#F2EDE3'; x.font = '700 70px Amiri'; x.fillText(w.t, CW / 2, 0);
+    x.fillStyle = '#C9CFCB'; x.font = '400 40px "IBM Plex Sans Arabic"'; x.fillText([w.cl, w.y, w.cr].filter(Boolean).join(' · '), CW / 2, 104);
+    x.fillStyle = 'rgba(179,154,112,.95)'; x.fillRect(CW / 2 - 70, CH - 8, 140, 3);   // the leitmotif: a short bronze line
     return c;
   }
   var fonts = doc.fonts && doc.fonts.load ? Promise.all(['700 56px Amiri', '400 40px "IBM Plex Sans Arabic"'].map(function (f) { return doc.fonts.load(f).catch(function () {}); })) : Promise.resolve();
   Promise.race([fonts, new Promise(function (r) { setTimeout(r, 1200); })]).then(function () {
     WORKS.forEach(function (w) {
-      w.texI = tex(imageCard(null)); w.texC = tex(caption(w));
-      var im = new Image(); im.onload = function () { gl.bindTexture(gl.TEXTURE_2D, w.texI); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, imageCard(im)); }; im.src = w.img;
+      w.texI = tex(posterTex(null)); w.texG = tex(glowTex(null)); w.texC = tex(caption(w));
+      var im = new Image(); im.onload = function () {
+        gl.bindTexture(gl.TEXTURE_2D, w.texI); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, posterTex(im));
+        gl.bindTexture(gl.TEXTURE_2D, w.texG); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, glowTex(im));
+      }; im.src = w.img;
     });
   });
 
@@ -110,9 +121,11 @@
     W = r.width; H = r.height; canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
     gl.bindTexture(gl.TEXTURE_2D, fboTex); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, canvas.width, canvas.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
     gl.bindFramebuffer(gl.FRAMEBUFFER, fbo); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, fboTex, 0); gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-    R.w = Math.min(W - 32, 600); R.ih = R.w * 430 / 820; R.ch = R.w * 74 / 820; R.row = R.ih + 10 + R.ch + 44;
-    R.focus = H * 0.47;                                         // the "now" line where a work reaches its peak
-    R.top = R.focus - (R.ih + 10 + R.ch) / 2;                   // the first work starts on the focus line
+    R.pw = W < 700 ? Math.min(W * 0.6, 300) : Math.min(H * 0.4, 360); R.ph = R.pw * 1.5;
+    R.cw = Math.min(W - 32, R.pw * 1.8); R.ch = R.cw * CH / CW; R.gap = 18;
+    R.h = R.ph + R.gap + R.ch; R.row = R.h + (W < 700 ? 70 : 90);
+    R.focus = H * 0.48;                                         // the "now" line where a work reaches its peak
+    R.top = R.focus - R.h / 2;                                  // the first work starts on the focus line
     R.max = (WORKS.length - 1) * R.row;
     R.camZ = (H / 2) / Math.tan(17.5 * Math.PI / 180);
   }
@@ -234,17 +247,29 @@
       var y = R.top + i * R.row - cam;
       if (y > H + 40 || y + R.row < -H * 0.9 || !w.texI) { rects[i] = null; return; }
       // arc: presence peaks on the focus line, muted while entering and leaving
-      var cy = y + (R.ih + 10 + R.ch) / 2, presence = 1 - Math.min(1, Math.abs(cy - R.focus) / (H * 0.42)); presence = presence * presence * (3 - 2 * presence);
-      var x = (W - R.w) / 2, alpha = 1 - ot;
-      rects[i] = [x, y, R.w, R.ih + 10 + R.ch];
+      var cy = y + R.h / 2, presence = 1 - Math.min(1, Math.abs(cy - R.focus) / (H * 0.42)); presence = presence * presence * (3 - 2 * presence);
+      var px = (W - R.pw) / 2, alpha = 1 - ot, lift = hov === i ? 1 : 0;
+      rects[i] = [Math.min(px, (W - R.cw) / 2), y, Math.max(R.pw, R.cw), R.h];
+      var glow = (0.22 + 0.75 * presence) * (music ? 0.75 + level * 2.4 + pulse * 0.7 : 0.82 + 0.18 * breath * calm) * (1 + 0.25 * lift) * alpha;
+      // light spill, folding and waving with the poster
+      gl.useProgram(glowProg); attr(glowProg, mesh); gl.blendFunc(gl.ONE, gl.ONE);
+      gl.uniform2f(GU.uRes, W, H); gl.uniform1f(GU.uCamZ, R.camZ); gl.uniform2f(GU.uBend, H * 0.2, H * 0.85); gl.uniform1f(GU.uTime, reduce ? 0 : t); gl.uniform1i(GU.uTex, 0);
+      gl.uniform1f(GU.uPhase, phase[i]); gl.uniform1f(GU.uAmp, amp[i] * 0.6); gl.uniform1f(GU.uFold, 1); gl.uniform1f(GU.uHOff, 1);
+      var gw = R.pw * 2.5, gh = R.ph * 1.75;
+      gl.uniform4f(GU.uRect, (W - gw) / 2, y + R.ph / 2 - gh / 2, gw, gh); gl.uniform1f(GU.uGlow, glow);
+      gl.bindTexture(gl.TEXTURE_2D, w.texG); gl.drawArrays(gl.TRIANGLES, 0, mN);
+      // the poster itself
+      gl.useProgram(planeProg); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
       gl.uniform1f(PU.uPhase, phase[i]); gl.uniform1f(PU.uAmp, amp[i]); gl.uniform1f(PU.uFold, 1); gl.uniform1f(PU.uPresence, presence);
       gl.bindTexture(gl.TEXTURE_2D, w.texI); attr(planeProg, mesh);
-      gl.uniform4f(PU.uRect, x, y, R.w, R.ih); gl.uniform1f(PU.uHOff, 1); gl.uniform1f(PU.uInner, 1 + (hov === i ? 0.06 : 0) + (music ? pulse * 0.015 : 0));
-      gl.uniform1f(PU.uOpacity, alpha); gl.uniform1f(PU.uLight, 0.12 + (music ? level * 0.5 + pulse * 0.12 : 0));
+      var grow = 1 + 0.035 * lift + (music ? pulse * 0.012 : 0), gpw = R.pw * grow, gph = R.ph * grow;
+      gl.uniform4f(PU.uRect, (W - gpw) / 2, y + (R.ph - gph) / 2, gpw, gph); gl.uniform1f(PU.uHOff, 1); gl.uniform1f(PU.uInner, 1);
+      gl.uniform1f(PU.uOpacity, alpha); gl.uniform1f(PU.uLight, 0.1 + (music ? level * 0.45 + pulse * 0.1 : 0));
       gl.drawArrays(gl.TRIANGLES, 0, mN);
+      // caption
       gl.bindTexture(gl.TEXTURE_2D, w.texC); attr(planeProg, cmesh);
-      gl.uniform4f(PU.uRect, x, y + R.ih + 10, R.w, R.ch); gl.uniform1f(PU.uHOff, 430 / 74); gl.uniform1f(PU.uInner, 1);
-      gl.uniform1f(PU.uLight, music ? pulse * 0.25 : 0.04); gl.drawArrays(gl.TRIANGLES, 0, cN);
+      gl.uniform4f(PU.uRect, (W - R.cw) / 2, y + R.ph + R.gap, R.cw, R.ch); gl.uniform1f(PU.uHOff, R.ph / R.ch); gl.uniform1f(PU.uInner, 1);
+      gl.uniform1f(PU.uPresence, Math.max(presence, 0.35)); gl.uniform1f(PU.uLight, music ? pulse * 0.25 : 0.03); gl.drawArrays(gl.TRIANGLES, 0, cN);
     });
 
     gl.disable(gl.BLEND); gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, canvas.width, canvas.height);
