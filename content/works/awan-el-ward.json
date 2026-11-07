@@ -1,0 +1,65 @@
+{
+  "slug": "awan-el-ward",
+  "published": true,
+  "category": "tv",
+  "year": 2000,
+  "title": {
+    "en": "Awan El Ward",
+    "ar": "أوان الورد",
+    "ru": "Пора роз"
+  },
+  "original_title": "أوان الورد",
+  "role": "original-score",
+  "cast": {
+    "en": "Yousra, Hesham Abdel Hamid",
+    "ar": "يسرا وهشام عبد الحميد",
+    "ru": "Юсра, Хешам Абдель Хамид"
+  },
+  "director": {
+    "en": "Samir Seif",
+    "ar": "سمير سيف",
+    "ru": "Самир Сейф"
+  },
+  "credit_note": null,
+  "synopsis": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "score_story": {
+    "en": "His first television drama score (2000), directed by Samir Seif and written by Waheed Hamed; the series was a major success and opened his career in TV drama.",
+    "ar": "أول أعماله في موسيقى الدراما التلفزيونية (٢٠٠٠)، من إخراج سمير سيف وتأليف وحيد حامد؛ حقق المسلسل نجاحًا كبيرًا وفتح له باب الدراما التلفزيونية.",
+    "ru": "Первая работа Хаммада для телевизионной драмы (2000), режиссёр Самир Сейф, сценарист Вахид Хамед; сериал имел большой успех и открыл композитору путь в телевидение."
+  },
+  "poster": "/assets/img/poster-awan-el-ward.webp",
+  "poster_rights": "used-on-previous-site-confirm-licence",
+  "gallery": [],
+  "audio": {
+    "src": "/assets/audio/track-awan-el-ward.mp3",
+    "rights": "used-on-previous-site-confirm-licence",
+    "caption": {
+      "en": "Excerpt from the original score for “Awan El Ward”",
+      "ar": "مقتطف من الموسيقى التصويرية «أوان الورد»",
+      "ru": "Фрагмент оригинальной музыки к «Пора роз»"
+    }
+  },
+  "video": null,
+  "awards": [],
+  "credit_sources": [
+    {
+      "label": {
+        "en": "Professional Portfolio (2025) — to be reconciled with IMDb / elCinema",
+        "ar": "ملف الأعمال المهني (٢٠٢٥) — قيد المراجعة مع IMDb و elCinema",
+        "ru": "Профессиональное портфолио (2025) — требует сверки с IMDb / elCinema"
+      },
+      "url": ""
+    }
+  ],
+  "featured": true,
+  "featured_order": 2,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

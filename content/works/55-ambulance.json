@@ -1,0 +1,57 @@
+{
+  "slug": "55-ambulance",
+  "published": true,
+  "category": "film",
+  "year": 2001,
+  "title": {
+    "en": "55 Ambulance",
+    "ar": "٥٥ إسعاف",
+    "ru": "Скорая 55"
+  },
+  "original_title": "٥٥ إسعاف",
+  "role": "original-score",
+  "cast": {
+    "en": "Mohamed Saad, Ahmed Helmy",
+    "ar": "محمد سعد وأحمد حلمي",
+    "ru": "Мохамед Саад, Ахмед Хельми"
+  },
+  "director": {
+    "en": "Magdy El-Hawary",
+    "ar": "مجدي الهواري",
+    "ru": "Магди аль-Хавари"
+  },
+  "credit_note": null,
+  "synopsis": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "score_story": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "poster": null,
+  "poster_rights": "not-supplied",
+  "gallery": [],
+  "audio": null,
+  "video": null,
+  "awards": [],
+  "credit_sources": [
+    {
+      "label": {
+        "en": "Professional Portfolio (2025) — to be reconciled with IMDb / elCinema",
+        "ar": "ملف الأعمال المهني (٢٠٢٥) — قيد المراجعة مع IMDb و elCinema",
+        "ru": "Профессиональное портфолио (2025) — требует сверки с IMDb / elCinema"
+      },
+      "url": ""
+    }
+  ],
+  "featured": false,
+  "featured_order": null,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

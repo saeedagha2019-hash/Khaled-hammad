@@ -1,0 +1,31 @@
+{
+  "slug": "2022-11-27-kelma-akhira-highlights-composer-khaled-hammads-success-at-h",
+  "published": true,
+  "date": "2022-11-27",
+  "type": "tv",
+  "publisher": {
+    "en": "ON · YouTube",
+    "ar": "ON · يوتيوب",
+    "ru": "ON · YouTube"
+  },
+  "url": "https://youtu.be/rbrzEF-c3j4",
+  "media": "video",
+  "byline": null,
+  "title": {
+    "en": "Kelma Akhira highlights composer Khaled Hammad’s success at his first Opera House concert",
+    "ar": "«كلمة أخيرة» تعرض تألق الموسيقار خالد حماد في حفله الأول بدار الأوبرا",
+    "ru": "Программа «Кельма ахира» об успехе первого концерта Халеда Хаммада в Оперном театре"
+  },
+  "summary": {
+    "en": "A segment from the ON talk show covering the success of his first concert at the Cairo Opera House.",
+    "ar": "فقرة من برنامج «كلمة أخيرة» على شاشة ON عن نجاح أولى حفلاته على المسرح الكبير بدار الأوبرا.",
+    "ru": "Сюжет ток-шоу на канале ON об успехе его первого концерта в Каирском оперном театре."
+  },
+  "language": "ar",
+  "related_concert": "cairo-opera-house-2022",
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

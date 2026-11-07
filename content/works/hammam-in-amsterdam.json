@@ -1,0 +1,65 @@
+{
+  "slug": "hammam-in-amsterdam",
+  "published": true,
+  "category": "film",
+  "year": 1999,
+  "title": {
+    "en": "Hammam in Amsterdam",
+    "ar": "همام في أمستردام",
+    "ru": "Хаммам в Амстердаме"
+  },
+  "original_title": "همام في أمستردام",
+  "role": "original-score",
+  "cast": {
+    "en": "Mohamed Henedy, Ahmed El Sakka",
+    "ar": "محمد هنيدي وأحمد السقا",
+    "ru": "Мохамед Хенеди, Ахмед ас-Сакка"
+  },
+  "director": {
+    "en": "Said Hamed",
+    "ar": "سعيد حامد",
+    "ru": "Саид Хамед"
+  },
+  "credit_note": null,
+  "synopsis": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "score_story": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "poster": "/assets/img/poster-hammam-in-amsterdam.webp",
+  "poster_rights": "used-on-previous-site-confirm-licence",
+  "gallery": [],
+  "audio": {
+    "src": "/assets/audio/track-hammam-in-amsterdam.mp3",
+    "rights": "used-on-previous-site-confirm-licence",
+    "caption": {
+      "en": "Excerpt from the original score for “Hammam in Amsterdam”",
+      "ar": "مقتطف من الموسيقى التصويرية «همام في أمستردام»",
+      "ru": "Фрагмент оригинальной музыки к «Хаммам в Амстердаме»"
+    }
+  },
+  "video": null,
+  "awards": [],
+  "credit_sources": [
+    {
+      "label": {
+        "en": "Professional Portfolio (2025) — to be reconciled with IMDb / elCinema",
+        "ar": "ملف الأعمال المهني (٢٠٢٥) — قيد المراجعة مع IMDb و elCinema",
+        "ru": "Профессиональное портфолио (2025) — требует сверки с IMDb / elCinema"
+      },
+      "url": ""
+    }
+  ],
+  "featured": false,
+  "featured_order": null,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

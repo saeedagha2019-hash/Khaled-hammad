@@ -1,0 +1,65 @@
+{
+  "slug": "an-upper-egyptian-at-the-american-university",
+  "published": true,
+  "category": "film",
+  "year": 1998,
+  "title": {
+    "en": "An Upper Egyptian at the American University",
+    "ar": "صعيدي في الجامعة الأمريكية",
+    "ru": "Саиди в Американском университете"
+  },
+  "original_title": "صعيدي في الجامعة الأمريكية",
+  "role": "original-score",
+  "cast": {
+    "en": "Mohamed Henedy",
+    "ar": "محمد هنيدي",
+    "ru": "Мохамед Хенеди"
+  },
+  "director": {
+    "en": "Said Hamed",
+    "ar": "سعيد حامد",
+    "ru": "Саид Хамед"
+  },
+  "credit_note": null,
+  "synopsis": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "score_story": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "poster": "/assets/img/poster-an-upper-egyptian-at-the-american-university.webp",
+  "poster_rights": "used-on-previous-site-confirm-licence",
+  "gallery": [],
+  "audio": {
+    "src": "/assets/audio/track-an-upper-egyptian-at-the-american-university.mp3",
+    "rights": "used-on-previous-site-confirm-licence",
+    "caption": {
+      "en": "Excerpt from the original score for “An Upper Egyptian at the American University”",
+      "ar": "مقتطف من الموسيقى التصويرية «صعيدي في الجامعة الأمريكية»",
+      "ru": "Фрагмент оригинальной музыки к «Саиди в Американском университете»"
+    }
+  },
+  "video": null,
+  "awards": [],
+  "credit_sources": [
+    {
+      "label": {
+        "en": "Professional Portfolio (2025) — to be reconciled with IMDb / elCinema",
+        "ar": "ملف الأعمال المهني (٢٠٢٥) — قيد المراجعة مع IMDb و elCinema",
+        "ru": "Профессиональное портфолио (2025) — требует сверки с IMDb / elCinema"
+      },
+      "url": ""
+    }
+  ],
+  "featured": false,
+  "featured_order": null,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "slug": "el-maraghy-law",
+  "published": true,
+  "category": "tv",
+  "year": 2009,
+  "title": {
+    "en": "El Maraghy Law",
+    "ar": "قانون المراغي",
+    "ru": "Закон Мараги"
+  },
+  "original_title": "قانون المراغي",
+  "role": "original-score",
+  "cast": {
+    "en": "Khaled El Sawy",
+    "ar": "خالد الصاوي",
+    "ru": "Халед ас-Сави"
+  },
+  "director": {
+    "en": "Ahmed Abdel Hamid",
+    "ar": "أحمد عبد الحميد",
+    "ru": "Ахмед Абдель Хамид"
+  },
+  "credit_note": null,
+  "synopsis": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "score_story": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "poster": null,
+  "poster_rights": "not-supplied",
+  "gallery": [],
+  "audio": null,
+  "video": null,
+  "awards": [],
+  "credit_sources": [
+    {
+      "label": {
+        "en": "Professional Portfolio (2025) — to be reconciled with IMDb / elCinema",
+        "ar": "ملف الأعمال المهني (٢٠٢٥) — قيد المراجعة مع IMDb و elCinema",
+        "ru": "Профессиональное портфолио (2025) — требует сверки с IMDb / elCinema"
+      },
+      "url": ""
+    }
+  ],
+  "featured": false,
+  "featured_order": null,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

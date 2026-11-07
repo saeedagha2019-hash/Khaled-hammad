@@ -1,0 +1,57 @@
+{
+  "slug": "and-we-have-love-in-our-imagination",
+  "published": true,
+  "category": "film",
+  "year": 2025,
+  "title": {
+    "en": "And We Have Love in Our Imagination!",
+    "ar": "ولنا في الخيال.. حب!",
+    "ru": "А у нас любовь в воображении!"
+  },
+  "original_title": "ولنا في الخيال.. حب!",
+  "role": "original-score",
+  "cast": {
+    "en": "Ahmed El Saadany, Mayan El Sayed",
+    "ar": "أحمد السعدني ومايان السيد",
+    "ru": "Ахмед ас-Саадани, Маян ас-Сайед"
+  },
+  "director": {
+    "en": "Sara Rozik",
+    "ar": "سارة رزيق",
+    "ru": "Сара Розик"
+  },
+  "credit_note": null,
+  "synopsis": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "score_story": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "poster": null,
+  "poster_rights": "not-supplied",
+  "gallery": [],
+  "audio": null,
+  "video": null,
+  "awards": [],
+  "credit_sources": [
+    {
+      "label": {
+        "en": "Professional Portfolio (2025) — to be reconciled with IMDb / elCinema",
+        "ar": "ملف الأعمال المهني (٢٠٢٥) — قيد المراجعة مع IMDb و elCinema",
+        "ru": "Профессиональное портфолио (2025) — требует сверки с IMDb / elCinema"
+      },
+      "url": ""
+    }
+  ],
+  "featured": false,
+  "featured_order": null,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

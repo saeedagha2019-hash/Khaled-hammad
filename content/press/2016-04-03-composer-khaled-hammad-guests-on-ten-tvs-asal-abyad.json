@@ -1,0 +1,31 @@
+{
+  "slug": "2016-04-03-composer-khaled-hammad-guests-on-ten-tvs-asal-abyad",
+  "published": true,
+  "date": "2016-04-03",
+  "type": "tv-interview",
+  "publisher": {
+    "en": "TeN TV · Dailymotion",
+    "ar": "قناة TeN · ديلي موشن",
+    "ru": "TeN TV · Dailymotion"
+  },
+  "url": "https://www.dailymotion.com/video/x73bv89",
+  "media": "video",
+  "byline": null,
+  "title": {
+    "en": "Composer Khaled Hammad guests on TeN TV’s Asal Abyad",
+    "ar": "الموسيقار خالد حماد ضيف برنامج «عسل أبيض» على قناة TeN",
+    "ru": "Композитор Халед Хаммад — гость программы «Асаль абьяд» на TeN TV"
+  },
+  "summary": {
+    "en": "A television interview with Khaled Hammad on the programme Asal Abyad, broadcast on TeN TV.",
+    "ar": "لقاء تلفزيوني مع الموسيقار خالد حماد في برنامج «عسل أبيض» على شاشة قناة TeN الفضائية.",
+    "ru": "Телеинтервью с Халедом Хаммадом в программе «Асаль абьяд» на канале TeN TV."
+  },
+  "language": "ar",
+  "related_concert": null,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

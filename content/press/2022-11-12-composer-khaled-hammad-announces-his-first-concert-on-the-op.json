@@ -1,0 +1,35 @@
+{
+  "slug": "2022-11-12-composer-khaled-hammad-announces-his-first-concert-on-the-op",
+  "published": true,
+  "date": "2022-11-12",
+  "type": "coverage",
+  "publisher": {
+    "en": "Youm7",
+    "ar": "اليوم السابع",
+    "ru": "Youm7"
+  },
+  "url": "https://www.youm7.com/5973277",
+  "media": "text",
+  "byline": {
+    "en": "By Shaimaa Mansour",
+    "ar": "شيماء منصور",
+    "ru": "Автор: Шаимаа Мансур"
+  },
+  "title": {
+    "en": "Composer Khaled Hammad announces his first concert on the Opera House Main Stage",
+    "ar": "الموسيقار خالد حماد يعلن حفله الأول على المسرح الكبير بدار الأوبرا",
+    "ru": "Композитор Халед Хаммад объявляет первый концерт на Главной сцене Оперного театра"
+  },
+  "summary": {
+    "en": "Announcing his first concert with the Cairo Opera Orchestra, conducted by Maestro Nayer Nagui, alongside a look back at his career and his best-known film scores.",
+    "ar": "إعلان أولى حفلاته بمصاحبة أوركسترا أوبرا القاهرة بقيادة المايسترو ناير ناجي، مع استعراض لمسيرته وأشهر أعماله في موسيقى الأفلام.",
+    "ru": "Анонс первого концерта с оркестром Каирской оперы под управлением маэстро Найера Наги и обзор творческого пути и самых известных работ композитора в кино."
+  },
+  "language": "ar",
+  "related_concert": "cairo-opera-house-2022",
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

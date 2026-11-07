@@ -1,0 +1,57 @@
+{
+  "slug": "meem-empire",
+  "published": true,
+  "category": "tv",
+  "year": 2024,
+  "title": {
+    "en": "Meem Empire",
+    "ar": "إمبراطورية ميم",
+    "ru": "Империя «Мим»"
+  },
+  "original_title": "إمبراطورية ميم",
+  "role": "original-score",
+  "cast": {
+    "en": "Khaled El Nabawy",
+    "ar": "خالد النبوي",
+    "ru": "Халед ан-Набави"
+  },
+  "director": {
+    "en": "Mohamed Salama",
+    "ar": "محمد سلامة",
+    "ru": "Мохамед Салама"
+  },
+  "credit_note": null,
+  "synopsis": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "score_story": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "poster": "/assets/img/poster-meem-empire.webp",
+  "poster_rights": "used-on-previous-site-confirm-licence",
+  "gallery": [],
+  "audio": null,
+  "video": null,
+  "awards": [],
+  "credit_sources": [
+    {
+      "label": {
+        "en": "Professional Portfolio (2025) — to be reconciled with IMDb / elCinema",
+        "ar": "ملف الأعمال المهني (٢٠٢٥) — قيد المراجعة مع IMDb و elCinema",
+        "ru": "Профессиональное портфолио (2025) — требует сверки с IMDb / elCinema"
+      },
+      "url": ""
+    }
+  ],
+  "featured": true,
+  "featured_order": 6,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

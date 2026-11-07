@@ -1,0 +1,59 @@
+{
+  "slug": "a-cultural-film",
+  "published": true,
+  "category": "film",
+  "year": 2000,
+  "title": {
+    "en": "A Cultural Film",
+    "ar": "فيلم ثقافي",
+    "ru": "Культурный фильм"
+  },
+  "original_title": "فيلم ثقافي",
+  "role": "original-score",
+  "cast": {
+    "en": "Ahmed Eid, Fathy Abdel Wahab",
+    "ar": "أحمد عيد وفتحي عبد الوهاب",
+    "ru": "Ахмед Ид, Фатхи Абдель Ваххаб"
+  },
+  "director": {
+    "en": "Mohamed Amin",
+    "ar": "محمد أمين",
+    "ru": "Мохамед Амин"
+  },
+  "credit_note": null,
+  "synopsis": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "score_story": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "poster": null,
+  "poster_rights": "not-supplied",
+  "gallery": [],
+  "audio": null,
+  "video": null,
+  "awards": [
+    "award-2001-a-cultural-film"
+  ],
+  "credit_sources": [
+    {
+      "label": {
+        "en": "Professional Portfolio (2025) — to be reconciled with IMDb / elCinema",
+        "ar": "ملف الأعمال المهني (٢٠٢٥) — قيد المراجعة مع IMDb و elCinema",
+        "ru": "Профессиональное портфолио (2025) — требует сверки с IMDb / elCinema"
+      },
+      "url": ""
+    }
+  ],
+  "featured": false,
+  "featured_order": null,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

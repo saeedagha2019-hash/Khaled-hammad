@@ -1,0 +1,35 @@
+{
+  "slug": "2026-10-30-composer-khaled-hammad-on-the-threat-ai-poses-to-music-educa",
+  "published": true,
+  "date": "2026-10-30",
+  "type": "interview",
+  "publisher": {
+    "en": "Asharq Al-Awsat",
+    "ar": "الشرق الأوسط",
+    "ru": "Asharq Al-Awsat"
+  },
+  "url": "https://aawsat.com/node/5335716",
+  "media": "text",
+  "byline": {
+    "en": "By Ahmed Adly · Cairo",
+    "ar": "أحمد عدلي · القاهرة",
+    "ru": "Автор: Ахмед Адли · Каир"
+  },
+  "title": {
+    "en": "Composer Khaled Hammad on the threat AI poses to music education",
+    "ar": "الموسيقار خالد حماد يتحدث عن خطر الذكاء الاصطناعي على دراسة الموسيقى",
+    "ru": "Композитор Халед Хаммад об угрозе, которую ИИ несёт музыкальному образованию"
+  },
+  "summary": {
+    "en": "The Egyptian composer voices his concern over the growing turn to AI because of its low cost, and talks about film sound, choosing his projects and joining the El Gouna jury.",
+    "ar": "الفنان المصري عبّر عن تخوفه من تزايد الاتجاه إلى الذكاء الاصطناعي لانخفاض تكلفته، وتحدث عن تطور صوت الفيلم واختياراته لأعماله وعضويته في لجنة تحكيم مهرجان الجونة.",
+    "ru": "Египетский композитор выражает тревогу из-за растущего обращения к ИИ ради экономии и говорит о звуке в кино, выборе проектов и работе в жюри фестиваля в Эль-Гуне."
+  },
+  "language": "ar",
+  "related_concert": null,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

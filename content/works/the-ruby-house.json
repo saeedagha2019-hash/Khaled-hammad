@@ -1,0 +1,59 @@
+{
+  "slug": "the-ruby-house",
+  "published": true,
+  "category": "film",
+  "year": 2023,
+  "title": {
+    "en": "The Ruby House",
+    "ar": "بيت الروبي",
+    "ru": "Дом Руби"
+  },
+  "original_title": "بيت الروبي",
+  "role": "original-score",
+  "cast": {
+    "en": "Karim Abdel Aziz, Karim Mahmoud Abdel Aziz, Nour",
+    "ar": "كريم عبدالعزيز وكريم محمود عبدالعزيز ونور",
+    "ru": "Карим Абдель Азиз, Карим Махмуд Абдель Азиз, Нур"
+  },
+  "director": {
+    "en": "Peter Mimi",
+    "ar": "بيتر ميمي",
+    "ru": "Питер Мими"
+  },
+  "credit_note": null,
+  "synopsis": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "score_story": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "poster": "/assets/img/poster-the-ruby-house.webp",
+  "poster_rights": "used-on-previous-site-confirm-licence",
+  "gallery": [],
+  "audio": null,
+  "video": null,
+  "awards": [
+    "award-2024-the-ruby-house"
+  ],
+  "credit_sources": [
+    {
+      "label": {
+        "en": "Professional Portfolio (2025) — to be reconciled with IMDb / elCinema",
+        "ar": "ملف الأعمال المهني (٢٠٢٥) — قيد المراجعة مع IMDb و elCinema",
+        "ru": "Профессиональное портфолио (2025) — требует сверки с IMDb / elCinema"
+      },
+      "url": ""
+    }
+  ],
+  "featured": true,
+  "featured_order": 4,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "slug": "adams-village",
+  "published": true,
+  "category": "film",
+  "year": 2009,
+  "title": {
+    "en": "Adam's Village",
+    "ar": "عزبة آدم",
+    "ru": "Деревня Адама"
+  },
+  "original_title": "عزبة آدم",
+  "role": "original-score",
+  "cast": {
+    "en": "Mahmoud Yassin, Fathy Abdel Wahab",
+    "ar": "محمود ياسين وفتحي عبد الوهاب",
+    "ru": "Махмуд Ясин, Фатхи Абдель Ваххаб"
+  },
+  "director": {
+    "en": "Mahmoud Kamel",
+    "ar": "محمود كامل",
+    "ru": "Махмуд Камель"
+  },
+  "credit_note": null,
+  "synopsis": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "score_story": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "poster": null,
+  "poster_rights": "not-supplied",
+  "gallery": [],
+  "audio": null,
+  "video": null,
+  "awards": [],
+  "credit_sources": [
+    {
+      "label": {
+        "en": "Professional Portfolio (2025) — to be reconciled with IMDb / elCinema",
+        "ar": "ملف الأعمال المهني (٢٠٢٥) — قيد المراجعة مع IMDb و elCinema",
+        "ru": "Профессиональное портфолио (2025) — требует сверки с IMDb / elCinema"
+      },
+      "url": ""
+    }
+  ],
+  "featured": false,
+  "featured_order": null,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

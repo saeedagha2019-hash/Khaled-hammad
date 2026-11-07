@@ -1,0 +1,59 @@
+{
+  "slug": "gaafar-el-omda",
+  "published": true,
+  "category": "tv",
+  "year": 2023,
+  "title": {
+    "en": "Gaafar El Omda",
+    "ar": "جعفر العمدة",
+    "ru": "Гаафар эль-Омда"
+  },
+  "original_title": "جعفر العمدة",
+  "role": "original-score",
+  "cast": {
+    "en": "Mohamed Ramadan",
+    "ar": "محمد رمضان",
+    "ru": "Мохамед Рамадан"
+  },
+  "director": {
+    "en": "Mohamed Sami",
+    "ar": "محمد سامي",
+    "ru": "Мохамед Сами"
+  },
+  "credit_note": null,
+  "synopsis": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "score_story": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "poster": "/assets/img/poster-gaafar-el-omda.webp",
+  "poster_rights": "used-on-previous-site-confirm-licence",
+  "gallery": [],
+  "audio": null,
+  "video": null,
+  "awards": [
+    "award-2023-gaafar-el-omda"
+  ],
+  "credit_sources": [
+    {
+      "label": {
+        "en": "Professional Portfolio (2025) — to be reconciled with IMDb / elCinema",
+        "ar": "ملف الأعمال المهني (٢٠٢٥) — قيد المراجعة مع IMDb و elCinema",
+        "ru": "Профессиональное портфолио (2025) — требует сверки с IMDb / elCinema"
+      },
+      "url": ""
+    }
+  ],
+  "featured": true,
+  "featured_order": 3,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

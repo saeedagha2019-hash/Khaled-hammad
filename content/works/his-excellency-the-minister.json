@@ -1,0 +1,57 @@
+{
+  "slug": "his-excellency-the-minister",
+  "published": true,
+  "category": "film",
+  "year": 2002,
+  "title": {
+    "en": "His Excellency the Minister",
+    "ar": "معالي الوزير",
+    "ru": "Его превосходительство министр"
+  },
+  "original_title": "معالي الوزير",
+  "role": "original-score",
+  "cast": {
+    "en": "Ahmed Zaki, Lebleba",
+    "ar": "أحمد زكي ولبلبة",
+    "ru": "Ахмед Заки, Леблеба"
+  },
+  "director": {
+    "en": "Samir Seif",
+    "ar": "سمير سيف",
+    "ru": "Самир Сейф"
+  },
+  "credit_note": null,
+  "synopsis": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "score_story": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "poster": "/assets/img/poster-his-excellency-the-minister.webp",
+  "poster_rights": "used-on-previous-site-confirm-licence",
+  "gallery": [],
+  "audio": null,
+  "video": null,
+  "awards": [],
+  "credit_sources": [
+    {
+      "label": {
+        "en": "Professional Portfolio (2025) — to be reconciled with IMDb / elCinema",
+        "ar": "ملف الأعمال المهني (٢٠٢٥) — قيد المراجعة مع IMDb و elCinema",
+        "ru": "Профессиональное портфолио (2025) — требует сверки с IMDb / elCinema"
+      },
+      "url": ""
+    }
+  ],
+  "featured": false,
+  "featured_order": null,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

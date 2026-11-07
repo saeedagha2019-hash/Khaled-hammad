@@ -1,0 +1,65 @@
+{
+  "slug": "love-passion-and-seriousness",
+  "published": true,
+  "category": "film",
+  "year": 1993,
+  "title": {
+    "en": "Love, Passion and Seriousness",
+    "ar": "ضحك ولعب وجد وحب",
+    "ru": "Смех, игра, серьёзность и любовь"
+  },
+  "original_title": "ضحك ولعب وجد وحب",
+  "role": "original-score",
+  "cast": {
+    "en": "Omar Sharif, Yousra, Amr Diab",
+    "ar": "عمر الشريف ويسرا وعمرو دياب",
+    "ru": "Омар Шариф, Юсра, Амр Диаб"
+  },
+  "director": {
+    "en": "Tarek El-Telmissany",
+    "ar": "طارق التلمساني",
+    "ru": "Тарек ат-Тельмисани"
+  },
+  "credit_note": null,
+  "synopsis": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "score_story": {
+    "en": "His first feature-film score (1993), for Tarek El-Telmissany’s film starring Omar Sharif, Yousra and Amr Diab.",
+    "ar": "أول موسيقى تصويرية له لفيلم روائي طويل (١٩٩٣)، لفيلم طارق التلمساني بطولة عمر الشريف ويسرا وعمرو دياب.",
+    "ru": "Первая музыка Хаммада к полнометражному фильму (1993) — к картине Тарека ат-Тельмисани с Омаром Шарифом, Юсрой и Амром Диабом."
+  },
+  "poster": "/assets/img/poster-love-passion-and-seriousness.webp",
+  "poster_rights": "used-on-previous-site-confirm-licence",
+  "gallery": [],
+  "audio": {
+    "src": "/assets/audio/track-love-passion-and-seriousness.mp3",
+    "rights": "used-on-previous-site-confirm-licence",
+    "caption": {
+      "en": "Excerpt from the original score for “Love, Passion and Seriousness”",
+      "ar": "مقتطف من الموسيقى التصويرية «ضحك ولعب وجد وحب»",
+      "ru": "Фрагмент оригинальной музыки к «Смех, игра, серьёзность и любовь»"
+    }
+  },
+  "video": null,
+  "awards": [],
+  "credit_sources": [
+    {
+      "label": {
+        "en": "Professional Portfolio (2025) — to be reconciled with IMDb / elCinema",
+        "ar": "ملف الأعمال المهني (٢٠٢٥) — قيد المراجعة مع IMDb و elCinema",
+        "ru": "Профессиональное портфолио (2025) — требует сверки с IMDb / elCinema"
+      },
+      "url": ""
+    }
+  ],
+  "featured": false,
+  "featured_order": null,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

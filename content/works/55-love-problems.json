@@ -1,0 +1,57 @@
+{
+  "slug": "55-love-problems",
+  "published": true,
+  "category": "tv",
+  "year": 2023,
+  "title": {
+    "en": "55 Love Problems",
+    "ar": "٥٥ مشكلة حب",
+    "ru": "55 любовных проблем"
+  },
+  "original_title": "٥٥ مشكلة حب",
+  "role": "original-score",
+  "cast": {
+    "en": "Elham Shahin, Ahmed Fahmy",
+    "ar": "إلهام شاهين وأحمد فهمي",
+    "ru": "Эльхам Шахин, Ахмед Фахми"
+  },
+  "director": {
+    "en": "Essam Nassar",
+    "ar": "عصام نصار",
+    "ru": "Эссам Нассар"
+  },
+  "credit_note": null,
+  "synopsis": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "score_story": {
+    "en": "",
+    "ar": "",
+    "ru": ""
+  },
+  "poster": null,
+  "poster_rights": "not-supplied",
+  "gallery": [],
+  "audio": null,
+  "video": null,
+  "awards": [],
+  "credit_sources": [
+    {
+      "label": {
+        "en": "Professional Portfolio (2025) — to be reconciled with IMDb / elCinema",
+        "ar": "ملف الأعمال المهني (٢٠٢٥) — قيد المراجعة مع IMDb و elCinema",
+        "ru": "Профессиональное портфолио (2025) — требует сверки с IMDb / elCinema"
+      },
+      "url": ""
+    }
+  ],
+  "featured": false,
+  "featured_order": null,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

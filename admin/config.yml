@@ -1,0 +1,215 @@
+# Decap CMS configuration — content model from brief §7.
+# Backend: GitHub. For editors without GitHub accounts, switch to git-gateway (Netlify Identity)
+# or a DecapBridge/OAuth proxy; see README.
+backend:
+  name: github
+  repo: saeedagha2019-hash/Khaled-hammad
+  branch: main
+  # base_url: https://your-oauth-proxy.example.com   # required for GitHub auth outside Netlify
+publish_mode: editorial_workflow   # draft → in review → ready (staging + approval gate)
+media_folder: assets/img
+public_folder: /assets/img
+site_url: https://khaledhammad.com
+locale: en
+
+x-lang: &lang
+  - { label: English, name: en, widget: string }
+  - { label: العربية, name: ar, widget: string, required: false }
+  - { label: Русский, name: ru, widget: string, required: false }
+x-lang-text: &langtext
+  - { label: English, name: en, widget: text, required: false }
+  - { label: العربية, name: ar, widget: text, required: false }
+  - { label: Русский, name: ru, widget: text, required: false }
+x-rights: &rights
+  widget: select
+  options: [not-supplied, used-on-previous-site-confirm-licence, permission-requested, licensed, declined]
+x-status: &tstatus
+  - { label: English, name: en, widget: select, options: [missing, draft-needs-native-review, approved] }
+  - { label: Arabic, name: ar, widget: select, options: [missing, draft-needs-native-review, approved] }
+  - { label: Russian, name: ru, widget: select, options: [missing, draft-needs-native-review, approved] }
+
+collections:
+  - name: works
+    label: Works
+    label_singular: Work
+    folder: content/works
+    extension: json
+    format: json
+    create: true
+    slug: "{{fields.slug}}"
+    identifier_field: slug
+    summary: "{{year}} — {{title.en}} ({{category}})"
+    sortable_fields: [year, slug]
+    view_filters:
+      - { label: Featured, field: featured, pattern: true }
+      - { label: Television, field: category, pattern: tv }
+    fields:
+      - { label: Slug (URL), name: slug, widget: string, pattern: ['^[a-z0-9-]+$', 'lowercase letters, numbers and dashes'] }
+      - { label: Published, name: published, widget: boolean, default: true }
+      - { label: Category, name: category, widget: select, options: [film, tv, theatre, children, songs] }
+      - { label: Year, name: year, widget: number, value_type: int, required: false }
+      - { label: Title, name: title, widget: object, fields: *lang }
+      - { label: Original title, name: original_title, widget: string, required: false }
+      - { label: Credited role, name: role, widget: select, options: [original-score, title-theme-music-songs, songs, stage-music] }
+      - { label: Director, name: director, widget: object, required: false, fields: *lang }
+      - { label: Cast, name: cast, widget: object, required: false, fields: *lang }
+      - { label: Credit note, name: credit_note, widget: object, required: false, fields: *lang }
+      - { label: Synopsis, name: synopsis, widget: object, fields: *langtext }
+      - { label: Story behind the score, name: score_story, widget: object, fields: *langtext }
+      - { label: Poster, name: poster, widget: image, required: false }
+      - { label: Poster rights, name: poster_rights, <<: *rights }
+      - { label: Gallery, name: gallery, widget: list, required: false, field: { label: Image, name: image, widget: image } }
+      - label: Audio excerpt
+        name: audio
+        widget: object
+        required: false
+        fields:
+          - { label: File (mp3), name: src, widget: file }
+          - { label: Rights, name: rights, <<: *rights }
+          - { label: Caption, name: caption, widget: object, fields: *lang }
+      - { label: Video (YouTube ID), name: video, widget: string, required: false }
+      - { label: Awards (award ids), name: awards, widget: list, required: false }
+      - label: Credit sources
+        name: credit_sources
+        widget: list
+        fields:
+          - { label: Label, name: label, widget: object, fields: *lang }
+          - { label: URL, name: url, widget: string, required: false }
+      - { label: Featured on home, name: featured, widget: boolean, default: false }
+      - { label: Featured order (1–6), name: featured_order, widget: number, value_type: int, required: false }
+      - { label: Translation status, name: translation_status, widget: object, fields: *tstatus }
+
+  - name: concerts
+    label: Concerts
+    label_singular: Concert
+    folder: content/concerts
+    extension: json
+    format: json
+    create: true
+    slug: "{{fields.slug}}"
+    identifier_field: slug
+    summary: "{{date}} — {{name.en}} ({{status}})"
+    fields:
+      - { label: Slug (URL), name: slug, widget: string }
+      - { label: Published, name: published, widget: boolean, default: true }
+      - { label: Status, name: status, widget: select, options: [announced, on-sale, sold-out, postponed, cancelled, past], hint: "Never publish speculative dates as confirmed." }
+      - { label: Date, name: date, widget: datetime, format: YYYY-MM-DD, date_format: YYYY-MM-DD, time_format: false }
+      - { label: Time (HH:MM), name: time, widget: string, required: false }
+      - { label: Name, name: name, widget: object, fields: *lang }
+      - { label: Venue, name: venue, widget: object, fields: *lang }
+      - { label: City, name: city, widget: object, fields: *lang }
+      - { label: Partners / orchestra, name: partners, widget: object, fields: *lang }
+      - { label: Summary, name: summary, widget: object, fields: *langtext }
+      - { label: Ticket URL, name: ticket_url, widget: string, required: false }
+      - { label: Accessibility information, name: accessibility, widget: object, fields: *langtext }
+      - { label: Photos, name: photos, widget: list, field: { label: Photo, name: photo, widget: image } }
+      - { label: Photo rights, name: photo_rights, <<: *rights }
+      - label: Videos
+        name: video
+        widget: list
+        required: false
+        fields:
+          - { label: YouTube ID, name: youtube, widget: string }
+          - { label: Title, name: title, widget: object, fields: *lang }
+      - { label: Translation status, name: translation_status, widget: object, fields: *tstatus }
+
+  - name: press
+    label: News & Press
+    label_singular: Article
+    folder: content/press
+    extension: json
+    format: json
+    create: true
+    slug: "{{fields.slug}}"
+    identifier_field: slug
+    summary: "{{date}} — {{publisher.en}}: {{title.en}}"
+    fields:
+      - { label: Slug, name: slug, widget: string }
+      - { label: Published, name: published, widget: boolean, default: true }
+      - { label: Date, name: date, widget: string, hint: "YYYY-MM-DD (leave empty if unknown)", required: false }
+      - { label: Type, name: type, widget: select, options: [coverage, interview, video-interview, tv, tv-interview, radio] }
+      - { label: Publisher / source, name: publisher, widget: object, fields: *lang }
+      - { label: URL, name: url, widget: string }
+      - { label: Media, name: media, widget: select, options: [text, video] }
+      - { label: Byline, name: byline, widget: object, required: false, fields: *lang }
+      - { label: Title, name: title, widget: object, fields: *lang }
+      - { label: Summary, name: summary, widget: object, fields: *langtext }
+      - { label: Original language, name: language, widget: select, options: [ar, en, ru] }
+      - { label: Related concert (slug), name: related_concert, widget: string, required: false }
+      - { label: Translation status, name: translation_status, widget: object, fields: *tstatus }
+
+  - name: site
+    label: Site data
+    editor: { preview: false }
+    files:
+      - name: awards
+        label: Awards & recognition
+        file: content/awards.json
+        fields:
+          - label: Groups
+            name: groups
+            widget: list
+            fields:
+              - { label: Key, name: key, widget: string }
+              - { label: Label, name: label, widget: object, fields: *lang }
+              - { label: Image, name: image, widget: image, required: false }
+              - { label: Image alt, name: image_alt, widget: string, required: false }
+          - label: Awards
+            name: items
+            widget: list
+            summary: "{{year}} — {{name.en}}"
+            fields:
+              - { label: ID, name: id, widget: string }
+              - { label: Group, name: group, widget: string }
+              - { label: Year, name: year, widget: number, value_type: int }
+              - { label: Name, name: name, widget: object, fields: *lang }
+              - { label: Awarding body, name: awarding_body, widget: object, required: false, fields: *lang }
+              - { label: Associated work (slug), name: work, widget: string, required: false }
+              - { label: Evidence URL, name: evidence_url, widget: string, required: false }
+              - { label: Verified, name: verified, widget: boolean, default: false }
+              - { label: Show on home page, name: show_on_home, widget: boolean, default: false }
+      - name: about
+        label: About / biography
+        file: content/about.json
+        fields:
+          - { label: Short biography, name: short_bio, widget: object, fields: *langtext }
+          - { label: Artistic approach, name: approach, widget: object, fields: *langtext }
+          - { label: Full history paragraphs, name: paragraphs, widget: list, fields: *langtext }
+          - { label: Education, name: education, widget: list, fields: [ { label: Year, name: year, widget: number }, { label: Text, name: text, widget: object, fields: *lang } ] }
+          - { label: Professional activities, name: activities, widget: list, fields: *lang }
+          - { label: Milestones, name: milestones, widget: list, fields: [ { label: Year, name: year, widget: number }, { label: Text, name: text, widget: object, fields: *lang }, { label: Evidence, name: evidence, widget: string, required: false } ] }
+          - { label: Stats, name: stats, widget: object, fields: [ { label: Feature films, name: feature_films, widget: number }, { label: TV series, name: tv_series, widget: number }, { label: Years active, name: years_active, widget: string }, { label: Status, name: status, widget: string } ] }
+          - { label: Images, name: images, widget: object, fields: [ { label: Profile, name: profile, widget: image }, { label: Wide, name: wide, widget: image }, { label: Portrait, name: portrait, widget: image }, { label: Studio, name: studio, widget: image } ] }
+          - { label: Verification to-do, name: verification_todo, widget: list }
+      - name: media
+        label: Media library & rights
+        file: content/media.json
+        fields:
+          - { label: Note, name: note, widget: string }
+          - label: Assets
+            name: assets
+            widget: list
+            summary: "{{file}} — {{licence}}"
+            fields:
+              - { label: File, name: file, widget: image }
+              - { label: Category, name: category, widget: select, options: [portraits, studio, concerts, tributes, events, behind] }
+              - { label: Caption, name: caption, widget: object, fields: *lang }
+              - { label: Alt text, name: alt, widget: object, fields: *lang }
+              - { label: Photographer, name: photographer, widget: string, required: false }
+              - { label: Licence / permission, name: licence, <<: *rights }
+              - { label: Licence expiry, name: expiry, widget: string, required: false }
+              - { label: Include in press kit, name: press_kit, widget: boolean, default: false }
+      - name: settings
+        label: Site settings
+        file: content/settings.json
+        fields:
+          - { label: Site URL (canonical domain), name: site_url, widget: string }
+          - { label: Base path, name: base_path, widget: string, required: false }
+          - { label: Domain note, name: domain_note, widget: text, required: false }
+          - { label: Show media still pending licence, name: show_media_pending_licence, widget: boolean, hint: "Turn OFF before launch unless every asset is licensed — unlicensed posters then fall back to typographic placeholders." }
+          - { label: Form endpoint (e.g. Formspree), name: form_endpoint, widget: string, required: false }
+          - { label: Contacts, name: contacts, widget: object, fields: [ { label: General, name: general, widget: string }, { label: Scoring, name: scoring, widget: string }, { label: Concerts, name: concerts, widget: string }, { label: Licensing, name: licensing, widget: string }, { label: Press, name: press, widget: string } ] }
+          - { label: Social links, name: social, widget: list, fields: [ { label: Name, name: name, widget: string }, { label: URL, name: url, widget: string } ] }
+          - { label: Analytics ID (consent required), name: analytics_id, widget: string, required: false }
+          - { label: Languages, name: languages, widget: list }
+          - { label: Default language, name: default_language, widget: string }

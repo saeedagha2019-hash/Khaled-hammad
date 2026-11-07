@@ -1,0 +1,31 @@
+{
+  "slug": "2024-10-16-a-concert-celebrating-the-finest-pieces-of-composer-khaled-h",
+  "published": true,
+  "date": "2024-10-16",
+  "type": "tv",
+  "publisher": {
+    "en": "Al Hayah TV · YouTube",
+    "ar": "قناة الحياة · يوتيوب",
+    "ru": "Телеканал Al Hayah · YouTube"
+  },
+  "url": "https://youtu.be/vwHpFU2XbHU",
+  "media": "video",
+  "byline": null,
+  "title": {
+    "en": "A concert celebrating the finest pieces of composer Khaled Hammad and Amr Ismail",
+    "ar": "حفل يجمع أبرز مقطوعات الموسيقار خالد حماد وعمرو إسماعيل",
+    "ru": "Концерт лучших произведений композиторов Халеда Хаммада и Амра Исмаила"
+  },
+  "summary": {
+    "en": "An Al Hayah TV report on a concert bringing together the best-known compositions of Khaled Hammad and Amr Ismail.",
+    "ar": "تقرير من قناة الحياة عن حفل يجمع أشهر مؤلفات خالد حماد وعمرو إسماعيل الموسيقية.",
+    "ru": "Репортаж телеканала Al Hayah о концерте, объединившем самые известные сочинения Халеда Хаммада и Амра Исмаила."
+  },
+  "language": "ar",
+  "related_concert": null,
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}

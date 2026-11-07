@@ -1,0 +1,35 @@
+{
+  "slug": "2022-11-23-composer-khaled-hammad-shines-with-his-finest-scores-at-his",
+  "published": true,
+  "date": "2022-11-23",
+  "type": "coverage",
+  "publisher": {
+    "en": "Youm7",
+    "ar": "اليوم السابع",
+    "ru": "Youm7"
+  },
+  "url": "https://www.youm7.com/5987745",
+  "media": "text",
+  "byline": {
+    "en": "By Mostafa El-Qasabi",
+    "ar": "مصطفى القصبي",
+    "ru": "Автор: Мустафа аль-Касаби"
+  },
+  "title": {
+    "en": "Composer Khaled Hammad shines with his finest scores at his first Opera House concert",
+    "ar": "الموسيقار خالد حماد يتألق بأجمل مؤلفاته في حفله الأول بدار الأوبرا",
+    "ru": "Композитор Халед Хаммад блистает лучшими партитурами на первом концерте в Оперном театре"
+  },
+  "summary": {
+    "en": "A sold-out first concert on the Main Stage of the Cairo Opera House, featuring music from his best-known films and series, from The Yacoubian Building to Awan El Ward and Hidden Worlds.",
+    "ar": "أولى حفلات خالد حماد على المسرح الكبير بدار الأوبرا المصرية بحضور كامل العدد، وقدّم فيها مختارات من موسيقاه لأشهر أفلامه ومسلسلاته، من «عمارة يعقوبيان» إلى «أوان الورد» و«عوالم خفية».",
+    "ru": "Первый концерт на Главной сцене Каирского оперного театра прошёл с аншлагом: прозвучала музыка к самым известным фильмам и сериалам — от «Дома Якубяна» до «Поры роз» и «Скрытых миров»."
+  },
+  "language": "ar",
+  "related_concert": "cairo-opera-house-2022",
+  "translation_status": {
+    "en": "approved",
+    "ar": "approved",
+    "ru": "draft-needs-native-review"
+  }
+}
