@@ -678,3 +678,5 @@ body.wc-mode .works-listview, body.wc-mode .site-footer, body.wc-mode .review-no
   .mm-legend { top: 14px; max-width: calc(100% - 32px); } .mm-legend[open] { inset-inline-start: 16px; }
   .mm-now { bottom: 14px; gap: 10px; } .mm-listen span { display: none; } .mm-listen { padding: 8px 12px; }
 }
+.mm-intro { transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.mm.is-scrolled .mm-intro { opacity: 0; transform: translateY(-10px); }

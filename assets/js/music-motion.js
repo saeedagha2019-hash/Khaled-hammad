@@ -46,17 +46,17 @@
   var planeProg = prog(VS,
     'precision highp float;uniform sampler2D uTex;uniform float uInner;uniform float uOpacity;uniform float uCamZ;uniform float uLight;uniform float uPresence;varying vec2 vUv;varying float vDepth;varying float vRipple;' +
     'void main(){vec4 c=texture2D(uTex,(vUv-.5)/uInner+.5);' +
-    'float g=dot(c.rgb,vec3(.299,.587,.114));vec3 quiet=mix(vec3(g),c.rgb,.35)*.42;' +   /* entering / leaving: muted */
+    'float g=dot(c.rgb,vec3(.299,.587,.114));vec3 quiet=mix(vec3(g),c.rgb,.6)*.78;' +    /* entering / leaving: softened, still readable */
     'c.rgb=mix(quiet,c.rgb*1.04,uPresence);' +                                            /* at the focus: full colour */
     'c.rgb+=smoothstep(0.,10.,vRipple*.3)*uLight;' +
-    'float fog=smoothstep(uCamZ+150.,uCamZ+1150.,vDepth);c.rgb=mix(c.rgb,vec3(.067,.09,.098),fog);' +
-    'c.a*=(1.-smoothstep(uCamZ+900.,uCamZ+1250.,vDepth))*uOpacity;gl_FragColor=c;}');
+    'float fog=smoothstep(uCamZ+250.,uCamZ+1500.,vDepth)*.55;c.rgb=mix(c.rgb,vec3(.067,.09,.098),fog);' +
+    'c.a*=(1.-smoothstep(uCamZ+1150.,uCamZ+1550.,vDepth))*uOpacity;gl_FragColor=c;}');
   // light spill: the poster lights the dark room around it like a screen — soft elliptical falloff, no edges
   var glowProg = prog(VS,
     'precision highp float;uniform sampler2D uTex;uniform float uGlow;uniform float uCamZ;varying vec2 vUv;varying float vDepth;' +
     'void main(){vec2 q=(vUv-.5)*2.;float m=1.-smoothstep(.1,1.,length(q*vec2(1.,.94)));m*=m;' +
     'vec3 c=texture2D(uTex,vUv).rgb;float fog=smoothstep(uCamZ+150.,uCamZ+1150.,vDepth);' +
-    'gl_FragColor=vec4(c*m*uGlow*(1.-fog),1.);}');
+    'gl_FragColor=vec4(c*m*uGlow*(1.-fog*.6),1.);}');
   var GU = U(glowProg, ['uRect', 'uRes', 'uCamZ', 'uBend', 'uTime', 'uPhase', 'uAmp', 'uFold', 'uHOff', 'uTex', 'uGlow']);
   var PU = U(planeProg, ['uRect', 'uRes', 'uCamZ', 'uBend', 'uTime', 'uPhase', 'uAmp', 'uFold', 'uHOff', 'uTex', 'uInner', 'uOpacity', 'uLight', 'uPresence']);
 
@@ -219,6 +219,7 @@
     // silence: with no gesture and no music, the motion comes to rest
     var idle = (now - lastInput) / 1000, rest = listening ? 1 : (idle > 4 ? Math.max(0.12, 1 - (idle - 4) / 5) : 1);
     calm += (rest - calm) * 0.02;
+    root.classList.toggle('is-scrolled', cam > 30);   // the title steps aside so the previous work stays visible
     focusIdx = Math.max(0, Math.min(WORKS.length - 1, Math.round(cam / R.row)));
     if (focusIdx !== shownIdx) {
       shownIdx = focusIdx; var w = WORKS[focusIdx];
@@ -239,18 +240,18 @@
     rects = [];
     WORKS.forEach(function (w, i) {
       // breath: each work's own tempo and depth; with music, its loudness and pulses drive the phrase
-      var music = listening && i === focusIdx;
+      var dist = Math.abs(i - focusIdx), mw = listening ? (dist === 0 ? 1 : dist === 1 ? 0.7 : 0.35) : 0, music = mw > 0;
       var breath = 0.6 + 0.4 * Math.sin(t * w.tempo * 1.6 + i);
-      var targetAmp = reduce ? 0 : (music ? w.depth * (0.35 + level * 3.2 + pulse * 0.8) : w.depth * breath * calm);
+      var targetAmp = reduce ? 0 : (music ? w.depth * (0.35 + (level * 3.2 + pulse * 0.8) * mw) : w.depth * breath * calm);
       amp[i] += (targetAmp - amp[i]) * 0.08;
-      phase[i] += dt * 2 * w.tempo * (music ? 0.7 + level * 2.5 : calm);
+      phase[i] += dt * 2 * w.tempo * (music ? 0.7 + level * 2.5 * mw : calm);
       var y = R.top + i * R.row - cam;
       if (y > H + 40 || y + R.row < -H * 0.9 || !w.texI) { rects[i] = null; return; }
       // arc: presence peaks on the focus line, muted while entering and leaving
       var cy = y + R.h / 2, presence = 1 - Math.min(1, Math.abs(cy - R.focus) / (H * 0.42)); presence = presence * presence * (3 - 2 * presence);
       var px = (W - R.pw) / 2, alpha = 1 - ot, lift = hov === i ? 1 : 0;
       rects[i] = [Math.min(px, (W - R.cw) / 2), y, Math.max(R.pw, R.cw), R.h];
-      var glow = (0.22 + 0.75 * presence) * (music ? 0.75 + level * 2.4 + pulse * 0.7 : 0.82 + 0.18 * breath * calm) * (1 + 0.25 * lift) * alpha;
+      var glow = (0.3 + 0.7 * presence) * (music ? 0.75 + (level * 2.4 + pulse * 0.7) * mw : 0.82 + 0.18 * breath * calm) * (1 + 0.25 * lift) * alpha;
       // light spill, folding and waving with the poster
       gl.useProgram(glowProg); attr(glowProg, mesh); gl.blendFunc(gl.ONE, gl.ONE);
       gl.uniform2f(GU.uRes, W, H); gl.uniform1f(GU.uCamZ, R.camZ); gl.uniform2f(GU.uBend, H * 0.2, H * 0.85); gl.uniform1f(GU.uTime, reduce ? 0 : t); gl.uniform1i(GU.uTex, 0);
@@ -260,16 +261,16 @@
       gl.bindTexture(gl.TEXTURE_2D, w.texG); gl.drawArrays(gl.TRIANGLES, 0, mN);
       // the poster itself
       gl.useProgram(planeProg); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-      gl.uniform1f(PU.uPhase, phase[i]); gl.uniform1f(PU.uAmp, amp[i]); gl.uniform1f(PU.uFold, 1); gl.uniform1f(PU.uPresence, presence);
+      gl.uniform1f(PU.uPhase, phase[i]); gl.uniform1f(PU.uAmp, amp[i]); gl.uniform1f(PU.uFold, 1); gl.uniform1f(PU.uPresence, 0.3 + 0.7 * presence);
       gl.bindTexture(gl.TEXTURE_2D, w.texI); attr(planeProg, mesh);
       var grow = 1 + 0.035 * lift + (music ? pulse * 0.012 : 0), gpw = R.pw * grow, gph = R.ph * grow;
       gl.uniform4f(PU.uRect, (W - gpw) / 2, y + (R.ph - gph) / 2, gpw, gph); gl.uniform1f(PU.uHOff, 1); gl.uniform1f(PU.uInner, 1);
-      gl.uniform1f(PU.uOpacity, alpha); gl.uniform1f(PU.uLight, 0.1 + (music ? level * 0.45 + pulse * 0.1 : 0));
+      gl.uniform1f(PU.uOpacity, alpha); gl.uniform1f(PU.uLight, 0.14 + (music ? (level * 0.45 + pulse * 0.1) * mw : 0));
       gl.drawArrays(gl.TRIANGLES, 0, mN);
       // caption
       gl.bindTexture(gl.TEXTURE_2D, w.texC); attr(planeProg, cmesh);
       gl.uniform4f(PU.uRect, (W - R.cw) / 2, y + R.ph + R.gap, R.cw, R.ch); gl.uniform1f(PU.uHOff, R.ph / R.ch); gl.uniform1f(PU.uInner, 1);
-      gl.uniform1f(PU.uPresence, Math.max(presence, 0.35)); gl.uniform1f(PU.uLight, music ? pulse * 0.25 : 0.03); gl.drawArrays(gl.TRIANGLES, 0, cN);
+      gl.uniform1f(PU.uPresence, Math.max(presence, 0.5)); gl.uniform1f(PU.uLight, music ? pulse * 0.25 * mw : 0.03); gl.drawArrays(gl.TRIANGLES, 0, cN);
     });
 
     gl.disable(gl.BLEND); gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, canvas.width, canvas.height);
