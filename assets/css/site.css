@@ -680,3 +680,8 @@ body.wc-mode .works-listview, body.wc-mode .site-footer, body.wc-mode .review-no
 }
 .mm-intro { transition: opacity .6s var(--ease), transform .6s var(--ease); }
 .mm.is-scrolled .mm-intro { opacity: 0; transform: translateY(-10px); }
+.mm-switch { margin: 10px 0 0 !important; pointer-events: auto; }
+.mm-switch a { color: var(--bronze); font-size: .85rem; }
+.mw .mm-intro { max-width: 360px; }
+@media (max-width: 700px) { .mm-switch { display: block !important; } }
+@media (max-width: 700px) { .mw .mm-intro p:not(.eyebrow):not(.mm-switch) { display: none; } .mw .mm-intro h1 { font-size: 1.5rem; } }

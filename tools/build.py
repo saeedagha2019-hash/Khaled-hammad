@@ -1082,7 +1082,7 @@ def build_lab(lang):
     body = f'''<section class="mm" data-mm aria-label="الحركة كموسيقى تصويرية">
  <canvas tabindex="0" role="img" aria-label="أربعة أعمال تتحرك كموسيقى تصويرية. استخدم الأسهم للتنقل وEnter للفتح."></canvas>
  <div class="wc-cursor mm-cursor" data-mm-cursor aria-hidden="true"><span>{e(t['wc_open'])}</span></div>
- <div class="mm-intro"><p class="eyebrow">تجربة</p><h1>الحركة كموسيقى تصويرية</h1><p>أربعة أعمال فقط، لكل منها إيقاعه. مرّر ببطء ثم بسرعة، ثم توقف — وجرّب الاستماع.</p></div>
+ <div class="mm-intro"><p class="eyebrow">تجربة</p><h1>الحركة كموسيقى تصويرية</h1><p>أربعة أعمال فقط، لكل منها إيقاعه. مرّر ببطء ثم بسرعة، ثم توقف — وجرّب الاستماع.</p><p class="mm-switch"><a href="{lu(lang, 'lab/music-wave')}">النسخة العرضية: الأعمال كموجة صوت ←</a></p></div>
  <details class="mm-legend"><summary>ماذا ترى؟</summary><ol>{leg}</ol></details>
  <div class="mm-now" aria-live="polite">
   <span class="mm-meter" data-mm-meter aria-hidden="true">{bars}</span>
@@ -1097,6 +1097,20 @@ def build_lab(lang):
 </section>'''
     write(out(lang, 'lab/music-motion'), page(lang, 'lab/music-motion', 'الحركة كموسيقى تصويرية', body, desc='تجربة: حركة عرض الأعمال كموسيقى تصويرية.',
                                              alt_langs=['ar'], scripts=('/assets/js/music-motion.js',), noindex=True, body_class='is-works is-lab'))
+    # the same study turned sideways: the works become one sound wave
+    wave_legend = [('موجة واحدة عبر كل الأعمال', 'الأعمال مصفوفة عرضيًا كشريط، وتمرّ عليها موجة عرضية واحدة متصلة تعبر كل شرائح كل ملصق، فيبدو الشريط كله كموجة صوت. إيقاعها وعمقها من العمل الذي في المنتصف.'),
+                   ('الطيف الصوتي', 'مع الاستماع تتحول الشاشة إلى طيف ترددات: الأصوات المنخفضة في جانب والعالية في الجانب الآخر، وترتفع كل شريحة وتتمدد مع ترددها، فتصبح الأعمال نفسها موجة الصوت.'),
+                   ('الانطواء الجانبي', 'الأعمال التي تبتعد يمينًا ويسارًا تنطوي للخلف في العمق، كشاشة سينما منحنية.'),
+                   ('القفلة والصدى والصمت', 'بعد كل سحبة يستقر الشريط على أقرب عمل، والسحب السريع يرنّ ثم يهدأ، وإذا توقفت بلا موسيقى تهدأ الموجة حتى تكاد تسكن.')]
+    wleg = ''.join(f'<li><b>{e(a)}</b><span>{e(b)}</span></li>' for a, b in wave_legend)
+    wbody = body.replace('<section class="mm" data-mm ', '<section class="mm mw" data-mw ', 1)
+    wbody = re.sub(r'<ol>.*?</ol>', '<ol>' + wleg.replace('\\', '\\\\') + '</ol>', wbody, count=1, flags=re.S)
+    wbody = wbody.replace('<h1>الحركة كموسيقى تصويرية</h1><p>أربعة أعمال فقط، لكل منها إيقاعه. مرّر ببطء ثم بسرعة، ثم توقف — وجرّب الاستماع.</p>',
+                          '<h1>الأعمال كموجة صوت</h1><p>اسحب يمينًا ويسارًا، ثم شغّل الاستماع وشاهد الأعمال تتحول إلى طيف الموسيقى.</p>', 1)
+    wbody = wbody.replace(f'<a href="{lu(lang, "lab/music-wave")}">النسخة العرضية: الأعمال كموجة صوت ←</a>', f'<a href="{lu(lang, "lab/music-motion")}">النسخة الطولية ←</a>', 1)
+    wbody = wbody.replace('أربعة أعمال تتحرك كموسيقى تصويرية. استخدم الأسهم للتنقل وEnter للفتح.', 'أربعة أعمال في شريط عرضي يتحرك كموجة صوت. استخدم الأسهم يمينًا ويسارًا للتنقل وEnter للفتح.', 1)
+    write(out(lang, 'lab/music-wave'), page(lang, 'lab/music-wave', 'الأعمال كموجة صوت', wbody, desc='تجربة: الأعمال كموجة صوت عرضية.',
+                                           alt_langs=['ar'], scripts=('/assets/js/music-wave.js',), noindex=True, body_class='is-works is-lab'))
 
 
 def build_utility(lang):
