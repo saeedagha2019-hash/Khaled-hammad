@@ -1082,7 +1082,7 @@ def build_lab(lang):
     body = f'''<section class="mm" data-mm aria-label="الحركة كموسيقى تصويرية">
  <canvas tabindex="0" role="img" aria-label="أربعة أعمال تتحرك كموسيقى تصويرية. استخدم الأسهم للتنقل وEnter للفتح."></canvas>
  <div class="wc-cursor mm-cursor" data-mm-cursor aria-hidden="true"><span>{e(t['wc_open'])}</span></div>
- <div class="mm-intro"><p class="eyebrow">تجربة</p><h1>الحركة كموسيقى تصويرية</h1><p>أربعة أعمال فقط، لكل منها إيقاعه. مرّر ببطء ثم بسرعة، ثم توقف — وجرّب الاستماع.</p><p class="mm-switch"><a href="{lu(lang, 'lab/music-staff')}">الأعمال مرسومة بالسطر الموسيقي ←</a> · <a href="{lu(lang, 'lab/music-wave')}">النسخة العرضية ←</a></p></div>
+ <div class="mm-intro"><p class="eyebrow">تجربة</p><h1>الحركة كموسيقى تصويرية</h1><p>أربعة أعمال فقط، لكل منها إيقاعه. مرّر ببطء ثم بسرعة، ثم توقف — وجرّب الاستماع.</p><p class="mm-switch"><a href="{lu(lang, 'lab/music-notes')}">الأعمال على موجة موسيقية ←</a> · <a href="{lu(lang, 'lab/music-staff')}">المرسومة بالخطوط ←</a> · <a href="{lu(lang, 'lab/music-wave')}">العرضية ←</a></p></div>
  <details class="mm-legend"><summary>ماذا ترى؟</summary><ol>{leg}</ol></details>
  <div class="mm-now" aria-live="polite">
   <span class="mm-meter" data-mm-meter aria-hidden="true">{bars}</span>
@@ -1107,7 +1107,7 @@ def build_lab(lang):
     wbody = re.sub(r'<ol>.*?</ol>', '<ol>' + wleg.replace('\\', '\\\\') + '</ol>', wbody, count=1, flags=re.S)
     wbody = wbody.replace('<h1>الحركة كموسيقى تصويرية</h1><p>أربعة أعمال فقط، لكل منها إيقاعه. مرّر ببطء ثم بسرعة، ثم توقف — وجرّب الاستماع.</p>',
                           '<h1>الأعمال كموجة صوت</h1><p>اسحب يمينًا ويسارًا، ثم شغّل الاستماع وشاهد الأعمال تتحول إلى طيف الموسيقى.</p>', 1)
-    wbody = wbody.replace(f'<a href="{lu(lang, "lab/music-wave")}">النسخة العرضية ←</a>', f'<a href="{lu(lang, "lab/music-motion")}">النسخة الطولية ←</a>', 1)
+    wbody = wbody.replace(f'<a href="{lu(lang, "lab/music-wave")}">العرضية ←</a>', f'<a href="{lu(lang, "lab/music-motion")}">الطولية ←</a>', 1)
     wbody = wbody.replace('أربعة أعمال تتحرك كموسيقى تصويرية. استخدم الأسهم للتنقل وEnter للفتح.', 'أربعة أعمال في شريط عرضي يتحرك كموجة صوت. استخدم الأسهم يمينًا ويسارًا للتنقل وEnter للفتح.', 1)
     write(out(lang, 'lab/music-wave'), page(lang, 'lab/music-wave', 'الأعمال كموجة صوت', wbody, desc='تجربة: الأعمال كموجة صوت عرضية.',
                                            alt_langs=['ar'], scripts=('/assets/js/music-wave.js',), noindex=True, body_class='is-works is-lab'))
@@ -1122,11 +1122,36 @@ def build_lab(lang):
     sbody = re.sub(r'<ol>.*?</ol>', '<ol>' + sleg.replace('\\', '\\\\') + '</ol>', sbody, count=1, flags=re.S)
     sbody = sbody.replace('<h1>الحركة كموسيقى تصويرية</h1><p>أربعة أعمال فقط، لكل منها إيقاعه. مرّر ببطء ثم بسرعة، ثم توقف — وجرّب الاستماع.</p>',
                           '<h1>الأعمال مرسومة بالسطر الموسيقي</h1><p>اترك الشاشة لتنساب الأعمال، أو اسحب بينها، ثم شغّل الاستماع لترقص الموجة.</p>', 1)
-    sbody = sbody.replace(f'<a href="{lu(lang, "lab/music-staff")}">الأعمال مرسومة بالسطر الموسيقي ←</a>', f'<a href="{lu(lang, "lab/music-motion")}">النسخة الطولية ←</a>', 1)
+    sbody = sbody.replace(f'<a href="{lu(lang, "lab/music-staff")}">المرسومة بالخطوط ←</a>', f'<a href="{lu(lang, "lab/music-motion")}">الطولية ←</a>', 1)
     sbody = sbody.replace('<div class="mm-now"', '<div class="ms-cap is-on" data-ms-cap aria-hidden="true"><p class="ms-cap-t" data-ms-cap-t></p><p class="ms-cap-m" data-ms-cap-m></p></div>\n <div class="mm-now"', 1)
     sbody = sbody.replace('أربعة أعمال تتحرك كموسيقى تصويرية. استخدم الأسهم للتنقل وEnter للفتح.', 'أربعة أعمال مرسومة بخطوط سطر موسيقي يتموج كموجة. استخدم الأسهم يمينًا ويسارًا للتنقل وEnter للفتح.', 1)
     write(out(lang, 'lab/music-staff'), page(lang, 'lab/music-staff', 'الأعمال مرسومة بالسطر الموسيقي', sbody, desc='تجربة: الأعمال مرسومة بخطوط سطر موسيقي يتموج مع الموسيقى.',
                                             alt_langs=['ar'], scripts=('/assets/js/music-staff.js',), noindex=True, body_class='is-works is-lab'))
+    # the posters ride a musical staff that flows as a wave (all works that have a poster)
+    nworks = []
+    for w in WORKS:
+        if not media_ok(w.get('poster'), w.get('poster_rights')):
+            continue
+        tempo, depth, mood = MM_MOODS.get(w['slug'], (0.65 if w['category'] == 'tv' else 0.95, 1.0, ''))
+        nworks.append({'t': tr(w['title'], lang), 'y': w['year'], 'cl': t['cat'][w['category']], 'cr': tr(w['director'], lang) if w.get('director') else '',
+                       'img': u(w['poster']), 'track': u(w['audio']['src']) if w.get('audio') and media_ok(w['audio']['src'], w['audio'].get('rights')) else '',
+                       'href': lu(lang, 'works/' + w['slug']), 'tempo': tempo, 'depth': depth, 'moodLabel': mood, 'f': w.get('featured_order') or 99, 'yr': w['year'] or 0})
+    nworks.sort(key=lambda d: (d['f'], -d['yr']))
+    notes_legend = [('الأعمال على الموجة', 'الملصقات تركب سطرًا موسيقيًا يتموج عبر الشاشة، وتميل مع الخط الذي تجلس عليه، كبيرة في الطرفين وتصغر في الوسط كأن الموجة تبتعد ثم تقترب.'),
+                    ('الانسياب', 'الأعمال تنساب باستمرار من اليمين إلى اليسار. اسحب أو مرّر لتحريكها بنفسك، واضغط على أي ملصق لفتحه.'),
+                    ('الآن', 'العمل الذي يمر في الجهة اليمنى من الشاشة هو «العمل الحالي»: يظهر إطاره البرونزي واسمه في الأسفل.'),
+                    ('رقص الموجة', 'مع الاستماع ترقص الموجة مع الموسيقى: يرتفع ارتفاعها مع شدة الصوت، ويتشكل انحناؤها من طيف الترددات، وتتمايل الملصقات وينبض العمل الحالي مع الإيقاع.'),
+                    ('الموسيقى تتبع العمل', 'حين يصل عمل له موسيقى خاصة إلى موضع «الآن» تنتقل الموسيقى إليه بتلاشٍ هادئ.')]
+    nleg = ''.join(f'<li><b>{e(a)}</b><span>{e(b)}</span></li>' for a, b in notes_legend)
+    nbody = sbody.replace('<section class="mm mw ms" data-ms ', '<section class="mm mw ms mn" data-mn ', 1)
+    nbody = re.sub(r'<ol>.*?</ol>', '<ol>' + nleg.replace('\\', '\\\\') + '</ol>', nbody, count=1, flags=re.S)
+    nbody = nbody.replace('<h1>الأعمال مرسومة بالسطر الموسيقي</h1><p>اترك الشاشة لتنساب الأعمال، أو اسحب بينها، ثم شغّل الاستماع لترقص الموجة.</p>',
+                          '<h1>الأعمال على موجة موسيقية</h1><p>الأعمال تنساب على السطر الموسيقي من اليمين إلى اليسار. شغّل الاستماع لترقص الموجة.</p>', 1)
+    nbody = nbody.replace(f'<a href="{lu(lang, "lab/music-notes")}">الأعمال على موجة موسيقية ←</a>', f'<a href="{lu(lang, "lab/music-staff")}">المرسومة بالخطوط ←</a>', 1)
+    nbody = re.sub(r'(<script type="application/json" data-mm-data>).*?(</script>)', lambda m: m.group(1) + json.dumps(nworks, ensure_ascii=False).replace('</', '<\\/') + m.group(2), nbody, count=1, flags=re.S)
+    nbody = nbody.replace('أربعة أعمال مرسومة بخطوط سطر موسيقي يتموج كموجة.', 'ملصقات الأعمال على سطر موسيقي يتموج كموجة.', 1)
+    write(out(lang, 'lab/music-notes'), page(lang, 'lab/music-notes', 'الأعمال على موجة موسيقية', nbody, desc='تجربة: ملصقات الأعمال على سطر موسيقي يتموج مع الموسيقى.',
+                                            alt_langs=['ar'], scripts=('/assets/js/music-notes.js',), noindex=True, body_class='is-works is-lab'))
 
 
 def build_utility(lang):
