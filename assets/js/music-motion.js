@@ -34,21 +34,32 @@
   function U(p, n) { var o = {}; n.forEach(function (k) { o[k] = gl.getUniformLocation(p, k); }); return o; }
   function attr(p, b) { var l = gl.getAttribLocation(p, 'aP'); gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.enableVertexAttribArray(l); gl.vertexAttribPointer(l, 2, gl.FLOAT, false, 0, 0); }
   var quad = buf([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1]), mA = grid(28, 28), mesh = buf(mA), mN = mA.length / 2, cA = grid(28, 2), cmesh = buf(cA), cN = cA.length / 2;
+  var NS = 18, GAP = 0.045, sA = [];                       // the poster as slats, so a transverse wave can run across it
+  for (var si = 0; si < NS; si++) for (var sy = 0; sy < 30; sy++) for (var sx2 = 0; sx2 < 2; sx2++) {
+    var w0 = (si + GAP / 2) / NS, w1 = (si + 1 - GAP / 2) / NS, xa = w0 + (w1 - w0) * sx2 / 2, xb = w0 + (w1 - w0) * (sx2 + 1) / 2, ya = sy / 30, yb = (sy + 1) / 30;
+    sA.push(xa, ya, xb, ya, xa, yb, xa, yb, xb, ya, xb, yb);
+  }
+  var smesh = buf(sA), sN = sA.length / 2;
 
-  var VS =     'attribute vec2 aP;uniform vec4 uRect;uniform vec2 uRes;uniform float uCamZ;uniform vec2 uBend;uniform float uTime;uniform float uPhase;uniform float uAmp;uniform float uFold;uniform float uHOff;' +
-    'varying vec2 vUv;varying float vDepth;varying float vRipple;' +
+  var VS =     'attribute vec2 aP;uniform vec4 uRect;uniform vec2 uRes;uniform float uCamZ;uniform vec2 uBend;uniform float uTime;uniform float uPhase;uniform float uAmp;uniform float uFold;uniform float uHOff;uniform float uSlats;uniform float uSlatAmp;uniform float uBands[18];' +
+    'varying vec2 vUv;varying float vDepth;varying float vRipple;varying float vShade;' +
     'void main(){vUv=aP;vec3 p=vec3(uRect.x+aP.x*uRect.z-uRes.x*.5,uRes.y*.5-(uRect.y+aP.y*uRect.w),0.);' +
     'float n=sin((p.x-p.y*.1)*.03-uTime*1.1+cos(p.z*.04)*10.)*50.;float n2=sin((p.x+p.y*.1)*.01-uTime*.4)*.5;' +
-    'float r=sin((p.x-p.y)*.02-uPhase)*12.*uAmp;p.z+=r;' +                         /* the phrase: amplitude and tempo per work */
+    'float r=sin((p.x-p.y)*.02-uPhase)*12.*uAmp*(1.-step(.5,uSlats)*.6);p.z+=r;vShade=0.;' +  /* the phrase: amplitude and tempo per work */
+    'if(uSlats>.5){float id=floor(aP.x*uSlats);float c=(id+.5)/uSlats;float lx=(aP.x-c)*uRect.z;' +
+    'float k=uPhase*1.35-c*7.5;float band=0.;for(int i=0;i<18;i++){if(float(i)==id)band=uBands[i];}' +
+    'float h=sin(k)*uSlatAmp+band*70.;' +                                          /* transverse wave + this slat's frequency band */
+    'float tilt=cos(k)*uSlatAmp*.03+band*.35;' +
+    'p.z+=h+lx*tilt;p.x-=sin(k)*uSlatAmp*.06;vShade=tilt;r+=h*.5;}' +
     'float b=smoothstep(uBend.x,uBend.y,p.y);p.z-=1200.*uFold*b+n*b;' +
     'p.y-=(1.5-n2)*smoothstep(uBend.x*1.1,uBend.y*.7,p.y)*uHOff;' +
     'float w=(uCamZ-p.z)/uCamZ;vDepth=uCamZ-p.z;vRipple=r;gl_Position=vec4(p.x/(uRes.x*.5),p.y/(uRes.y*.5),0.,w);}';
   var planeProg = prog(VS,
-    'precision highp float;uniform sampler2D uTex;uniform float uInner;uniform float uOpacity;uniform float uCamZ;uniform float uLight;uniform float uPresence;varying vec2 vUv;varying float vDepth;varying float vRipple;' +
+    'precision highp float;uniform sampler2D uTex;uniform float uInner;uniform float uOpacity;uniform float uCamZ;uniform float uLight;uniform float uPresence;varying vec2 vUv;varying float vDepth;varying float vRipple;varying float vShade;' +
     'void main(){vec4 c=texture2D(uTex,(vUv-.5)/uInner+.5);' +
     'float g=dot(c.rgb,vec3(.299,.587,.114));vec3 quiet=mix(vec3(g),c.rgb,.6)*.78;' +    /* entering / leaving: softened, still readable */
     'c.rgb=mix(quiet,c.rgb*1.04,uPresence);' +                                            /* at the focus: full colour */
-    'c.rgb+=smoothstep(0.,10.,vRipple*.3)*uLight;' +
+    'c.rgb+=smoothstep(0.,10.,vRipple*.3)*uLight;c.rgb*=1.+clamp(vShade,-.6,.6)*.55;' +   /* each slat catches the light as it turns */
     'float fog=smoothstep(uCamZ+250.,uCamZ+1500.,vDepth)*.55;c.rgb=mix(c.rgb,vec3(.067,.09,.098),fog);' +
     'c.a*=(1.-smoothstep(uCamZ+1150.,uCamZ+1550.,vDepth))*uOpacity;gl_FragColor=c;}');
   // light spill: the poster lights the dark room around it like a screen — soft elliptical falloff, no edges
@@ -58,7 +69,7 @@
     'vec3 c=texture2D(uTex,vUv).rgb;float fog=smoothstep(uCamZ+150.,uCamZ+1150.,vDepth);' +
     'gl_FragColor=vec4(c*m*uGlow*(1.-fog*.6),1.);}');
   var GU = U(glowProg, ['uRect', 'uRes', 'uCamZ', 'uBend', 'uTime', 'uPhase', 'uAmp', 'uFold', 'uHOff', 'uTex', 'uGlow']);
-  var PU = U(planeProg, ['uRect', 'uRes', 'uCamZ', 'uBend', 'uTime', 'uPhase', 'uAmp', 'uFold', 'uHOff', 'uTex', 'uInner', 'uOpacity', 'uLight', 'uPresence']);
+  var PU = U(planeProg, ['uRect', 'uRes', 'uCamZ', 'uBend', 'uTime', 'uPhase', 'uAmp', 'uFold', 'uHOff', 'uTex', 'uInner', 'uOpacity', 'uLight', 'uPresence', 'uSlats', 'uSlatAmp', 'uBands']);
 
   var lensProg = prog(
     'attribute vec2 aP;varying vec2 vUv;void main(){vUv=aP;gl_Position=vec4(aP*2.-1.,0.,1.);}',
@@ -161,10 +172,17 @@
     if (listening) { current = -1; crossfade(focusIdx); }
     else { var now = AC.currentTime; WORKS.forEach(function (w) { w.gain.gain.cancelScheduledValues(now); w.gain.gain.setValueAtTime(w.gain.gain.value, now); w.gain.gain.linearRampToValueAtTime(0, now + 0.9); setTimeout(function () { w.audio.pause(); }, 1000); }); current = -1; }
   });
-  var level = 0, pulse = 0, lowPrev = 0;
+  var level = 0, pulse = 0, lowPrev = 0, bands = new Float32Array(18), zero = new Float32Array(18), tmpB = new Float32Array(18);
   function listenFrame() {
-    if (!listening || !analyser) { level += (0 - level) * 0.05; pulse *= 0.9; return; }
+    if (!listening || !analyser) { level += (0 - level) * 0.05; pulse *= 0.9; for (var z = 0; z < 18; z++) bands[z] *= 0.92; return; }
     analyser.getByteFrequencyData(data);
+    // 18 log-spaced bands, low strings to the first slat, high strings to the last; each with a quick rise and slow fall
+    for (var bi = 0; bi < 18; bi++) {
+      var a0 = Math.floor(2 * Math.pow(data.length / 2, bi / 18)), a1 = Math.max(a0 + 1, Math.floor(2 * Math.pow(data.length / 2, (bi + 1) / 18))), acc = 0;
+      for (var q = a0; q < a1 && q < data.length; q++) acc += data[q];
+      var v0 = Math.max(0, acc / ((a1 - a0) * 255) - 0.18) / 0.82;
+      bands[bi] += (v0 - bands[bi]) * (v0 > bands[bi] ? 0.5 : 0.08);
+    }
     var sum = 0, low = 0, n = data.length; for (var i = 0; i < n; i++) { sum += data[i]; if (i < 12) low += data[i]; }
     var lv = sum / (n * 255), lo = low / (12 * 255);
     level += (lv - level) * (lv > level ? 0.35 : 0.05);           // envelope follower: quick attack, slow release
@@ -262,11 +280,14 @@
       // the poster itself
       gl.useProgram(planeProg); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
       gl.uniform1f(PU.uPhase, phase[i]); gl.uniform1f(PU.uAmp, amp[i]); gl.uniform1f(PU.uFold, 1); gl.uniform1f(PU.uPresence, 0.3 + 0.7 * presence);
-      gl.bindTexture(gl.TEXTURE_2D, w.texI); attr(planeProg, mesh);
+      gl.bindTexture(gl.TEXTURE_2D, w.texI); attr(planeProg, smesh);
+      gl.uniform1f(PU.uSlats, NS); gl.uniform1f(PU.uSlatAmp, reduce ? 0 : 9 * amp[i]);
+      if (music) { for (var bq = 0; bq < 18; bq++) tmpB[bq] = bands[bq] * mw; gl.uniform1fv(PU.uBands, tmpB); } else gl.uniform1fv(PU.uBands, zero);
       var grow = 1 + 0.035 * lift + (music ? pulse * 0.012 : 0), gpw = R.pw * grow, gph = R.ph * grow;
       gl.uniform4f(PU.uRect, (W - gpw) / 2, y + (R.ph - gph) / 2, gpw, gph); gl.uniform1f(PU.uHOff, 1); gl.uniform1f(PU.uInner, 1);
       gl.uniform1f(PU.uOpacity, alpha); gl.uniform1f(PU.uLight, 0.14 + (music ? (level * 0.45 + pulse * 0.1) * mw : 0));
-      gl.drawArrays(gl.TRIANGLES, 0, mN);
+      gl.drawArrays(gl.TRIANGLES, 0, sN);
+      gl.uniform1f(PU.uSlats, 0); gl.uniform1fv(PU.uBands, zero);
       // caption
       gl.bindTexture(gl.TEXTURE_2D, w.texC); attr(planeProg, cmesh);
       gl.uniform4f(PU.uRect, (W - R.cw) / 2, y + R.ph + R.gap, R.cw, R.ch); gl.uniform1f(PU.uHOff, R.ph / R.ch); gl.uniform1f(PU.uInner, 1);
