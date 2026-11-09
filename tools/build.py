@@ -1212,8 +1212,9 @@ def build_lab(lang):
     vworks.sort(key=lambda d: (d['i'] is None, d['f'], -(d['y'] or 0)))
     for d in vworks:
         d.pop('f')
-    vdesigns = [('staff', 'السطر الموسيقي'), ('film', 'شريط الفيلم'), ('halo', 'الهالة'), ('spectrum', 'الطيف'), ('silk', 'الحرير')]
-    vtabs = ''.join(f'<button type="button" data-wv-design="{k}" aria-pressed="false"><b>{AR_DIG(i + 1)}</b>{e(nm)}</button>' for i, (k, nm) in enumerate(vdesigns))
+    vdesigns = [('staff', 'السطر الموسيقي'), ('film', 'شريط الفيلم'), ('halo', 'الهالة'), ('spectrum', 'الطيف'), ('silk', 'الحرير'),
+                ('zoetrope', 'الأسطوانة الدوّارة'), ('tunnel', 'ممر الزمن'), ('fan', 'المروحة'), ('deck', 'الأرشيف'), ('sphere', 'الكوكبة')]
+    vtabs = ''.join((('<span class="wv-sep" aria-hidden="true">بالسحب</span>' if i == 5 else '') + f'<button type="button" data-wv-design="{k}" aria-pressed="false"><b>{AR_DIG(i + 1)}</b>{e(nm)}</button>') for i, (k, nm) in enumerate(vdesigns))
     arrow = lambda d: f'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="{"m15 6-6 6 6 6" if d == "l" else "m9 6 6 6-6 6"}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
     vbody = f'''<section class="wv" data-wv data-font="{u('assets/fonts/noto-music-400-symbols.woff2')}" aria-label="{e(t['works_title'])}">
  <canvas data-sc-back aria-hidden="true"></canvas><canvas data-sc-gl aria-hidden="true"></canvas>

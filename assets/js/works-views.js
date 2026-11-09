@@ -222,8 +222,204 @@
     }
   }
 
+  /* ---------- drag designs (6–10) ---------- */
+  function sstep(a, b, x) { var t = Math.max(0, Math.min(1, (x - a) / (b - a))); return t * t * (3 - 2 * t); }
+  function arcPts(cx, cy, r, a0, a1, n) { var p = []; for (var i = 0; i <= n; i++) { var a = a0 + (a1 - a0) * i / n; p.push([cx + Math.sin(a) * r, cy - Math.cos(a) * r]); } return p; }
+
+  // 6 · the zoetrope: the works around a bronze drum that turns as you drag (the device that came before cinema)
+  designs.zoetrope = {
+    mode: 'free', noFloor: true, R: 1350, Z: 3350,
+    S: function () { return small ? 10 : 12; },
+    unit: function () { return (2 * Math.PI * this.R / this.S()) * F / (this.Z - this.R); },
+    v: function (x, y, z) { return pr(x, y - 110 - (z - this.Z) * 0.2, z); },
+    hgt: function () { return small ? 660 : 640; },
+    layout: function (items) {
+      var S = this.S(), R = this.R, Z = this.Z, h = this.hgt(), w = h / 1.5, base = Math.round(cam), self = this;
+      for (var k = base - Math.floor(S / 2); k < base + Math.ceil(S / 2); k++) {
+        if (!wrap && (k < 0 || k >= N)) continue; var wk = list[wi(k)]; need(wk);
+        var th = (k - cam) * 2 * Math.PI / S, c = Math.cos(th), s = Math.sin(th);
+        (function (cx, cz, tx, tz, c) {
+          items.push({ w: wk, k: k, focus: Math.abs(k - cam) < 0.5, depth: -cz, alpha: fade * (c > -0.2 ? 1 : 0.85), noFrame: c < 0.1, nu: 8,
+            fn: function (u, v) { var X = (u - 0.5) * w; return self.v(cx + X * tx, YC + (v - 0.5) * h, cz + X * tz); },
+            light: function () { return c > 0 ? 0.42 + 0.62 * c : 0.2; } });
+        })(R * s, Z - R * c, c, s, c);
+      }
+      items.sort(function (a, b) { return a.depth - b.depth; });
+    },
+    ring: function (yy, frontHalf, ctx, a) {
+      var pts = [], R = this.R * 1.04; for (var i = 0; i <= 90; i++) { var t = i / 90 * Math.PI * 2, c = Math.cos(t); if ((c > 0) !== frontHalf) { if (pts.length > 1) glowPath(ctx, pts, small ? 1 : 1.4, a); pts = []; continue; } pts.push(this.v(R * Math.sin(t), yy, this.Z - R * c)); }
+      if (pts.length > 1) glowPath(ctx, pts, small ? 1 : 1.4, a);
+    },
+    slats: function (frontHalf, ctx, a) { var S = this.S(), h = this.hgt(), R = this.R * 1.04; for (var k = 0; k < S; k++) { var th = (k + 0.5 - (cam % 1)) * 2 * Math.PI / S, c = Math.cos(th); if ((c > 0) !== frontHalf) continue;
+      var x = R * Math.sin(th), z = this.Z - R * c; glowPath(ctx, [this.v(x, YC - h / 2 - 55, z), this.v(x, YC + h / 2 + 55, z)], small ? 0.8 : 1.1, a * (frontHalf ? 0.35 + 0.4 * c : 0.4)); } },
+    back: function () {
+      var h = this.hgt(), base = this.v(0, YC + h / 2 + 130, this.Z), rx = this.R * 1.25 * F / this.Z;
+      bx.save(); bx.globalAlpha = 0.6 * fade; bx.fillStyle = 'rgba(0,0,0,.55)'; bx.beginPath(); bx.ellipse(base[0], base[1], rx, rx * 0.2, 0, 0, 7); bx.fill(); bx.restore();
+      softGlow(bx, base[0], base[1], rx * 1.1, '179,154,112', 0.12 * fade);
+      this.ring(YC - h / 2 - 55, false, bx, 0.75 * fade); this.ring(YC + h / 2 + 55, false, bx, 0.75 * fade); this.slats(false, bx, fade);
+    },
+    front: function () { var h = this.hgt(); this.slats(true, fx, fade); this.ring(YC - h / 2 - 55, true, fx, 0.9 * fade); this.ring(YC + h / 2 + 55, true, fx, 0.9 * fade); }
+  };
+
+  // 7 · the corridor of time: the works hung on both walls, you walk through them; the years are written on the floor
+  designs.tunnel = {
+    mode: 'free', axis: 'y', noFloor: true, Z0: 1900, G: 640,
+    unit: function () { return small ? 90 : 120; },
+    Wc: function () { return small ? 420 : 640; }, hgt: function () { return small ? 600 : 720; },
+    zMax: function () { return this.Z0 + 10 * this.G; },
+    layout: function (items) {
+      var base = Math.round(cam), h = this.hgt(), w = h / 1.5, Wc = this.Wc(), zMax = this.zMax();
+      for (var k = base - 2; k <= base + 11; k++) {
+        if (!wrap && (k < 0 || k >= N)) continue;
+        var z = this.Z0 + (k - cam) * this.G; if (z < 320 || z > zMax) continue;
+        var wk = list[wi(k)]; need(wk);
+        var left = ((k % 2) + 2) % 2 === 0, yaw = left ? 1.0 : -1.0, tx = Math.cos(yaw), tz = Math.sin(yaw), x = left ? -Wc : Wc;
+        var a = sstep(320, 820, z) * (1 - sstep(zMax - 2200, zMax, z)) * fade, near = Math.abs(k - cam) < 0.5;
+        (function (x, z, tx, tz, near) {
+          items.push({ w: wk, k: k, focus: near, depth: -z, alpha: a, nu: 8,
+            fn: function (u, v) { var X = (u - 0.5) * w; return pr(x + X * tx, YC + (v - 0.5) * h, z + X * tz); },
+            light: function (u) { return (near ? 1.04 : 0.86) - 0.15 * Math.abs(u - 0.5); } });
+        })(x, z, tx, tz, near);
+      }
+      items.sort(function (a, b) { return a.depth - b.depth; });
+    },
+    back: function () {
+      var Wc = this.Wc(), h = this.hgt(), fy = YC + h / 2 + 70, cy = YC - h / 2 - 90, zMax = this.zMax() + 1500, z, i;
+      var end = pr(0, YC, zMax); softGlow(bx, end[0], end[1], Math.min(W, H) * 0.45, '217,180,120', 0.25 * fade);
+      [[-Wc, fy], [Wc, fy], [-Wc, cy], [Wc, cy]].forEach(function (q) { glowPath(bx, [pr(q[0], q[1], 330), pr(q[0], q[1], zMax)], small ? 1 : 1.4, 0.7 * fade); });
+      // floor rungs travel with you, each with its work's year
+      var base = Math.round(cam);
+      bx.save(); bx.textAlign = 'center'; bx.direction = 'rtl';
+      for (var k = base - 1; k <= base + 11; k++) {
+        if (!wrap && (k < 0 || k >= N)) continue; z = this.Z0 + (k - cam) * this.G; if (z < 330) continue;
+        var a = sstep(this.Z0 + 150, this.Z0 + 700, z) * (1 - sstep(zMax - 3000, zMax, z)) * fade, l = pr(-Wc, fy, z), r = pr(Wc, fy, z);
+        thin(bx, [l, r], 1, 0.35 * a); var y = list[wi(k)].y;
+        if (y) { bx.globalAlpha = 0.75 * a; bx.fillStyle = '#B39A70'; bx.font = '400 ' + Math.max(10, 46 * F / z) + 'px "IBM Plex Sans Arabic", sans-serif'; var c = pr(0, fy + 70, z); bx.fillText(AR(y), c[0], c[1]); bx.globalAlpha = 1; }
+      }
+      bx.restore();
+      for (i = 1; i < 6; i++) { var zz = 330 + i * 900 - ((cam * this.G) % 900 + 900) % 900; if (zz < 330) continue; thin(bx, [pr(-Wc, cy, zz), pr(Wc, cy, zz)], 1, 0.12 * fade); }
+    },
+    front: function () {}
+  };
+
+  // 8 · the fan: the works open like a hand of cards; a dial of years above them
+  designs.fan = {
+    mode: 'free', noFloor: true,
+    st: function () { return small ? 0.27 : 0.165; }, R0: function () { return small ? H * 0.7 : H * 0.95; },
+    hgt: function () { return small ? Math.min(H * 0.36, W * 0.72) : H * 0.38; },
+    unit: function () { return this.st() * this.R0(); },
+    layout: function (items) {
+      var st = this.st(), R0 = this.R0(), h0 = this.hgt(), base = Math.round(cam), span = small ? 3 : 5, py = CY + R0 - h0 * 0.05;
+      for (var k = base - span; k <= base + span; k++) {
+        if (!wrap && (k < 0 || k >= N)) continue; var p = k - cam, ap = Math.abs(p); if (ap > span + 0.4) continue;
+        var wk = list[wi(k)]; need(wk);
+        var hk = Math.exp(-p * p * 3), ang = p * st, h = h0 * (1 + 0.16 * hk), w = h / 1.5, rr = R0 + 24 * hk;
+        var cx = CX + Math.sin(ang) * rr, cy = py - Math.cos(ang) * rr, ca = Math.cos(ang), sa = Math.sin(ang);
+        (function (cx, cy, ca, sa, w, h, ap) {
+          items.push({ w: wk, k: k, focus: ap < 0.5, depth: -ap, alpha: Math.min(1, (span + 0.4 - ap) / 1.2) * fade, nu: 2, noFrame: ap >= 0.5,
+            fn: function (u, v) { var X = (u - 0.5) * w, Y = (v - 0.5) * h; return [cx + X * ca - Y * sa, cy + X * sa + Y * ca]; },
+            light: function () { return 1.02 - 0.07 * ap; } });
+        })(cx, cy, ca, sa, w, h, ap);
+      }
+      items.sort(function (a, b) { return a.depth - b.depth; });
+    },
+    back: function () {
+      var st = this.st(), R0 = this.R0(), h0 = this.hgt(), py = CY + R0 - h0 * 0.05, ro = R0 + h0 * 0.62 + 60, ri = R0 - h0 * 0.62 - 30, frac = cam - Math.round(cam);
+      glowPath(bx, arcPts(CX, py, ro, -1.35, 1.35, 160), small ? 1.1 : 1.5, 0.85 * fade);
+      glowPath(bx, arcPts(CX, py, ri, -1.2, 1.2, 140), small ? 0.8 : 1, 0.45 * fade);
+      for (var i = -40; i <= 40; i++) { var a = (i * 0.5 - frac) * st; if (Math.abs(a) > 1.33) continue; var major = i % 2 === 0, l = major ? 22 : 11;
+        thin(bx, [[CX + Math.sin(a) * ro, py - Math.cos(a) * ro], [CX + Math.sin(a) * (ro + l), py - Math.cos(a) * (ro + l)]], 1, (major ? 0.6 : 0.3) * fade); }
+    },
+    front: function () {
+      var st = this.st(), R0 = this.R0(), h0 = this.hgt(), py = CY + R0 - h0 * 0.05, ro = R0 + h0 * 0.62 + 60 + 44, base = Math.round(cam), span = small ? 3 : 5;
+      fx.save(); fx.textAlign = 'center'; fx.direction = 'rtl';
+      for (var k = base - span; k <= base + span; k++) {
+        if (!wrap && (k < 0 || k >= N)) continue; var p = k - cam, y = list[wi(k)].y; if (!y || Math.abs(p) > span) continue; var a = p * st;
+        fx.save(); fx.translate(CX + Math.sin(a) * ro, py - Math.cos(a) * ro); fx.rotate(a); fx.globalAlpha = fade * (1 - Math.abs(p) / (span + 1)) * (Math.abs(p) < 0.5 ? 1 : 0.7);
+        fx.fillStyle = Math.abs(p) < 0.5 ? '#F2EDE3' : '#B39A70'; fx.font = '400 ' + (small ? 13 : 16) + 'px "IBM Plex Sans Arabic", sans-serif'; fx.fillText(AR(y), 0, 0); fx.restore();
+      }
+      fx.restore();
+    }
+  };
+
+  // 9 · the archive: a stack of cards; drag the top one away to reveal the next
+  designs.deck = {
+    mode: 'free', noFloor: true,
+    unit: function () { return W * (small ? 0.7 : 0.5); },
+    hgt: function () { return small ? Math.min(H * 0.46, W * 1.02) : H * 0.52; },
+    layout: function (items) {
+      var base = Math.floor(cam), h0 = this.hgt(), w0 = h0 / 1.5;
+      for (var k = base - 1; k <= base + 6; k++) {
+        if (!wrap && (k < 0 || k >= N)) continue; var p = k - cam; if (p < -1.3 || p > 5.6) continue;
+        var wk = list[wi(k)]; need(wk);
+        var j1 = Math.sin(k * 12.9898) * 0.5, j2 = Math.sin(k * 78.233) * 0.5, x, y, rot, sc, a, l;
+        if (p >= 0) { var q = Math.min(p, 1); x = CX + j1 * 26 * q; y = CY - 14 - p * (small ? 12 : 16); rot = j2 * 0.1 * q; sc = 1 - 0.055 * p; a = 1 - sstep(3.6, 5.6, p); l = 1.03 - 0.13 * p; }
+        else { var t = -p; x = CX - t * W * (small ? 0.78 : 0.6); y = CY - 14 + t * 36 - Math.sin(t * Math.PI) * 30; rot = -t * 0.34; sc = 1 - 0.05 * t; a = 1 - sstep(0.75, 1.3, t); l = 1.03; }
+        (function (x, y, rot, sc, a, l, p) {
+          var w = w0 * sc, h = h0 * sc, cr = Math.cos(rot), sr = Math.sin(rot);
+          items.push({ w: wk, k: k, focus: Math.abs(p) < 0.5, depth: -p, alpha: a * fade, nu: 2, noFrame: p > 0.6,
+            fn: function (u, v) { var X = (u - 0.5) * w, Y = (v - 0.5) * h; return [x + X * cr - Y * sr, y + X * sr + Y * cr]; },
+            light: function () { return l; } });
+        })(x, y, rot, sc, a, l, p);
+      }
+      items.sort(function (a, b) { return a.depth - b.depth; });
+    },
+    back: function () {
+      var h0 = this.hgt(), w0 = h0 / 1.5;
+      bx.save(); bx.globalAlpha = fade; bx.fillStyle = 'rgba(0,0,0,.5)'; bx.filter = 'blur(18px)'; bx.beginPath(); bx.ellipse(CX + 10, CY + h0 * 0.5 + 8, w0 * 0.62, h0 * 0.06, 0, 0, 7); bx.fill(); bx.restore();
+      for (var i = 0; i < 4; i++) { var o = (i + 1) * 7; bx.save(); bx.globalAlpha = 0.5 * fade; bx.strokeStyle = 'rgba(179,154,112,' + (0.35 - i * 0.07) + ')'; bx.lineWidth = 1; bx.strokeRect(CX - w0 / 2 + o, CY - 14 - h0 / 2 - o, w0 - o * 2 + o, h0); bx.restore(); }
+    },
+    front: function () {
+      if (!N) return; var h0 = this.hgt(), w0 = h0 / 1.5, i = wi(Math.round(cam));
+      fx.save(); fx.globalAlpha = fade; fx.direction = 'rtl'; fx.textAlign = 'center'; fx.fillStyle = '#B39A70'; fx.font = '400 ' + (small ? 13 : 15) + 'px "IBM Plex Sans Arabic", sans-serif';
+      fx.fillText(AR(i + 1) + ' / ' + AR(N), CX, CY - 14 - h0 / 2 - (small ? 14 : 22)); fx.restore();
+    }
+  };
+
+  // 10 · the constellation: every work on a sphere you turn in any direction
+  designs.sphere = {
+    mode: 'sphere', noFloor: true,
+    R: function () { return Math.max(700, Math.min(1500, 900 * Math.sqrt(Math.max(N, 6) / 40))); },
+    Z: function () { return this.R() * (small ? 3.3 : 3.05) + 500; }, yc: function () { return YC - 250; },
+    radPx: function () { return this.R() * F / this.Z(); },
+    rot: function (x0, y0, z0) { var cy = Math.cos(rotY), sy = Math.sin(rotY), cx = Math.cos(rotX), sx = Math.sin(rotX), x1 = x0 * cy + z0 * sy, z1 = -x0 * sy + z0 * cy; return [x1, y0 * cx - z1 * sx, y0 * sx + z1 * cx]; },
+    layout: function (items) {
+      var R = this.R(), Z = this.Z(), n = N, h = Math.sqrt(7.6 / Math.max(n, 8)) * R, w = h / 1.5, best = null, snapN = null;
+      for (var i = 0; i < n; i++) {
+        var sl = slots[i], yy = 1 - 2 * (sl + 0.5) / n, r = Math.sqrt(1 - yy * yy), phi = sl * 2.399963, d = this.rot(r * Math.cos(phi), yy, r * Math.sin(phi)), nx = d[0], ny = d[1], nz = d[2];
+        if (i === snapTo) snapN = d;
+        var vis = -nz; if (vis < -0.12) continue;
+        var wk = list[i]; need(wk);
+        var el = Math.hypot(nz, nx) || 1, e1 = [-nz / el, 0, nx / el], e2 = [-nx * ny / el, (nx * nx + nz * nz) / el, -nz * ny / el], c = [R * nx, this.yc() + R * ny, Z + R * nz];
+        (function (c, e1, e2, vis) {
+          var it = { w: wk, k: i, focus: false, depth: -c[2], alpha: sstep(-0.12, 0.3, vis) * fade, nu: 3, nv: 3, n: d, vis: vis, noFrame: vis < 0.55,
+            fn: function (u, v) { var X = (u - 0.5) * w, Y = (v - 0.5) * h; return pr(c[0] + X * e1[0] + Y * e2[0], c[1] + X * e1[1] + Y * e2[1], c[2] + X * e1[2] + Y * e2[2]); },
+            light: function () { return 0.42 + 0.64 * Math.max(0, vis); } };
+          items.push(it); if (!best || vis > best.vis) best = it;
+        })(c, e1, e2, vis);
+      }
+      if (best) best.focus = true;
+      // when the sphere comes to rest, turn the nearest work (or the one clicked) to face you
+      var tn = snapN || (best && best.n);
+      if (tn && !drag && Math.abs(vX) + Math.abs(vY) < 0.25 && (lastInput > 0 || snapN)) {
+        var g = Math.min(1, DT * (reduce ? 30 : 4)); rotY += Math.atan2(tn[0], -tn[2]) * g; rotX = Math.max(-1.25, Math.min(1.25, rotX - Math.atan2(tn[1], -tn[2]) * g));
+        if (snapN && Math.abs(tn[0]) < 0.01 && Math.abs(tn[1]) < 0.01 && tn[2] < 0) snapTo = -1;
+      }
+      items.sort(function (a, b) { return a.depth - b.depth; });
+    },
+    back: function () {
+      var R = this.R() * 1.02, Z = this.Z(), YS = this.yc(), c = pr(0, YS, Z), rp = R * F / Z, self = this, i, j, pts;
+      softGlow(bx, c[0], c[1], rp * 1.5, '179,154,112', 0.16 * fade);
+      glowPath(bx, arcPts(c[0], c[1], rp * 1.04, 0, Math.PI * 2, 140), small ? 1 : 1.3, 0.5 * fade);
+      var line = function (f) { pts = []; for (j = 0; j <= 72; j++) { var q = f(j / 72 * Math.PI * 2), d = self.rot(q[0], q[1], q[2]); if (d[2] < 0) { if (pts.length > 1) thin(bx, pts, 1, 0.1 * fade); pts = []; continue; } pts.push(pr(R * d[0], YS + R * d[1], Z + R * d[2])); } if (pts.length > 1) thin(bx, pts, 1, 0.1 * fade); };
+      for (i = -2; i <= 2; i++) { var la = i * 0.5; line(function (t) { return [Math.cos(la) * Math.cos(t), Math.sin(la), Math.cos(la) * Math.sin(t)]; }); }
+      for (i = 0; i < 6; i++) { var lo = i * Math.PI / 6; line(function (t) { return [Math.cos(t) * Math.cos(lo), Math.sin(t), Math.cos(t) * Math.sin(lo)]; }); }
+    },
+    front: function () {}
+  };
+
   /* ---------- filters ---------- */
-  var list = [], N = 0, wrap = true, cat = 'all', dec = '', query = '', fade = 0, fadeTo = 1, pendingList = null;
+  var list = [], slots = [], N = 0, wrap = true, cat = 'all', dec = '', query = '', fade = 0, fadeTo = 1, pendingList = null;
   function norm(s) { return (s || '').toLowerCase().replace(/[ً-ْـ]/g, '').replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي'); }
   function filtered() { var q = norm(query.trim()); return ALL.filter(function (w) { return (cat === 'all' || w.c === cat) && (!dec || (w.y && Math.floor(w.y / 10) * 10 === +dec)) && (!q || norm(w.t + ' ' + (w.cr || '') + ' ' + (w.k || '')).indexOf(q) >= 0); }); }
   function applyFilters(instant) {
@@ -233,41 +429,52 @@
     if (instant) { setList(nl); return; }
     pendingList = nl; fadeTo = 0;
   }
-  function setList(nl) { list = nl; N = list.length; wrap = N >= 7; var withPoster = 0; nl.forEach(function (w) { if (w.i) withPoster++; }); cam = target = wrap && withPoster >= 9 ? 4 : 0; shown = -1; started = performance.now(); fadeTo = 1; if (!N) ui.cap.classList.remove('is-on'); root.classList.toggle('is-empty', !N); }
+  function setList(nl) { list = nl; N = list.length; slots = nl.map(function (w, i) { return i; }).sort(function (a, b) { return (a * 0.6180339887) % 1 - (b * 0.6180339887) % 1; }); var inv = []; slots.forEach(function (i, r) { inv[i] = r; }); slots = inv; wrap = N >= 7; var withPoster = 0; nl.forEach(function (w) { if (w.i) withPoster++; }); cam = target = wrap && withPoster >= 9 ? 4 : 0; shown = -1; started = performance.now(); fadeTo = 1; if (!N) ui.cap.classList.remove('is-on'); root.classList.toggle('is-empty', !N); rotY = 0; rotX = -0.15; snapTo = N ? 0 : -1; vel = vX = vY = 0; }
   $$('[data-wv-chip]').forEach(function (b) { b.addEventListener('click', function () { cat = b.getAttribute('data-wv-chip'); $$('[data-wv-chip]').forEach(function (o) { o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); }); applyFilters(); }); });
   ui.decade.addEventListener('change', function () { dec = ui.decade.value; applyFilters(); });
   var qT = 0; ui.q.addEventListener('input', function () { clearTimeout(qT); qT = setTimeout(function () { query = ui.q.value; applyFilters(); }, 220); });
 
   /* ---------- design switch ---------- */
-  var NAMES = ['staff', 'film', 'halo', 'spectrum', 'silk'], design = 'staff';
-  function setDesign(d) { if (!designs[d]) d = 'staff'; design = d; root.setAttribute('data-design', d);
+  var NAMES = ['staff', 'film', 'halo', 'spectrum', 'silk', 'zoetrope', 'tunnel', 'fan', 'deck', 'sphere'], design = 'staff';
+  function setDesign(d) { if (!designs[d]) d = 'staff'; design = d; vel = vX = vY = 0; snapTo = designs[d].mode === 'sphere' && N ? wi(Math.round(cam)) : -1; cam = target = Math.round(cam); root.setAttribute('data-design', d);
     $$('[data-wv-design]').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-wv-design') === d ? 'true' : 'false'); });
     try { history.replaceState(null, '', location.pathname + '?d=' + (NAMES.indexOf(d) + 1) + location.hash); } catch (e) {}
     try { localStorage.setItem('kh-works-design', d); } catch (e) {} }
   $$('[data-wv-design]').forEach(function (b) { b.addEventListener('click', function () { setDesign(b.getAttribute('data-wv-design')); front.focus({ preventScroll: true }); }); });
-  (function () { var m = /[?&]d=(\d)/.exec(location.search), d = m ? NAMES[+m[1] - 1] : null; if (!d) try { d = localStorage.getItem('kh-works-design'); } catch (e) {} setDesign(d || 'staff'); })();
+  (function () { var m = /[?&]d=(\d+)/.exec(location.search), d = m ? NAMES[+m[1] - 1] : null; if (!d) try { d = localStorage.getItem('kh-works-design'); } catch (e) {} setDesign(d || 'staff'); })();
 
   /* ---------- input ---------- */
-  var cam = 0, target = 0, lastInput = -1e9, drag = null, mouse = { x: -1, y: -1, in: false }, hits = [], opening = null, wheelT = 0, started = performance.now();
-  function unit() { return BH / 1.5 * 1.2 * F / D; }
+  var cam = 0, target = 0, vel = 0, rotX = -0.15, rotY = 0, vX = 0, vY = 0, snapTo = -1, DT = 0.016;
+  var lastInput = -1e9, drag = null, mouse = { x: -1, y: -1, in: false }, hits = [], opening = null, wheelT = 0, started = performance.now();
+  function cur() { return designs[design]; }
+  function mode() { return cur().mode || 'stepped'; }
+  function unit() { return cur().unit ? cur().unit() : BH / 1.5 * 1.2 * F / D; }
   function clampT(v) { return wrap ? v : Math.max(0, Math.min(N - 1, v)); }
-  function go(d) { target = clampT(Math.round(target) + d); lastInput = performance.now(); }
+  function go(d) { lastInput = performance.now(); if (mode() === 'sphere') { snapTo = -1; vX = vY = 0; rotY -= d * 0.5; return; } vel = 0; target = clampT(Math.round(target) + d); }
   front.addEventListener('wheel', function (e) { var d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? -e.deltaX : e.deltaY; if (Math.abs(d) < 4) return; e.preventDefault();
     if (performance.now() - wheelT > 380) { go(d > 0 ? 1 : -1); wheelT = performance.now(); } }, { passive: false });
-  front.addEventListener('pointerdown', function (e) { front.setPointerCapture(e.pointerId); drag = { x: e.clientX, moved: 0, v: 0, t: performance.now() }; lastInput = performance.now(); });
+  front.addEventListener('pointerdown', function (e) { front.setPointerCapture(e.pointerId); drag = { x: e.clientX, y: e.clientY, moved: 0, v: 0, vx: 0, vy: 0, t: performance.now() }; vel = vX = vY = 0; lastInput = performance.now(); });
   front.addEventListener('pointermove', function (e) {
     var r = front.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; mouse.in = e.pointerType === 'mouse';
-    if (!drag) return; var dx = e.clientX - drag.x, now = performance.now(), du = dx / unit();
-    cam = cam - du; if (!wrap) cam = Math.max(-0.4, Math.min(N - 0.6, cam)); target = cam; drag.v = -du / Math.max(1, now - drag.t) * 1000; drag.t = now; drag.x = e.clientX; drag.moved += Math.abs(dx); lastInput = now;
+    if (!drag) return; var dx = e.clientX - drag.x, dy = e.clientY - drag.y, now = performance.now(), ms = Math.max(1, now - drag.t);
+    if (mode() === 'sphere') { var kr = cur().radPx(); rotY -= dx / kr; rotX = Math.max(-1.25, Math.min(1.25, rotX + dy / kr)); drag.vx = -dx / kr / ms * 1000; drag.vy = dy / kr / ms * 1000; snapTo = -1; }
+    else { var dd = cur().axis === 'y' ? (Math.abs(dy) > Math.abs(dx) ? dy : dx) : dx, du = dd / unit();
+      cam = cam - du; if (!wrap) cam = Math.max(-0.4, Math.min(N - 0.6, cam)); target = cam; drag.v = -du / ms * 1000; }
+    drag.t = now; drag.x = e.clientX; drag.y = e.clientY; drag.moved += Math.abs(dx) + Math.abs(dy); lastInput = now;
   });
   front.addEventListener('pointerleave', function () { mouse.in = false; });
   front.addEventListener('pointerup', function (e) {
     if (!drag) return; var d = drag; drag = null; lastInput = performance.now();
-    if (d.moved < 6) { var r = front.getBoundingClientRect(), h = hit(e.clientX - r.left, e.clientY - r.top); if (h) { if (h.focus) open(h.w); else target = clampT(h.k); } return; }
-    target = clampT(Math.round(cam + (reduce ? 0 : Math.max(-3, Math.min(3, d.v * 0.22)))));
+    if (d.moved < 6) { var r = front.getBoundingClientRect(), h = hit(e.clientX - r.left, e.clientY - r.top);
+      if (h) { if (h.focus) open(h.w); else if (mode() === 'sphere') snapTo = h.k; else { vel = 0; target = clampT(h.k); } } return; }
+    if (reduce) { if (mode() !== 'sphere') target = clampT(Math.round(cam)); return; }
+    if (mode() === 'sphere') { vY = Math.max(-4, Math.min(4, d.vx)); vX = Math.max(-3, Math.min(3, d.vy)); }
+    else if (mode() === 'free') { vel = Math.max(-9, Math.min(9, d.v)); }
+    else target = clampT(Math.round(cam + Math.max(-3, Math.min(3, d.v * 0.22))));
   });
   front.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowLeft') go(1); else if (e.key === 'ArrowRight') go(-1); else if (e.key === 'Enter' || e.key === ' ') { if (N) open(list[wi(Math.round(cam))]); } else return; e.preventDefault();
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') go(1); else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(-1);
+    else if (e.key === 'Enter' || e.key === ' ') { var hi = null; hits.forEach(function (h) { if (h.focus) hi = h; }); if (hi) open(hi.w); } else return; e.preventDefault();
   });
   $$('[data-wv-step]').forEach(function (b) { b.addEventListener('click', function () { go(+b.getAttribute('data-wv-step')); }); });
   function hit(px, py) { for (var i = hits.length - 1; i >= 0; i--) if (inPoly(px, py, hits[i].pts)) return hits[i]; return null; }
@@ -276,41 +483,49 @@
 
   /* ---------- frame ---------- */
   var last = performance.now(), shown = -1;
+  function rowLayout(items) {
+    var base = Math.round(cam), span = small ? 3 : 4;
+    for (var k = base - span; k <= base + span; k++) {
+      if (!wrap && (k < 0 || k >= N)) continue;
+      var p = k - cam, ap = Math.abs(p); if (ap > span + 0.4) continue;
+      var w = list[wi(k)]; need(w);
+      var heroK = Math.exp(-p * p * 2.4), h = BH * hf(p), ww = h / 1.5, xc = sOf(p), zc = D + xc * xc / K, yaw = Math.atan(2 * xc / K), cs = Math.cos(yaw), sn = Math.sin(yaw);
+      var yc = YC + (design === 'staff' ? (designs.staff.yS(xc) - YC) * (1 - heroK) * 0.6 : 0);
+      var a = Math.min(1, (span + 0.4 - ap) / 1.2) * fade;
+      items.push(make(w, k, p, a, ap < 0.5, xc, zc, yc, ww, h, cs, sn, heroK));
+    }
+    items.sort(function (a, b) { return a.depth - b.depth; });
+  }
   function frame(now) {
-    var dt = Math.min(0.1, (now - last) / 1000 || 0.016), idle = (now - lastInput) / 1000; last = now; T = now * 0.001;
+    var dt = Math.min(0.1, (now - last) / 1000 || 0.016), m = mode(); DT = dt; last = now; T = now * 0.001;
     if (!reduce) ph += dt * 0.22;
-    // a slow tour of the works until the visitor takes over
-    if (!reduce && !drag && N > 1 && lastInput < 0 && now - started > 6000) { started = now; target = clampT(Math.round(target) + 1); }
-    if (!drag) cam += (target - cam) * Math.min(1, dt * (reduce ? 30 : 4.2));
+    if (m === 'sphere') {
+      if (!drag) { rotY += vY * dt; rotX = Math.max(-1.25, Math.min(1.25, rotX + vX * dt)); vY *= Math.pow(0.05, dt); vX *= Math.pow(0.05, dt); if (!reduce && lastInput < 0 && snapTo < 0) rotY += dt * 0.09; }
+    } else {
+      // a slow tour of the works until the visitor takes over
+      if (!reduce && !drag && N > 1 && lastInput < 0 && now - started > 6000) { started = now; target = clampT(Math.round(target) + 1); }
+      if (!drag) {
+        if (m === 'free' && Math.abs(vel) > 0.35) { cam += vel * dt; vel *= Math.pow(0.035, dt); if (!wrap && (cam < 0 || cam > N - 1)) { cam = clampT(cam); vel = 0; } target = cam; }
+        else { vel = 0; if (m === 'free') target = clampT(Math.round(target)); cam += (target - cam) * Math.min(1, dt * (reduce ? 30 : 4.2)); }
+      }
+    }
     // filter transition
     fade += (fadeTo - fade) * Math.min(1, dt * (reduce ? 30 : 7)); if (pendingList && fade < 0.03) { setList(pendingList); pendingList = null; }
     var items = [];
-    if (N) {
-      var base = Math.round(cam), span = small ? 3 : 4;
-      for (var k = base - span; k <= base + span; k++) {
-        if (!wrap && (k < 0 || k >= N)) continue;
-        var p = k - cam, ap = Math.abs(p); if (ap > span + 0.4) continue;
-        var w = list[wi(k)]; need(w);
-        var heroK = Math.exp(-p * p * 2.4), h = BH * hf(p), ww = h / 1.5, xc = sOf(p), zc = D + xc * xc / K, yaw = Math.atan(2 * xc / K), cs = Math.cos(yaw), sn = Math.sin(yaw);
-        var yc = YC + (design === 'staff' ? (designs.staff.yS(xc) - YC) * (1 - heroK) * 0.6 : 0);
-        var a = Math.min(1, (span + 0.4 - ap) / 1.2) * fade;
-        items.push(make(w, k, p, a, ap < 0.5, xc, zc, yc, ww, h, cs, sn, heroK));
-      }
-      items.sort(function (a, b) { return a.depth - b.depth; });
-    }
+    if (N) { if (cur().layout) cur().layout(items); else rowLayout(items); }
     var hi = hero(items); if (hi && wi(hi.k) !== shown) onFocus(hi.w, wi(hi.k));
     bx.setTransform(DPR, 0, 0, DPR, 0, 0); fx.setTransform(DPR, 0, 0, DPR, 0, 0); fx.clearRect(0, 0, W, H);
     bgFill(0.5);
-    items.forEach(function (it) { var c = it.fn(0.5, 0.5), r = (it.fn(1, 0.5)[0] - it.fn(0, 0.5)[0]) * (it.focus ? 1.7 : 1.25); softGlow(bx, c[0], c[1], r, it.focus ? '217,180,120' : it.w.rgb, (it.focus ? 0.42 : 0.24) * it.alpha); });
-    designs[design].back(items);
-    floorShade();
+    items.forEach(function (it) { if (it.alpha < 0.05) return; var c = it.fn(0.5, 0.5), r = Math.abs(it.fn(1, 0.5)[0] - it.fn(0, 0.5)[0]) * (it.focus ? 1.7 : 1.25); softGlow(bx, c[0], c[1], r, it.focus ? '217,180,120' : it.w.rgb, (it.focus ? 0.42 : 0.2) * it.alpha); });
+    cur().back(items);
+    if (!cur().noFloor) floorShade();
     var op = 1 - (opening ? opening.t : 0);
-    items.forEach(function (it) { mesh(it.mf, it.w.tex, function (u, v) { return 0.3 * Math.pow(v, 2.6); }, 10, 2, it.alpha * op); });
+    items.forEach(function (it) { if (it.mf) mesh(it.mf, it.w.tex, function (u, v) { return 0.3 * Math.pow(v, 2.6); }, it.nu || 10, it.nv || 2, it.alpha * op); });
     hits = [];
-    items.forEach(function (it) { mesh(it.fn, it.w.tex, it.light, 10, 2, it.alpha * op); hits.push({ w: it.w, k: it.k, focus: it.focus, pts: outline(it.fn, 3) }); });
+    items.forEach(function (it) { if (it.alpha < 0.02) return; mesh(it.fn, it.w.tex, it.light, it.nu || 10, it.nv || 2, it.alpha * op); hits.push({ w: it.w, k: it.k, focus: it.focus, pts: outline(it.fn, 3) }); });
     flushGL();
-    items.forEach(function (it) { glowPath(fx, outline(it.fn, 8), it.focus ? 2.1 : 1, (it.focus ? 0.95 : 0.5) * it.alpha); });
-    designs[design].front(items);
+    items.forEach(function (it) { if (it.alpha < 0.02 || it.noFrame) return; glowPath(fx, outline(it.fn, 8), it.focus ? 2.1 : 1, (it.focus ? 0.95 : 0.5) * it.alpha); });
+    cur().front(items);
     fx.fillStyle = grainPat; fx.fillRect(0, 0, W, H);
     var vg = fx.createRadialGradient(W / 2, H / 2, Math.min(W, H) * 0.4, W / 2, H / 2, Math.max(W, H) * 0.75); vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,.45)'); fx.fillStyle = vg; fx.fillRect(0, 0, W, H);
     var hov = mouse.in && !drag ? hit(mouse.x, mouse.y) : null; front.style.cursor = hov ? 'pointer' : (drag ? 'grabbing' : 'grab');

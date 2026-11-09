@@ -745,3 +745,7 @@ body.wc-mode .works-listview, body.wc-mode .site-footer, body.wc-mode .review-no
   .wv-list-link { display: none; }
 }
 .wv.is-empty .wv-bar { display: none; }
+.wv-designs { flex-wrap: nowrap; overflow-x: auto; max-width: min(1040px, calc(100vw - 300px)); scrollbar-width: none; padding-block: 2px; }
+.wv-designs::-webkit-scrollbar { display: none; }
+.wv-sep { flex: none; align-self: center; padding: 0 6px 0 4px; font-size: .74rem; color: var(--bronze); border-inline-start: 1px solid var(--line-dark); margin-inline-start: 4px; padding-inline-start: 12px; }
+@media (max-width: 900px) { .wv-designs { max-width: none; } }
