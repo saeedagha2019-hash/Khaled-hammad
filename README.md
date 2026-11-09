@@ -111,7 +111,7 @@ editorial review" note while its status is `draft-needs-native-review`.
 4. **Russian copy:** every Russian string is a first draft. Film titles and names need native editorial review.
 5. **Biography facts:** confirm the birth date, transliterations, awards evidence (`awards.json → evidence_url`) and affiliations.
 6. **Showreel:** no scoring showreel video exists yet. Add its YouTube ID once it is produced.
-7. **Fonts:** Cormorant Garamond, Inter, Amiri and IBM Plex Sans Arabic are self-hosted (`assets/fonts`,
+7. **Fonts:** Cormorant Garamond, Inter, Amiri, IBM Plex Sans Arabic and a six-glyph Noto Music subset (clef and notes for the lab scenes) are self-hosted (`assets/fonts`,
    Latin, Cyrillic and Arabic subsets, SIL OFL). No requests go to Google.
 8. **CMS sign-in:** `/admin/` needs an OAuth provider (Netlify Identity, DecapBridge or a small OAuth proxy)
    before editors can log in. Branch protection and required reviews on `main` act as the approval gate.

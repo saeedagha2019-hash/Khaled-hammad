@@ -693,3 +693,6 @@ body.wc-mode .works-listview, body.wc-mode .site-footer, body.wc-mode .review-no
 .ms-cap-m { margin: 2px 0 0; font-size: .82rem; color: var(--on-dark-2); }
 .ms-cap-m::after { content: ""; display: block; width: 56px; height: 1px; background: var(--bronze); margin: 10px auto 0; }
 @media (max-width: 700px) { .ms-cap { bottom: 88px; } }
+/* music scenes (stage / staff wave / hung): three stacked canvases, only the front one takes input */
+.sc canvas:not([data-sc-front]) { pointer-events: none; }
+.sc canvas[data-sc-front] { cursor: grab; }
