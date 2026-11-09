@@ -1058,6 +1058,10 @@ MM_MOODS = {  # presentational tempo/depth per work for the music-motion study
 }
 
 
+def AR_DIG(n):
+    return str(n).translate(str.maketrans('0123456789', '٠١٢٣٤٥٦٧٨٩'))
+
+
 def build_lab(lang):
     """Music-motion study (Arabic): four works whose motion behaves like a film score. Not linked, noindex."""
     if lang != 'ar':
@@ -1193,6 +1197,51 @@ def build_lab(lang):
  <script type="application/json" data-mm-data>{sdata}</script>
 </section>'''
         write(out(lang, spath), page(lang, spath, name, sb, desc=f'تجربة: {lead}', alt_langs=['ar'], scripts=('/assets/js/music-scenes.js',), noindex=True, body_class='is-works is-lab'))
+    # the works page, several presentation designs, each with the same filters (no audio: music plays on the work's own page)
+    cats = ['all', 'film', 'tv', 'theatre', 'children', 'songs']
+    counts = {c: sum(1 for w in WORKS if w['category'] == c) for c in cats[1:]}
+    vchips = ''.join(f'<button type="button" class="wv-chip" data-wv-chip="{c}" aria-pressed="{"true" if c == "all" else "false"}">{e(t["cat"][c])}<sup>{AR_DIG(len(WORKS) if c == "all" else counts[c])}</sup></button>' for c in cats if c == 'all' or counts[c])
+    decades = sorted({(w['year'] // 10) * 10 for w in WORKS if w['year']}, reverse=True)
+    vdopts = ''.join(f'<option value="{d}">{AR_DIG(d)}–{AR_DIG(d + 9)}</option>' for d in decades)
+    vworks = []
+    for w in WORKS:
+        hay = ' '.join([tr(w['title'], l) for l in LANGS] + [w.get('original_title') or ''] + [tr(w.get(k), l) for k in ('cast', 'director') for l in LANGS])
+        vworks.append({'t': tr(w['title'], lang), 'c': w['category'], 'cl': t['cat'][w['category']], 'y': w['year'], 'h': lu(lang, 'works/' + w['slug']),
+                       'i': u(w['poster']) if media_ok(w.get('poster'), w.get('poster_rights')) else None, 'cr': tr(w['director'], lang) if w.get('director') else '',
+                       'k': hay, 'f': w.get('featured_order') or 99})
+    vworks.sort(key=lambda d: (d['i'] is None, d['f'], -(d['y'] or 0)))
+    for d in vworks:
+        d.pop('f')
+    vdesigns = [('staff', 'السطر الموسيقي'), ('film', 'شريط الفيلم'), ('halo', 'الهالة'), ('spectrum', 'الطيف'), ('silk', 'الحرير')]
+    vtabs = ''.join(f'<button type="button" data-wv-design="{k}" aria-pressed="false"><b>{AR_DIG(i + 1)}</b>{e(nm)}</button>' for i, (k, nm) in enumerate(vdesigns))
+    arrow = lambda d: f'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="{"m15 6-6 6 6 6" if d == "l" else "m9 6 6 6-6 6"}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    vbody = f'''<section class="wv" data-wv data-font="{u('assets/fonts/noto-music-400-symbols.woff2')}" aria-label="{e(t['works_title'])}">
+ <canvas data-sc-back aria-hidden="true"></canvas><canvas data-sc-gl aria-hidden="true"></canvas>
+ <canvas data-sc-front tabindex="0" role="img" aria-label="ملصقات الأعمال في صف، العمل الحالي في المنتصف. استخدم الأسهم للتنقل وEnter لفتح العمل."></canvas>
+ <div class="wv-top">
+  <div class="wv-head"><h1>{e(t['works_title'])}</h1><span class="wv-count" data-wv-count></span></div>
+  <div class="wv-designs" role="group" aria-label="طريقة العرض">{vtabs}</div>
+ </div>
+ <div class="wv-filters" role="search">
+  <div class="wv-chips" role="group" aria-label="{e(t['format'])}">{vchips}</div>
+  <label class="wv-sel"><span class="sr">{e(t['decade'])}</span><select data-wv-decade aria-label="{e(t['decade'])}"><option value="">{e(t['all_decades'])}</option>{vdopts}</select></label>
+  <label class="wv-search"><span class="sr">{e(t['keyword'])}</span><input type="search" data-wv-q placeholder="{e(t['keyword'])}" aria-label="{e(t['keyword'])}"></label>
+ </div>
+ <div class="wv-cap" data-wv-cap aria-hidden="true"><p class="wv-cap-cat" data-wv-cat></p><a class="wv-cap-t" data-wv-title href="#" tabindex="-1"></a><p class="wv-cap-m" data-wv-meta></p></div>
+ <div class="wv-bar">
+  <button type="button" class="wv-step" data-wv-step="-1" aria-label="العمل السابق">{arrow('r')}</button>
+  <a class="btn btn-primary wv-more" data-wv-more href="#">تفاصيل العمل</a>
+  <button type="button" class="wv-step" data-wv-step="1" aria-label="العمل التالي">{arrow('l')}</button>
+ </div>
+ <p class="wv-empty" data-wv-empty hidden>لا توجد أعمال مطابقة. جرّب تصفية أخرى.</p>
+ <p class="mm-fallback">هذا العرض يحتاج متصفحًا يدعم WebGL. <a href="{lu(lang, 'works')}?view=list">اعرض قائمة الأعمال</a></p>
+ <p class="wv-list-link"><a href="{lu(lang, 'works')}?view=list">عرض كقائمة</a></p>
+ <p class="sr" aria-live="polite" data-wv-live></p>
+ <div class="mm-cut" data-wv-cut aria-hidden="true"></div>
+ <script type="application/json" data-wv-data>{json.dumps(vworks, ensure_ascii=False).replace('</', '<\\/')}</script>
+</section>'''
+    write(out(lang, 'lab/works-views'), page(lang, 'lab/works-views', t['works_title'], vbody, desc='معاينة: طرق عرض الأعمال مع التصفية.', alt_langs=['ar'],
+                                            scripts=('/assets/js/works-views.js',), noindex=True, body_class='is-works is-lab'))
 
 
 def build_utility(lang):
