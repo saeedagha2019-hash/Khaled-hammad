@@ -1152,6 +1152,47 @@ def build_lab(lang):
     nbody = nbody.replace('أربعة أعمال مرسومة بخطوط سطر موسيقي يتموج كموجة.', 'ملصقات الأعمال على سطر موسيقي يتموج كموجة.', 1)
     write(out(lang, 'lab/music-notes'), page(lang, 'lab/music-notes', 'الأعمال على موجة موسيقية', nbody, desc='تجربة: ملصقات الأعمال على سطر موسيقي يتموج مع الموسيقى.',
                                             alt_langs=['ar'], scripts=('/assets/js/music-notes.js',), noindex=True, body_class='is-works is-lab'))
+    # three scenes chosen from the concept stills: the stage, the staff wave, hung on the staff (all works with a poster)
+    scenes = [
+        ('stage', 'lab/works-stage', 'مسرح الأعمال', 'العمل الحالي كبير في المقدمة أمام جدار منحنٍ من الأعمال، والسطر الموسيقي ينساب خلفها. تنتقل الأعمال عملًا بعد عمل من اليمين إلى اليسار.',
+         [('العمل في المقدمة', 'العمل الحالي يتقدم ويكبر في منتصف المسرح بإطار برونزي مضيء، وبقية الأعمال على جدار منحنٍ تبتعد يمينًا ويسارًا، وتنعكس على أرضية لامعة.'),
+          ('جملة لكل عمل', 'العرض ينتقل عملًا واحدًا في كل مرة كجملة موسيقية، من اليمين إلى اليسار. اسحب أو مرّر أو استخدم الأسهم للانتقال، واضغط على أي ملصق لفتحه.'),
+          ('السطر والمفتاح', 'خمسة خطوط برونزية تنساب خلف الأعمال ويفتتحها مفتاح «صول»، والنوتات تطفو حولها.'),
+          ('مع الموسيقى', 'مع الاستماع يرتفع موج السطر مع شدة الصوت ويتشكل من طيف الترددات، ويتوهج العمل الحالي وينبض مع الإيقاع، وتنتقل الموسيقى إلى كل عمل له مقطع خاص.')]),
+        ('wave', 'lab/works-wave', 'مدرج الموجة', 'الملصقات منحنية على سطر موسيقي يتموج، تدخل صغيرة من اليمين وتكبر وهي تقترب من المفتاح الموسيقي على اليسار.',
+         [('الملصق على الموجة', 'كل ملصق مطبوع على جزء من السطر الموسيقي، فينحني معه ويميل، والخطوط تمر خلفه فلا تغطي الصورة.'),
+          ('الاقتراب', 'الأعمال تنساب من اليمين إلى اليسار، تدخل صغيرة بعيدة وتكبر وهي تقترب من مفتاح «صول»، كأن الموجة تحملها نحوك.'),
+          ('النوتات', 'بين كل عمل وآخر نوتة تركب السطر وتتمايل معه.'),
+          ('مع الموسيقى', 'مع الاستماع ترقص الموجة: ارتفاعها من شدة الصوت، وانحناؤها من طيف الترددات، والنوتات تنبض مع الإيقاع.')]),
+        ('hung', 'lab/works-hung', 'معلّقة على المدرج', 'كل ملصق معلّق بمشبك برونزي على السطر العلوي، يحمله السطر من اليمين إلى اليسار فيتأرجح ويلتفت في الهواء.',
+         [('المشبك والسطر', 'الملصقات معلّقة على السطر العلوي من المدرج بمشابك برونزية، والسطر يحملها من اليمين إلى اليسار.'),
+          ('التأرجح', 'كل ملصق يتأرجح كبندول حين يتسارع السطر أو يتباطأ، ويلتفت قليلًا في العمق فيلتقط الضوء.'),
+          ('التحكم', 'اسحب أو مرّر لتحريك الأعمال بنفسك، واضغط على أي ملصق لفتحه.'),
+          ('مع الموسيقى', 'مع الاستماع يتموج السطر مع الموسيقى، وتدفع ضربات الإيقاع الملصقات فتتأرجح، وتنتقل الموسيقى إلى العمل الحالي.')]),
+    ]
+    links = lambda cur: ' · '.join(f'<a href="{lu(lang, sp)}">{e(nm)} ←</a>' for _, sp, nm, _d, _l in scenes if sp != cur)
+    bars = ''.join('<i></i>' for _ in range(5))
+    sdata = json.dumps(nworks, ensure_ascii=False).replace('</', '<\\/')
+    for key, spath, name, lead, sleg in scenes:
+        lg = ''.join(f'<li><b>{e(a)}</b><span>{e(b)}</span></li>' for a, b in sleg)
+        sb = f'''<section class="mm mw ms sc" data-scene="{key}" data-font="{u('assets/fonts/noto-music-400-symbols.woff2')}" aria-label="{e(name)}">
+ <canvas data-sc-back aria-hidden="true"></canvas><canvas data-sc-gl aria-hidden="true"></canvas>
+ <canvas data-sc-front tabindex="0" role="img" aria-label="{e(name)}: ملصقات الأعمال على سطر موسيقي. استخدم الأسهم يمينًا ويسارًا للتنقل وEnter لفتح العمل الحالي."></canvas>
+ <div class="mm-intro"><p class="eyebrow">تجربة</p><h1>{e(name)}</h1><p>{e(lead)}</p><p class="mm-switch">{links(spath)}</p></div>
+ <details class="mm-legend"><summary>ماذا ترى؟</summary><ol>{lg}</ol></details>
+ <div class="ms-cap is-on" data-ms-cap aria-hidden="true"><p class="ms-cap-t" data-ms-cap-t></p><p class="ms-cap-m" data-ms-cap-m></p></div>
+ <div class="mm-now" aria-live="polite">
+  <span class="mm-meter" data-mm-meter aria-hidden="true">{bars}</span>
+  <div class="mm-now-t"><p class="mm-title" data-mm-title></p><p class="mm-mood" data-mm-mood></p></div>
+  <button type="button" class="mm-listen" data-mm-listen aria-pressed="false" data-on="إيقاف الاستماع" data-off="استمع أثناء التصفح">
+   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5z" fill="currentColor"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+   <span data-mm-listen-label>استمع أثناء التصفح</span></button>
+ </div>
+ <p class="mm-fallback">هذه التجربة تحتاج متصفحًا يدعم WebGL. <a href="{lu(lang, 'works')}?view=list">اعرض قائمة الأعمال</a></p>
+ <div class="mm-cut" data-mm-cut aria-hidden="true"></div>
+ <script type="application/json" data-mm-data>{sdata}</script>
+</section>'''
+        write(out(lang, spath), page(lang, spath, name, sb, desc=f'تجربة: {lead}', alt_langs=['ar'], scripts=('/assets/js/music-scenes.js',), noindex=True, body_class='is-works is-lab'))
 
 
 def build_utility(lang):
