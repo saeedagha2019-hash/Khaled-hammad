@@ -1197,12 +1197,33 @@ def build_lab(lang):
  <script type="application/json" data-mm-data>{sdata}</script>
 </section>'''
         write(out(lang, spath), page(lang, spath, name, sb, desc=f'تجربة: {lead}', alt_langs=['ar'], scripts=('/assets/js/music-scenes.js',), noindex=True, body_class='is-works is-lab'))
-    # the works page, several presentation designs, each with the same filters (no audio: music plays on the work's own page)
+
+
+WV_TEXT = {
+    'ar': {'names': ['السطر الموسيقي', 'شريط الفيلم', 'الهالة', 'الطيف', 'الحرير', 'الأسطوانة الدوّارة', 'ممر الزمن', 'المروحة', 'الأرشيف', 'الكوكبة'],
+           'sep': 'بالسحب', 'group': 'طريقة العرض', 'prev': 'العمل السابق', 'next': 'العمل التالي', 'more': 'تفاصيل العمل',
+           'a11y': 'ملصقات الأعمال في صف، العمل الحالي في المنتصف. استخدم الأسهم للتنقل وEnter لفتح العمل.',
+           'empty': 'لا توجد أعمال مطابقة. جرّب تصفية أخرى.', 'fallback': 'هذا العرض يحتاج متصفحًا يدعم WebGL.', 'fallback_a': 'اعرض قائمة الأعمال',
+           'list': 'عرض كقائمة', 'desc': 'معاينة: طرق عرض الأعمال مع التصفية.'},
+    'en': {'names': ['Musical Staff', 'Film Strip', 'Halo', 'Spectrum', 'Silk', 'Zoetrope', 'Corridor of Time', 'Fan', 'Archive', 'Constellation'],
+           'sep': 'Drag', 'group': 'Display style', 'prev': 'Previous work', 'next': 'Next work', 'more': 'View details',
+           'a11y': 'Work posters in a row, the current work in the middle. Use the arrow keys to move and Enter to open the work.',
+           'empty': 'No matching works. Try another filter.', 'fallback': 'This view needs a browser with WebGL.', 'fallback_a': 'View the works list',
+           'list': 'View as list', 'desc': 'Preview: ways of presenting the works, with filters.'},
+}
+
+
+def build_works_views(lang):
+    """Works page preview: ten presentation designs, each with the same filters. No audio (music plays on a work's own page)."""
+    if lang not in WV_TEXT:
+        return
+    t, L = I18N[lang], WV_TEXT[lang]
+    dig = AR_DIG if lang == 'ar' else str
     cats = ['all', 'film', 'tv', 'theatre', 'children', 'songs']
     counts = {c: sum(1 for w in WORKS if w['category'] == c) for c in cats[1:]}
-    vchips = ''.join(f'<button type="button" class="wv-chip" data-wv-chip="{c}" aria-pressed="{"true" if c == "all" else "false"}">{e(t["cat"][c])}<sup>{AR_DIG(len(WORKS) if c == "all" else counts[c])}</sup></button>' for c in cats if c == 'all' or counts[c])
+    vchips = ''.join(f'<button type="button" class="wv-chip" data-wv-chip="{c}" aria-pressed="{"true" if c == "all" else "false"}">{e(t["cat"][c])}<sup>{dig(len(WORKS) if c == "all" else counts[c])}</sup></button>' for c in cats if c == 'all' or counts[c])
     decades = sorted({(w['year'] // 10) * 10 for w in WORKS if w['year']}, reverse=True)
-    vdopts = ''.join(f'<option value="{d}">{AR_DIG(d)}–{AR_DIG(d + 9)}</option>' for d in decades)
+    vdopts = ''.join(f'<option value="{d}">{dig(d)}–{dig(d + 9)}</option>' if lang == 'ar' else f'<option value="{d}">{d}s</option>' for d in decades)
     vworks = []
     for w in WORKS:
         hay = ' '.join([tr(w['title'], l) for l in LANGS] + [w.get('original_title') or ''] + [tr(w.get(k), l) for k in ('cast', 'director') for l in LANGS])
@@ -1212,16 +1233,16 @@ def build_lab(lang):
     vworks.sort(key=lambda d: (d['i'] is None, d['f'], -(d['y'] or 0)))
     for d in vworks:
         d.pop('f')
-    vdesigns = [('staff', 'السطر الموسيقي'), ('film', 'شريط الفيلم'), ('halo', 'الهالة'), ('spectrum', 'الطيف'), ('silk', 'الحرير'),
-                ('zoetrope', 'الأسطوانة الدوّارة'), ('tunnel', 'ممر الزمن'), ('fan', 'المروحة'), ('deck', 'الأرشيف'), ('sphere', 'الكوكبة')]
-    vtabs = ''.join((('<span class="wv-sep" aria-hidden="true">بالسحب</span>' if i == 5 else '') + f'<button type="button" data-wv-design="{k}" aria-pressed="false"><b>{AR_DIG(i + 1)}</b>{e(nm)}</button>') for i, (k, nm) in enumerate(vdesigns))
+    keys = ['staff', 'film', 'halo', 'spectrum', 'silk', 'zoetrope', 'tunnel', 'fan', 'deck', 'sphere']
+    vtabs = ''.join(((f'<span class="wv-sep" aria-hidden="true">{e(L["sep"])}</span>' if i == 5 else '') + f'<button type="button" data-wv-design="{k}" aria-pressed="false"><b>{dig(i + 1)}</b>{e(L["names"][i])}</button>') for i, k in enumerate(keys))
     arrow = lambda d: f'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="{"m15 6-6 6 6 6" if d == "l" else "m9 6 6 6-6 6"}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    prev_icon, next_icon = ('r', 'l') if lang == 'ar' else ('l', 'r')
     vbody = f'''<section class="wv" data-wv data-font="{u('assets/fonts/noto-music-400-symbols.woff2')}" aria-label="{e(t['works_title'])}">
  <canvas data-sc-back aria-hidden="true"></canvas><canvas data-sc-gl aria-hidden="true"></canvas>
- <canvas data-sc-front tabindex="0" role="img" aria-label="ملصقات الأعمال في صف، العمل الحالي في المنتصف. استخدم الأسهم للتنقل وEnter لفتح العمل."></canvas>
+ <canvas data-sc-front tabindex="0" role="img" aria-label="{e(L['a11y'])}"></canvas>
  <div class="wv-top">
   <div class="wv-head"><h1>{e(t['works_title'])}</h1><span class="wv-count" data-wv-count></span></div>
-  <div class="wv-designs" role="group" aria-label="طريقة العرض">{vtabs}</div>
+  <div class="wv-designs" role="group" aria-label="{e(L['group'])}">{vtabs}</div>
  </div>
  <div class="wv-filters" role="search">
   <div class="wv-chips" role="group" aria-label="{e(t['format'])}">{vchips}</div>
@@ -1230,18 +1251,18 @@ def build_lab(lang):
  </div>
  <div class="wv-cap" data-wv-cap aria-hidden="true"><p class="wv-cap-cat" data-wv-cat></p><a class="wv-cap-t" data-wv-title href="#" tabindex="-1"></a><p class="wv-cap-m" data-wv-meta></p></div>
  <div class="wv-bar">
-  <button type="button" class="wv-step" data-wv-step="-1" aria-label="العمل السابق">{arrow('r')}</button>
-  <a class="btn btn-primary wv-more" data-wv-more href="#">تفاصيل العمل</a>
-  <button type="button" class="wv-step" data-wv-step="1" aria-label="العمل التالي">{arrow('l')}</button>
+  <button type="button" class="wv-step" data-wv-step="-1" aria-label="{e(L['prev'])}">{arrow(prev_icon)}</button>
+  <a class="btn btn-primary wv-more" data-wv-more href="#">{e(L['more'])}</a>
+  <button type="button" class="wv-step" data-wv-step="1" aria-label="{e(L['next'])}">{arrow(next_icon)}</button>
  </div>
- <p class="wv-empty" data-wv-empty hidden>لا توجد أعمال مطابقة. جرّب تصفية أخرى.</p>
- <p class="mm-fallback">هذا العرض يحتاج متصفحًا يدعم WebGL. <a href="{lu(lang, 'works')}?view=list">اعرض قائمة الأعمال</a></p>
- <p class="wv-list-link"><a href="{lu(lang, 'works')}?view=list">عرض كقائمة</a></p>
+ <p class="wv-empty" data-wv-empty hidden>{e(L['empty'])}</p>
+ <p class="mm-fallback">{e(L['fallback'])} <a href="{lu(lang, 'works')}?view=list">{e(L['fallback_a'])}</a></p>
+ <p class="wv-list-link"><a href="{lu(lang, 'works')}?view=list">{e(L['list'])}</a></p>
  <p class="sr" aria-live="polite" data-wv-live></p>
  <div class="mm-cut" data-wv-cut aria-hidden="true"></div>
  <script type="application/json" data-wv-data>{json.dumps(vworks, ensure_ascii=False).replace('</', '<\\/')}</script>
 </section>'''
-    write(out(lang, 'lab/works-views'), page(lang, 'lab/works-views', t['works_title'], vbody, desc='معاينة: طرق عرض الأعمال مع التصفية.', alt_langs=['ar'],
+    write(out(lang, 'lab/works-views'), page(lang, 'lab/works-views', t['works_title'], vbody, desc=L['desc'], alt_langs=[l for l in ('ar', 'en') if l in WV_TEXT],
                                             scripts=('/assets/js/works-views.js',), noindex=True, body_class='is-works is-lab'))
 
 
@@ -1362,7 +1383,7 @@ def main():
     for lang in LANGS:
         set_scope(lang)
         build_home(lang); build_about(lang); build_works(lang); build_listen(lang); build_concerts(lang)
-        build_press(lang); build_contact(lang); build_search(lang); build_utility(lang); build_lab(lang)
+        build_press(lang); build_contact(lang); build_search(lang); build_utility(lang); build_lab(lang); build_works_views(lang)
     build_root()
     static = ['', 'about', 'works', 'listen-watch', 'concerts', 'news-press', 'news-press/press-kit', 'contact', 'privacy', 'accessibility'] + ['contact/' + k for k in FORM_KINDS]
     entries = [(p, LANGS) for p in static]

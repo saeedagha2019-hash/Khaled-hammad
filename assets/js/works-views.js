@@ -23,7 +23,8 @@
   var $ = function (s) { return root.querySelector(s); }, $$ = function (s) { return Array.prototype.slice.call(root.querySelectorAll(s)); };
   var ui = { cat: $('[data-wv-cat]'), title: $('[data-wv-title]'), meta: $('[data-wv-meta]'), more: $('[data-wv-more]'), cap: $('[data-wv-cap]'),
     count: $('[data-wv-count]'), empty: $('[data-wv-empty]'), live: $('[data-wv-live]'), cut: $('[data-wv-cut]'), decade: $('[data-wv-decade]'), q: $('[data-wv-q]') };
-  var AR = function (n) { return String(n).replace(/\d/g, function (d) { return '٠١٢٣٤٥٦٧٨٩'[d]; }); };
+  var EN = (doc.documentElement.lang || '').indexOf('en') === 0, DIR = EN ? 'ltr' : 'rtl';
+  var AR = function (n) { return EN ? String(n) : String(n).replace(/\d/g, function (d) { return '٠١٢٣٤٥٦٧٨٩'[d]; }); };
 
   /* ---------- GL ---------- */
   function sh(t, s) { var q = gl.createShader(t); gl.shaderSource(q, s); gl.compileShader(q); return q; }
@@ -70,14 +71,14 @@
     var c = doc.createElement('canvas'); c.width = 512; c.height = 1024; var x = c.getContext('2d');
     var g = x.createLinearGradient(0, 0, 0, 1024); g.addColorStop(0, '#1C3533'); g.addColorStop(1, '#0D1517'); x.fillStyle = g; x.fillRect(0, 0, 512, 1024);
     x.strokeStyle = 'rgba(179,154,112,.6)'; x.lineWidth = 3; x.strokeRect(28, 56, 456, 912);
-    x.direction = 'rtl'; x.textAlign = 'center'; x.fillStyle = '#B39A70'; x.font = '400 30px "IBM Plex Sans Arabic", sans-serif'; x.fillText([w.cl, w.y ? AR(w.y) : ''].filter(Boolean).join(' · '), 256, 300);
-    x.fillStyle = '#F2EDE3'; x.font = '400 64px Amiri, serif'; var lines = wrapText(x, w.t, 400); lines.forEach(function (l, i) { x.fillText(l, 256, 470 + (i - (lines.length - 1) / 2) * 150, 420); });
-    x.fillStyle = '#B39A70'; x.fillRect(216, 640, 80, 2); x.fillStyle = 'rgba(201,207,203,.8)'; x.font = '400 28px "IBM Plex Sans Arabic", sans-serif'; if (w.cr) x.fillText(w.cr, 256, 700, 420);
+    x.direction = DIR; x.textAlign = 'center'; x.fillStyle = '#B39A70'; x.font = EN ? '400 28px Inter, sans-serif' : '400 30px "IBM Plex Sans Arabic", sans-serif'; x.fillText([w.cl, w.y ? AR(w.y) : ''].filter(Boolean).join(' · '), 256, 300);
+    x.fillStyle = '#F2EDE3'; x.font = EN ? '400 66px "Cormorant Garamond", serif' : '400 64px Amiri, serif'; var lines = wrapText(x, w.t, 400); lines.forEach(function (l, i) { x.fillText(l, 256, 470 + (i - (lines.length - 1) / 2) * 150, 420); });
+    x.fillStyle = '#B39A70'; x.fillRect(216, 640, 80, 2); x.fillStyle = 'rgba(201,207,203,.8)'; x.font = EN ? '400 26px Inter, sans-serif' : '400 28px "IBM Plex Sans Arabic", sans-serif'; if (w.cr) x.fillText(w.cr, 256, 700, 420);
     return texFrom(c);
   }
   function need(w) {
     if (w.req) return; w.req = true; w.rgb = '64,96,92';
-    if (!w.i) { var make = function () { w.tex = cardTex(w); }; if (doc.fonts && doc.fonts.load) Promise.all([doc.fonts.load('400 64px Amiri'), doc.fonts.load('400 30px "IBM Plex Sans Arabic"')]).then(make, make); else make(); return; }
+    if (!w.i) { var make = function () { w.tex = cardTex(w); }; if (doc.fonts && doc.fonts.load) Promise.all(EN ? [doc.fonts.load('400 66px "Cormorant Garamond"'), doc.fonts.load('400 28px Inter')] : [doc.fonts.load('400 64px Amiri'), doc.fonts.load('400 30px "IBM Plex Sans Arabic"')]).then(make, make); else make(); return; }
     var im = new Image(); im.decoding = 'async';
     im.onload = function () {
       var c = doc.createElement('canvas'); c.width = 512; c.height = 1024; c.getContext('2d').drawImage(im, 0, 0, 512, 1024); w.tex = texFrom(c);
@@ -289,12 +290,12 @@
       [[-Wc, fy], [Wc, fy], [-Wc, cy], [Wc, cy]].forEach(function (q) { glowPath(bx, [pr(q[0], q[1], 330), pr(q[0], q[1], zMax)], small ? 1 : 1.4, 0.7 * fade); });
       // floor rungs travel with you, each with its work's year
       var base = Math.round(cam);
-      bx.save(); bx.textAlign = 'center'; bx.direction = 'rtl';
+      bx.save(); bx.textAlign = 'center'; bx.direction = DIR;
       for (var k = base - 1; k <= base + 11; k++) {
         if (!wrap && (k < 0 || k >= N)) continue; z = this.Z0 + (k - cam) * this.G; if (z < 330) continue;
         var a = sstep(this.Z0 + 150, this.Z0 + 700, z) * (1 - sstep(zMax - 3000, zMax, z)) * fade, l = pr(-Wc, fy, z), r = pr(Wc, fy, z);
         thin(bx, [l, r], 1, 0.35 * a); var y = list[wi(k)].y;
-        if (y) { bx.globalAlpha = 0.75 * a; bx.fillStyle = '#B39A70'; bx.font = '400 ' + Math.max(10, 46 * F / z) + 'px "IBM Plex Sans Arabic", sans-serif'; var c = pr(0, fy + 70, z); bx.fillText(AR(y), c[0], c[1]); bx.globalAlpha = 1; }
+        if (y) { bx.globalAlpha = 0.75 * a; bx.fillStyle = '#B39A70'; bx.font = '400 ' + Math.max(10, 46 * F / z) + 'px ' + (EN ? 'Inter' : '"IBM Plex Sans Arabic"') + ', sans-serif'; var c = pr(0, fy + 70, z); bx.fillText(AR(y), c[0], c[1]); bx.globalAlpha = 1; }
       }
       bx.restore();
       for (i = 1; i < 6; i++) { var zz = 330 + i * 900 - ((cam * this.G) % 900 + 900) % 900; if (zz < 330) continue; thin(bx, [pr(-Wc, cy, zz), pr(Wc, cy, zz)], 1, 0.12 * fade); }
@@ -332,11 +333,11 @@
     },
     front: function () {
       var st = this.st(), R0 = this.R0(), h0 = this.hgt(), py = CY + R0 - h0 * 0.05, ro = R0 + h0 * 0.62 + 60 + 44, base = Math.round(cam), span = small ? 3 : 5;
-      fx.save(); fx.textAlign = 'center'; fx.direction = 'rtl';
+      fx.save(); fx.textAlign = 'center'; fx.direction = DIR;
       for (var k = base - span; k <= base + span; k++) {
         if (!wrap && (k < 0 || k >= N)) continue; var p = k - cam, y = list[wi(k)].y; if (!y || Math.abs(p) > span) continue; var a = p * st;
         fx.save(); fx.translate(CX + Math.sin(a) * ro, py - Math.cos(a) * ro); fx.rotate(a); fx.globalAlpha = fade * (1 - Math.abs(p) / (span + 1)) * (Math.abs(p) < 0.5 ? 1 : 0.7);
-        fx.fillStyle = Math.abs(p) < 0.5 ? '#F2EDE3' : '#B39A70'; fx.font = '400 ' + (small ? 13 : 16) + 'px "IBM Plex Sans Arabic", sans-serif'; fx.fillText(AR(y), 0, 0); fx.restore();
+        fx.fillStyle = Math.abs(p) < 0.5 ? '#F2EDE3' : '#B39A70'; fx.font = '400 ' + (small ? 13 : 16) + 'px ' + (EN ? 'Inter' : '"IBM Plex Sans Arabic"') + ', sans-serif'; fx.fillText(AR(y), 0, 0); fx.restore();
       }
       fx.restore();
     }
@@ -371,7 +372,7 @@
     },
     front: function () {
       if (!N) return; var h0 = this.hgt(), w0 = h0 / 1.5, i = wi(Math.round(cam));
-      fx.save(); fx.globalAlpha = fade; fx.direction = 'rtl'; fx.textAlign = 'center'; fx.fillStyle = '#B39A70'; fx.font = '400 ' + (small ? 13 : 15) + 'px "IBM Plex Sans Arabic", sans-serif';
+      fx.save(); fx.globalAlpha = fade; fx.direction = DIR; fx.textAlign = 'center'; fx.fillStyle = '#B39A70'; fx.font = '400 ' + (small ? 13 : 15) + 'px ' + (EN ? 'Inter' : '"IBM Plex Sans Arabic"') + ', sans-serif';
       fx.fillText(AR(i + 1) + ' / ' + AR(N), CX, CY - 14 - h0 / 2 - (small ? 14 : 22)); fx.restore();
     }
   };
@@ -424,7 +425,7 @@
   function filtered() { var q = norm(query.trim()); return ALL.filter(function (w) { return (cat === 'all' || w.c === cat) && (!dec || (w.y && Math.floor(w.y / 10) * 10 === +dec)) && (!q || norm(w.t + ' ' + (w.cr || '') + ' ' + (w.k || '')).indexOf(q) >= 0); }); }
   function applyFilters(instant) {
     var nl = filtered();
-    ui.count.textContent = !nl.length ? 'لا أعمال' : nl.length === 1 ? 'عمل واحد' : nl.length === 2 ? 'عملان' : AR(nl.length) + ' ' + (nl.length >= 3 && nl.length <= 10 ? 'أعمال' : 'عملًا');
+    ui.count.textContent = EN ? (!nl.length ? 'No works' : nl.length === 1 ? '1 work' : nl.length + ' works') : !nl.length ? 'لا أعمال' : nl.length === 1 ? 'عمل واحد' : nl.length === 2 ? 'عملان' : AR(nl.length) + ' ' + (nl.length >= 3 && nl.length <= 10 ? 'أعمال' : 'عملًا');
     ui.empty.hidden = nl.length > 0; ui.live.textContent = ui.count.textContent;
     if (instant) { setList(nl); return; }
     pendingList = nl; fadeTo = 0;
@@ -473,7 +474,8 @@
     else target = clampT(Math.round(cam + Math.max(-3, Math.min(3, d.v * 0.22))));
   });
   front.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') go(1); else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(-1);
+    var fwd = EN ? 'ArrowRight' : 'ArrowLeft', bwd = EN ? 'ArrowLeft' : 'ArrowRight';
+    if (e.key === fwd || e.key === 'ArrowUp') go(1); else if (e.key === bwd || e.key === 'ArrowDown') go(-1);
     else if (e.key === 'Enter' || e.key === ' ') { var hi = null; hits.forEach(function (h) { if (h.focus) hi = h; }); if (hi) open(hi.w); } else return; e.preventDefault();
   });
   $$('[data-wv-step]').forEach(function (b) { b.addEventListener('click', function () { go(+b.getAttribute('data-wv-step')); }); });
