@@ -707,7 +707,7 @@ body.wc-mode .works-listview, body.wc-mode .site-footer, body.wc-mode .review-no
 .wv-head { display: flex; align-items: baseline; gap: 14px; }
 .wv-head h1 { margin: 0; font-size: clamp(1.6rem, 2.6vw, 2.2rem); }
 .wv-count { font-size: .85rem; color: var(--bronze); }
-.wv-designs { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.wv-designs { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-start; margin-inline-start: auto; }
 .wv-designs button, .wv-chip { display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 6px 14px; border: 1px solid var(--line-dark); border-radius: 999px; background: rgba(17,23,25,.72); color: var(--on-dark-2); font: inherit; font-size: .84rem; cursor: pointer; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: border-color .25s, color .25s, background .25s; white-space: nowrap; }
 .wv-designs button b { color: var(--bronze); font-weight: 500; }
 .wv-designs button:hover, .wv-chip:hover { color: var(--ivory); border-color: rgba(179,154,112,.6); }
@@ -749,3 +749,4 @@ body.wc-mode .works-listview, body.wc-mode .site-footer, body.wc-mode .review-no
 .wv-designs::-webkit-scrollbar { display: none; }
 .wv-sep { flex: none; align-self: center; padding: 0 6px 0 4px; font-size: .74rem; color: var(--bronze); border-inline-start: 1px solid var(--line-dark); margin-inline-start: 4px; padding-inline-start: 12px; }
 @media (max-width: 900px) { .wv-designs { max-width: none; } }
+@media (min-width: 901px) { .wv-designs { gap: 4px; } .wv-designs button { padding: 6px 11px; font-size: .8rem; } }
