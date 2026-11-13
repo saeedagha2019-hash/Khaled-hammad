@@ -1,0 +1,32 @@
+{
+  "slug": "2024-01-01-khaled-hammad-at-the-arab-music-festival",
+  "published": true,
+  "date": "2024-01-01",
+  "date_precision": "year",
+  "type": "coverage",
+  "publisher": {
+    "en": "El Watan",
+    "ar": "",
+    "ru": ""
+  },
+  "url": "",
+  "media": "text",
+  "byline": null,
+  "title": {
+    "en": "Khaled Hammad at the Arab Music Festival",
+    "ar": "",
+    "ru": ""
+  },
+  "summary": {
+    "en": "Coverage of his participation in the Arab Music Festival.",
+    "ar": "",
+    "ru": ""
+  },
+  "image": "/assets/img/d/pr-bow2.webp",
+  "image_position": "center 45%",
+  "translation_status": {
+    "en": "approved",
+    "ar": "draft-needs-native-review",
+    "ru": "draft-needs-native-review"
+  }
+}

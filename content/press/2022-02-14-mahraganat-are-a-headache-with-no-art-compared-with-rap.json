@@ -1,0 +1,32 @@
+{
+  "slug": "2022-02-14-mahraganat-are-a-headache-with-no-art-compared-with-rap",
+  "published": true,
+  "date": "2022-02-14",
+  "date_precision": "day",
+  "type": "interview",
+  "publisher": {
+    "en": "Cairo 24",
+    "ar": "",
+    "ru": ""
+  },
+  "url": "https://www.cairo24.com/1505073",
+  "media": "text",
+  "byline": null,
+  "title": {
+    "en": "“Mahraganat are a headache, with no art compared with rap”",
+    "ar": "",
+    "ru": ""
+  },
+  "summary": {
+    "en": "A frank view of popular street music.",
+    "ar": "",
+    "ru": ""
+  },
+  "image": "/assets/img/d/pr-dub.webp",
+  "image_position": "center 45%",
+  "translation_status": {
+    "en": "approved",
+    "ar": "draft-needs-native-review",
+    "ru": "draft-needs-native-review"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "slug": "2022-11-23-khaled-hammad-s-concert-opens-at-the-cairo-opera-house",
+  "published": true,
+  "date": "2022-11-23",
+  "date_precision": "day",
+  "type": "coverage",
+  "publisher": {
+    "en": "Al-Masry Al-Youm",
+    "ar": "",
+    "ru": ""
+  },
+  "url": "https://www.almasryalyoum.com/news/details/2528692",
+  "media": "text",
+  "byline": null,
+  "title": {
+    "en": "Khaled Hammad’s concert opens at the Cairo Opera House",
+    "ar": "",
+    "ru": ""
+  },
+  "summary": {
+    "en": "Coverage of the composer’s first concert on the Main Hall stage, with the Cairo Opera Symphony Orchestra.",
+    "ar": "",
+    "ru": ""
+  },
+  "image": "/assets/img/d/pr-opera.webp",
+  "image_position": "center 45%",
+  "translation_status": {
+    "en": "approved",
+    "ar": "draft-needs-native-review",
+    "ru": "draft-needs-native-review"
+  }
+}

@@ -27,5 +27,7 @@
     "en": "approved",
     "ar": "approved",
     "ru": "draft-needs-native-review"
-  }
+  },
+  "image": "/assets/img/d/pr-pyr.webp",
+  "image_position": "78% 30%"
 }

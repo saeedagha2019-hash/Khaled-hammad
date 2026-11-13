@@ -1,0 +1,32 @@
+{
+  "slug": "2026-06-07-his-excellency-the-minister-was-among-the-hardest-scores-of-",
+  "published": true,
+  "date": "2026-06-07",
+  "date_precision": "day",
+  "type": "interview",
+  "publisher": {
+    "en": "Al-Ahram Gate",
+    "ar": "",
+    "ru": ""
+  },
+  "url": "https://gate.ahram.org.eg/News/5668360.aspx",
+  "media": "text",
+  "byline": null,
+  "title": {
+    "en": "“His Excellency the Minister” was among the hardest scores of my career — because of Ahmed Zaki",
+    "ar": "",
+    "ru": ""
+  },
+  "summary": {
+    "en": "Speaking to Hamsa Imam, the composer looks back on scoring Ahmed Zaki’s film.",
+    "ar": "",
+    "ru": ""
+  },
+  "image": "/assets/img/d/pr-minister.webp",
+  "image_position": "center 25%",
+  "translation_status": {
+    "en": "approved",
+    "ar": "draft-needs-native-review",
+    "ru": "draft-needs-native-review"
+  }
+}

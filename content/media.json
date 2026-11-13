@@ -343,5 +343,189 @@
       "expiry": "",
       "press_kit": false
     }
+  ],
+  "gallery": [
+    {
+      "file": "/assets/img/d/ab-hall.webp",
+      "position": "center 40%",
+      "categories": [
+        "studio",
+        "collab"
+      ],
+      "caption": {
+        "en": "Recording session with the orchestra",
+        "ar": "جلسة تسجيل مع الأوركسترا",
+        "ru": ""
+      },
+      "photographer": "",
+      "licence": "supplied-by-client"
+    },
+    {
+      "file": "/assets/img/d/ab-stand.webp",
+      "position": "center 15%",
+      "categories": [
+        "portraits"
+      ],
+      "caption": {
+        "en": "Portrait · Cairo",
+        "ar": "بورتريه · القاهرة",
+        "ru": ""
+      },
+      "photographer": "",
+      "licence": "supplied-by-client"
+    },
+    {
+      "file": "/assets/img/d/ab-bow.webp",
+      "position": "center 45%",
+      "categories": [
+        "live"
+      ],
+      "caption": {
+        "en": "Curtain call · Cairo Opera House",
+        "ar": "تحية الختام · دار الأوبرا المصرية",
+        "ru": ""
+      },
+      "photographer": "",
+      "licence": "supplied-by-client"
+    },
+    {
+      "file": "/assets/img/d/ab-ctrl.webp",
+      "position": "70% 40%",
+      "categories": [
+        "studio",
+        "behind"
+      ],
+      "caption": {
+        "en": "In the control room",
+        "ar": "في غرفة التحكم",
+        "ru": ""
+      },
+      "photographer": "",
+      "licence": "supplied-by-client"
+    },
+    {
+      "file": "/assets/img/d/ab-award.webp",
+      "position": "center 35%",
+      "categories": [
+        "events"
+      ],
+      "caption": {
+        "en": "Receiving the award",
+        "ar": "تسلّم الجائزة",
+        "ru": ""
+      },
+      "photographer": "",
+      "licence": "supplied-by-client"
+    },
+    {
+      "file": "/assets/img/d/ab-stagew.webp",
+      "position": "center 50%",
+      "categories": [
+        "behind",
+        "collab"
+      ],
+      "caption": {
+        "en": "On the scoring stage",
+        "ar": "في استوديو التسجيل",
+        "ru": ""
+      },
+      "photographer": "",
+      "licence": "supplied-by-client"
+    },
+    {
+      "file": "/assets/img/d/ab-piano.webp",
+      "position": "25% 30%",
+      "categories": [
+        "live"
+      ],
+      "caption": {
+        "en": "At the piano",
+        "ar": "على البيانو",
+        "ru": ""
+      },
+      "photographer": "",
+      "licence": "supplied-by-client"
+    },
+    {
+      "file": "/assets/img/d/ab-dub.webp",
+      "position": "center 45%",
+      "categories": [
+        "studio"
+      ],
+      "caption": {
+        "en": "In the recording booth",
+        "ar": "في غرفة التسجيل",
+        "ru": ""
+      },
+      "photographer": "",
+      "licence": "supplied-by-client"
+    },
+    {
+      "file": "/assets/img/d/ab-chair.webp",
+      "position": "center 15%",
+      "categories": [
+        "portraits"
+      ],
+      "caption": {
+        "en": "Portrait",
+        "ar": "بورتريه",
+        "ru": ""
+      },
+      "photographer": "",
+      "licence": "supplied-by-client"
+    },
+    {
+      "file": "/assets/img/d/ab-ctrlw.webp",
+      "position": "center 40%",
+      "categories": [
+        "studio",
+        "behind",
+        "collab"
+      ],
+      "caption": {
+        "en": "Recording session",
+        "ar": "جلسة تسجيل",
+        "ru": ""
+      },
+      "photographer": "",
+      "licence": "supplied-by-client"
+    },
+    {
+      "file": "/assets/img/d/ab-concert.webp",
+      "position": "center 55%",
+      "categories": [
+        "live"
+      ],
+      "caption": {
+        "en": "Cairo Opera House · 2022",
+        "ar": "دار الأوبرا المصرية · ٢٠٢٢",
+        "ru": ""
+      },
+      "photographer": "",
+      "licence": "supplied-by-client"
+    },
+    {
+      "file": "/assets/img/d/ab-wd2.webp",
+      "position": "center 30%",
+      "categories": [
+        "events"
+      ],
+      "caption": {
+        "en": "The White Dress · Best Original Score",
+        "ar": "«الفستان الأبيض» · أفضل موسيقى تصويرية",
+        "ru": ""
+      },
+      "photographer": "",
+      "licence": "supplied-by-client"
+    }
+  ],
+  "gallery_categories": [
+    "portraits",
+    "studio",
+    "live",
+    "behind",
+    "everyday",
+    "events",
+    "collab"
   ]
 }

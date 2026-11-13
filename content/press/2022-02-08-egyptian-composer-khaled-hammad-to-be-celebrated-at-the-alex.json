@@ -1,0 +1,32 @@
+{
+  "slug": "2022-02-08-egyptian-composer-khaled-hammad-to-be-celebrated-at-the-alex",
+  "published": true,
+  "date": "2022-02-08",
+  "date_precision": "day",
+  "type": "coverage",
+  "publisher": {
+    "en": "Ahram Online",
+    "ar": "",
+    "ru": ""
+  },
+  "url": "https://english.ahram.org.eg/NewsContent/5/32/460738/Arts–Culture/Screens/Egyptian-composer-Khaled-Hammad-to-be-celebrated-a.aspx",
+  "media": "text",
+  "byline": null,
+  "title": {
+    "en": "Egyptian composer Khaled Hammad to be celebrated at the Alexandria festival",
+    "ar": "",
+    "ru": ""
+  },
+  "summary": {
+    "en": "A career tribute at the Alexandria Short Film Festival.",
+    "ar": "",
+    "ru": ""
+  },
+  "image": "/assets/img/d/pr-award.webp",
+  "image_position": "center 35%",
+  "translation_status": {
+    "en": "approved",
+    "ar": "draft-needs-native-review",
+    "ru": "draft-needs-native-review"
+  }
+}
