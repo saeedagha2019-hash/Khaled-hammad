@@ -1,0 +1,32 @@
+{
+  "slug": "2022-01-01-breaking-the-stereotype-a-new-look-at-khaled-hammad",
+  "published": true,
+  "date": "2022-01-01",
+  "date_precision": "year",
+  "type": "feature",
+  "publisher": {
+    "en": "Al-Masry Al-Youm",
+    "ar": "",
+    "ru": ""
+  },
+  "url": "",
+  "media": "text",
+  "byline": null,
+  "title": {
+    "en": "Breaking the stereotype: a new look at Khaled Hammad",
+    "ar": "",
+    "ru": ""
+  },
+  "summary": {
+    "en": "A profile that goes beyond the familiar image of the composer.",
+    "ar": "",
+    "ru": ""
+  },
+  "image": "/assets/img/d/pr-piano.webp",
+  "image_position": "25% 30%",
+  "translation_status": {
+    "en": "approved",
+    "ar": "draft-needs-native-review",
+    "ru": "draft-needs-native-review"
+  }
+}

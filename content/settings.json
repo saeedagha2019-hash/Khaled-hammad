@@ -5,11 +5,11 @@
   "show_media_pending_licence": true,
   "form_endpoint": "",
   "contacts": {
-    "general": "info@khaledhammad.com",
-    "scoring": "info@khaledhammad.com",
-    "concerts": "info@khaledhammad.com",
-    "licensing": "info@khaledhammad.com",
-    "press": "info@khaledhammad.com"
+    "general": "khaled@khaledhammad.com",
+    "scoring": "khaled@khaledhammad.com",
+    "concerts": "khaled@khaledhammad.com",
+    "licensing": "khaled@khaledhammad.com",
+    "press": "khaled@khaledhammad.com"
   },
   "social": [
     {
@@ -78,5 +78,23 @@
     "note": "provider: \"plausible\" (cookieless) or \"ga4\". Leave id empty to disable. GA4 loads only after consent."
   },
   "google_site_verification": "",
-  "redirects": []
+  "redirects": [],
+  "phones": [
+    {
+      "label": {
+        "en": "Egypt",
+        "ar": "مصر",
+        "ru": "Египет"
+      },
+      "number": "+20 100 116 0400"
+    },
+    {
+      "label": {
+        "en": "UAE",
+        "ar": "الإمارات",
+        "ru": "ОАЭ"
+      },
+      "number": "+971 56 182 5157"
+    }
+  ]
 }

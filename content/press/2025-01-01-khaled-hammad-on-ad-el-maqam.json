@@ -1,0 +1,32 @@
+{
+  "slug": "2025-01-01-khaled-hammad-on-ad-el-maqam",
+  "published": true,
+  "date": "2025-01-01",
+  "date_precision": "year",
+  "type": "radio",
+  "publisher": {
+    "en": "Mobtada · 9090 FM",
+    "ar": "",
+    "ru": ""
+  },
+  "url": "https://www.mobtada.com/9090fm/1509677/",
+  "media": "audio",
+  "byline": null,
+  "title": {
+    "en": "Khaled Hammad on “Ad El Maqam”",
+    "ar": "",
+    "ru": ""
+  },
+  "summary": {
+    "en": "A radio conversation about his career and music.",
+    "ar": "",
+    "ru": ""
+  },
+  "image": "/assets/img/d/pr-r105.webp",
+  "image_position": "center 40%",
+  "translation_status": {
+    "en": "approved",
+    "ar": "draft-needs-native-review",
+    "ru": "draft-needs-native-review"
+  }
+}

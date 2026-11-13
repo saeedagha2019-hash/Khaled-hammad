@@ -27,5 +27,7 @@
     "en": "approved",
     "ar": "approved",
     "ru": "draft-needs-native-review"
-  }
+  },
+  "image": "/assets/img/d/pr-studio.webp",
+  "image_position": "center"
 }

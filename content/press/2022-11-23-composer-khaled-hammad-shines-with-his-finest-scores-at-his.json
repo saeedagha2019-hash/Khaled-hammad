@@ -31,5 +31,7 @@
     "en": "approved",
     "ar": "approved",
     "ru": "draft-needs-native-review"
-  }
+  },
+  "image": "/assets/img/d/pr-opera.webp",
+  "image_position": "center"
 }

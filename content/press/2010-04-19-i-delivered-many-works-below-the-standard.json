@@ -1,0 +1,32 @@
+{
+  "slug": "2010-04-19-i-delivered-many-works-below-the-standard",
+  "published": true,
+  "date": "2010-04-19",
+  "date_precision": "day",
+  "type": "interview",
+  "publisher": {
+    "en": "Al-Jarida (Kuwait)",
+    "ar": "",
+    "ru": ""
+  },
+  "url": "https://www.aljarida.com/articles/1461821824598983400/",
+  "media": "text",
+  "byline": null,
+  "title": {
+    "en": "“I delivered many works below the standard”",
+    "ar": "",
+    "ru": ""
+  },
+  "summary": {
+    "en": "A candid interview about his career and the industry.",
+    "ar": "",
+    "ru": ""
+  },
+  "image": "/assets/img/d/pr-bow.webp",
+  "image_position": "center 45%",
+  "translation_status": {
+    "en": "approved",
+    "ar": "draft-needs-native-review",
+    "ru": "draft-needs-native-review"
+  }
+}

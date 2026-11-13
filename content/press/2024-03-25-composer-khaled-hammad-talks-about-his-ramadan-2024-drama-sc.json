@@ -27,5 +27,7 @@
     "en": "approved",
     "ar": "approved",
     "ru": "draft-needs-native-review"
-  }
+  },
+  "image": "/assets/img/d/lw-nagham.webp",
+  "image_position": "center"
 }

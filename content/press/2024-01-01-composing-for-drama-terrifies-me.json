@@ -1,0 +1,32 @@
+{
+  "slug": "2024-01-01-composing-for-drama-terrifies-me",
+  "published": true,
+  "date": "2024-01-01",
+  "date_precision": "year",
+  "type": "interview",
+  "publisher": {
+    "en": "El Watan",
+    "ar": "",
+    "ru": ""
+  },
+  "url": "",
+  "media": "text",
+  "byline": null,
+  "title": {
+    "en": "“Composing for drama terrifies me”",
+    "ar": "",
+    "ru": ""
+  },
+  "summary": {
+    "en": "Khaled Hammad on the pressure and responsibility of writing for television drama.",
+    "ar": "",
+    "ru": ""
+  },
+  "image": "/assets/img/d/pr-hall.webp",
+  "image_position": "center 40%",
+  "translation_status": {
+    "en": "approved",
+    "ar": "draft-needs-native-review",
+    "ru": "draft-needs-native-review"
+  }
+}

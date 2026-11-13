@@ -1,0 +1,32 @@
+{
+  "slug": "2022-01-01-khaled-hammad-guest-of-the-programme-trio",
+  "published": true,
+  "date": "2022-01-01",
+  "date_precision": "year",
+  "type": "interview",
+  "publisher": {
+    "en": "Al-Ahram Gate",
+    "ar": "",
+    "ru": ""
+  },
+  "url": "https://gate.ahram.org.eg/News/3351150.aspx",
+  "media": "text",
+  "byline": null,
+  "title": {
+    "en": "Khaled Hammad, guest of the programme “Trio”",
+    "ar": "",
+    "ru": ""
+  },
+  "summary": {
+    "en": "A television interview on Al-Ahram’s programme.",
+    "ar": "",
+    "ru": ""
+  },
+  "image": "/assets/img/d/pr-trio.webp",
+  "image_position": "center 30%",
+  "translation_status": {
+    "en": "approved",
+    "ar": "draft-needs-native-review",
+    "ru": "draft-needs-native-review"
+  }
+}

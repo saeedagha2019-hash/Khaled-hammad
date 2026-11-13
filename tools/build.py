@@ -1023,7 +1023,7 @@ def build_contact(lang):
                                              jsonld=[crumb_ld(lang, [(t['nav']['home'], lu(lang)), (t['contact_title'], lu(lang, 'contact')), (t['forms'][k], lu(lang, 'contact/' + k))])]))
 
 
-def build_search(lang):
+def build_search_index(lang):
     t = I18N[lang]
     idx = []
     for w in WORKS:
@@ -1043,6 +1043,10 @@ def build_search(lang):
     for c in CONCERTS:
         idx.append({'t': tr(c['name'], lang), 's': f'{tr(c["venue"], lang)} · {fmt_date(c["date"], lang)}', 'u': lu(lang, 'concerts/' + c['slug']), 'k': (tr(c['name'], lang) + ' ' + tr(c['venue'], lang) + ' ' + c['date']).lower()})
     write(f'{lang}/search-index.json', json.dumps(idx, ensure_ascii=False, separators=(',', ':')))
+
+
+def build_search_old(lang):
+    t = I18N[lang]
     body = f'''{page_head(lang, t['search_title'], t['search_title'], t['search_intro'])}
 <section class="sec sec-ivory"><div class="wrap narrow" data-search data-index="{lu(lang)}search-index.json">
  <label class="field"><span class="sr">{e(t['search_ph'])}</span><input type="search" class="big-search" placeholder="{e(t['search_ph'])}" aria-label="{e(t['search_ph'])}" data-search-input autofocus></label>
@@ -1296,19 +1300,19 @@ def redirect_page(target):
 
 def build_root():
     # Language chooser: no automatic redirect (brief §6); the visitor's browser language is only highlighted.
-    links = ''.join(f'<li><a href="{lu(l)}" hreflang="{l}" lang="{l}" data-l="{l}"><span class="rl-name">{e(I18N[l]["site_name"])}</span><span class="rl-lang">{e(I18N[l]["lang_name"])}</span></a></li>' for l in LANGS)
+    links = ''.join(f'<li><a href="{lu(l)}" hreflang="{l}" lang="{l}" data-l="{l}"><b>{e(I18N[l]["site_name"])}</b><small>{e(I18N[l]["lang_name"])}</small></a></li>' for l in LANGS)
     alts = ''.join(f'<link rel="alternate" hreflang="{l}" href="{SITE_URL + lu(l)}">' for l in LANGS) + f'<link rel="alternate" hreflang="x-default" href="{SITE_URL + u("/")}">'
     hmap = json.dumps(LEGACY_HASH)
     langs = json.dumps(LANGS)
     robots = '<meta name="robots" content="noindex, nofollow">' if STAGING else ''
     write('index.html', f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">{robots}
-<title>Khaled Hammad · خالد حماد · Халед Хаммад</title><meta name="description" content="{e(I18N['en']['meta_desc'])}">
+<title>Khaled Hammad · خالد حماد</title><meta name="description" content="{e(I18N['en']['meta_desc'])}"><meta name="theme-color" content="#000000">
 <link rel="canonical" href="{SITE_URL + u('/')}">{alts}<link rel="icon" href="{u('/assets/icons/favicon.svg')}" type="image/svg+xml">
-<meta property="og:title" content="Khaled Hammad · خالد حماد"><meta property="og:image" content="{SITE_URL + u('/assets/img/about-wide.webp')}">
-<link rel="stylesheet" href="{u('/assets/css/fonts.css')}?v={VERSION}"><link rel="stylesheet" href="{u('/assets/css/site.css')}?v={VERSION}">
+<meta property="og:title" content="Khaled Hammad · خالد حماد"><meta property="og:image" content="{SITE_URL + u('/assets/img/d/hx-polowide-clean.webp')}">
+<link rel="stylesheet" href="{u('/assets/css/fonts.css')}?v={VERSION}"><link rel="stylesheet" href="{u('/assets/css/v2.css')}?v={VERSION}">
 <script>(function(){{var h=location.hash.slice(1),m={hmap},L={langs};if(h&&m[h]){{var l=(navigator.language||'en').slice(0,2);if(L.indexOf(l)<0)l='en';var p=m[h].split('#');location.replace('{BASE}/'+l+'/'+p[0]+'/'+(p[1]?'#'+p[1]:''));}}}})();</script></head>
-<body class="root-chooser"><main class="chooser"><div class="ch-bg">{img('/assets/img/about-wide.webp', '', priority=True, lazy=False)}</div>
-<div class="ch-in"><p class="eyebrow">Composer · مؤلف موسيقي · Композитор</p><h1 class="sr">Khaled Hammad</h1><ul class="ch-list">{links}</ul></div></main>
+<body><main class="chooser"><div class="bg"><img src="{u('/assets/img/d/hx-polowide-clean.webp')}" alt="" fetchpriority="high"></div>
+<div class="in"><span class="k">Composer · مؤلف موسيقي</span><h1>Khaled Hammad</h1><p class="tg">The Art of Sound in Storytelling</p><ul>{links}</ul></div></main>
 <script>(function(){{var l=(navigator.language||'en').slice(0,2),a=document.querySelector('[data-l="'+l+'"]');if(a){{a.parentNode.parentNode.prepend(a.parentNode);a.classList.add('is-pref');}}}})();</script></body></html>''')
     blocks = ''.join(f'<section lang="{l}" dir="{I18N[l]["dir"]}"><h2>{e(I18N[l]["notfound_title"])}</h2><p>{e(I18N[l]["notfound_text"])}</p><a class="btn btn-primary" href="{lu(l)}">{e(I18N[l]["back_home"])}</a></section>' for l in LANGS)
     write('404.html', f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
@@ -1343,7 +1347,7 @@ def copy_static():
         if os.path.isdir(src):
             shutil.copytree(src, os.path.join(OUT, d), dirs_exist_ok=True)
     if Image:  # responsive variants
-        for f in glob.glob(os.path.join(OUT, 'assets/img/*.webp')):
+        for f in glob.glob(os.path.join(OUT, 'assets/img/**/*.webp'), recursive=True):
             if f.endswith('-800.webp'):
                 continue
             with Image.open(f) as im:
@@ -1382,14 +1386,14 @@ def main():
                 SLUGS[(l, sec, rec['slug'])] = sl
     for lang in LANGS:
         set_scope(lang)
-        build_home(lang); build_about(lang); build_works(lang); build_listen(lang); build_concerts(lang)
-        build_press(lang); build_contact(lang); build_search(lang); build_utility(lang); build_lab(lang); build_works_views(lang)
+        v2.build_home(lang); v2.build_about(lang); v2.build_works(lang); v2.build_listen(lang); v2.build_concerts(lang)
+        v2.build_press(lang); v2.build_contact(lang); v2.build_search(lang); v2.build_utility(lang); build_lab(lang); build_works_views(lang)
     build_root()
+    v2.build_404()
     static = ['', 'about', 'works', 'listen-watch', 'concerts', 'news-press', 'news-press/press-kit', 'contact', 'privacy', 'accessibility'] + ['contact/' + k for k in FORM_KINDS]
     entries = [(p, LANGS) for p in static]
     entries += [('works/' + w['slug'], [l for l in LANGS if avail(w, l)]) for w in ALL['works']]
     entries += [('news-press/' + n['slug'], [l for l in LANGS if avail(n, l)]) for n in ALL['news']]
-    entries += [('concerts/' + c['slug'], [l for l in LANGS if avail(c, l)]) for c in ALL['concerts']]
     build_seo(entries)
     pages = sum(len(ls) for _, ls in entries)
     print(f'Built {pages} pages ({"staging" if STAGING else "production"}; languages: {", ".join(LANGS)}) into {os.path.relpath(OUT, ROOT)}/  base="{BASE}" site="{SITE_URL}"')
@@ -1398,6 +1402,11 @@ def main():
                    OUT_DIR=os.path.join(os.path.relpath(OUT, ROOT), 'staging'))
         subprocess.run([sys.executable, os.path.abspath(__file__)], env=env, check=True)
 
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import v2  # noqa: E402  (v2 page templates; reads this module's globals)
+v2.B = sys.modules[__name__]
+v2.V2 = load('src/i18n_v2.json')
 
 if __name__ == '__main__':
     main()

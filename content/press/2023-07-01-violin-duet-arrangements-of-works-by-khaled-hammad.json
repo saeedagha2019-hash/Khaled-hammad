@@ -1,0 +1,32 @@
+{
+  "slug": "2023-07-01-violin-duet-arrangements-of-works-by-khaled-hammad",
+  "published": true,
+  "date": "2023-07-01",
+  "date_precision": "month",
+  "type": "research",
+  "publisher": {
+    "en": "Journal of Music Arts (JFMA)",
+    "ar": "",
+    "ru": ""
+  },
+  "url": "https://jfma.journals.ekb.eg/article_307928_38b61746bd38ffd60cd8b844dedd76cb.pdf",
+  "media": "text",
+  "byline": null,
+  "title": {
+    "en": "Violin duet arrangements of works by Khaled Hammad",
+    "ar": "",
+    "ru": ""
+  },
+  "summary": {
+    "en": "Academic paper · PDF",
+    "ar": "",
+    "ru": ""
+  },
+  "image": "/assets/img/d/pr-stagew.webp",
+  "image_position": "center 50%",
+  "translation_status": {
+    "en": "approved",
+    "ar": "draft-needs-native-review",
+    "ru": "draft-needs-native-review"
+  }
+}

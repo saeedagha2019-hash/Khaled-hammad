@@ -1,0 +1,32 @@
+{
+  "slug": "2026-02-04-khaled-hammad-scores-fakhr-el-delta-for-ramadan-2026",
+  "published": true,
+  "date": "2026-02-04",
+  "date_precision": "day",
+  "type": "coverage",
+  "publisher": {
+    "en": "Youm7",
+    "ar": "",
+    "ru": ""
+  },
+  "url": "",
+  "media": "text",
+  "byline": null,
+  "title": {
+    "en": "Khaled Hammad scores Fakhr El Delta for Ramadan 2026",
+    "ar": "",
+    "ru": ""
+  },
+  "summary": {
+    "en": "The composer writes the original music for the Ramadan drama series.",
+    "ar": "",
+    "ru": ""
+  },
+  "image": "/assets/img/d/pr-studio2.webp",
+  "image_position": "center",
+  "translation_status": {
+    "en": "approved",
+    "ar": "draft-needs-native-review",
+    "ru": "draft-needs-native-review"
+  }
+}

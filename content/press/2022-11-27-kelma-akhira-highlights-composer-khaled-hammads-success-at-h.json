@@ -27,5 +27,7 @@
     "en": "approved",
     "ar": "approved",
     "ru": "draft-needs-native-review"
-  }
+  },
+  "image": "/assets/img/d/lw-tv.webp",
+  "image_position": "center"
 }
